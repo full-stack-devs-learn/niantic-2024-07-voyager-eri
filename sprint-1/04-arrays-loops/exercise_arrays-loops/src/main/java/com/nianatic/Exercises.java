@@ -152,9 +152,9 @@ public class Exercises
      */
     public boolean hasName(String[] names, String nameToFind)
     {
-        for (int i = 0; i < names.length; i++)
+        for (String name : names)
         {
-            if (names[i].equalsIgnoreCase(nameToFind))
+            if (name.equalsIgnoreCase(nameToFind))
             {
                 return true;
             }
@@ -182,9 +182,9 @@ public class Exercises
     {
         int numberOfNames = 0;
 
-        for (int i = 0; i < names.length; i++)
+        for (String name : names)
         {
-            if (names[i].equalsIgnoreCase(nameToFind))
+            if (name.equalsIgnoreCase(nameToFind))
             {
                 numberOfNames++;
             }
@@ -203,7 +203,13 @@ public class Exercises
      */
     public int sumNumbers(int[] numbers)
     {
-        return -1;
+        int sumNumbers = 0;
+
+        for (int number : numbers)
+        {
+            sumNumbers += number;
+        }
+        return sumNumbers;
     }
 
     /*
@@ -218,7 +224,19 @@ public class Exercises
      */
     public int doubleEvens(int[] numbers)
     {
-        return -1;
+        int sumNumbers = 0;
+
+        for (int number : numbers)
+        {
+            if (number % 2 == 0)
+            {
+                sumNumbers += number;
+            }
+        }
+
+        sumNumbers *=2;
+
+        return sumNumbers;
     }
 
     /*
@@ -233,7 +251,14 @@ public class Exercises
      */
     public int sumEveryThird(int[] numbers)
     {
-        return -1;
+        int sumNumbers = 0;
+
+        for (int i = 0; i < numbers.length; i += 3)
+        {
+            sumNumbers += numbers[i];
+        }
+
+        return sumNumbers;
     }
 
     /*
@@ -246,7 +271,17 @@ public class Exercises
      */
     public double averagePrice(double[] prices)
     {
-        return -1;
+        double total = 0;
+        double average;
+
+        for (double price : prices)
+        {
+            total += price;
+        }
+
+        average = total / prices.length;
+
+        return average;
     }
 
     /*
@@ -259,20 +294,40 @@ public class Exercises
      */
     public double highestValue(double[] prices)
     {
-        return -1;
+        double currentHighest = prices[0];
+
+        for (double price : prices)
+        {
+            if (price > currentHighest)
+            {
+                currentHighest = price;
+            }
+        }
+
+        return currentHighest;
     }
 
     /*
      * 15)
      * Given an array of prices, return the
-     * lowest price that is greater than 0.
+     * lowest price.
      *
      * lowestPrice([-15.25, 15.25, 2.34, 3.50])                        =>  2.34
      * lowestPrice([12.75, -5.5, 10.25, 18.44, 4.23, -15.55, 9.20])    =>  -15.55
      */
     public double lowestValue(double[] prices)
     {
-        return -1;
+        double currentLowest = prices[0];
+
+        for (double price : prices)
+        {
+            if (price < currentLowest)
+            {
+                currentLowest = price;
+            }
+        }
+
+        return currentLowest;
     }
 
 }
