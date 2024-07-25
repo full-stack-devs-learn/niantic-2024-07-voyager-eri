@@ -21,7 +21,7 @@ public class ClairesCookies
      */
     public double calculateSubtotal(int quantity)
     {
-        return 0;
+        return quantity * 12.95;
     }
 
     /*
@@ -43,7 +43,9 @@ public class ClairesCookies
      */
     public double calculateTotal(int quantity)
     {
-        return 0;
+        double subtotal = calculateSubtotal(quantity);
+
+        return (subtotal * TaxRate) + subtotal;
     }
 
     /*
@@ -75,7 +77,9 @@ public class ClairesCookies
      */
     public double calculateQuickOrder(int snickerDozen, int chocolateDozen, int frostedDozen)
     {
-        return 0;
+        double subtotal = (snickerDozen * 12.95) + (chocolateDozen * 13.95) + (frostedDozen * 15.95);
+
+        return (subtotal * TaxRate) + subtotal;
     }
 
 
@@ -103,7 +107,19 @@ public class ClairesCookies
      */
     public double calculateCustomOrder (int quantity, boolean hasChocolateChips, boolean hasFrosting)
     {
-        return 0;
+        double subtotal = calculateSubtotal(quantity);
+
+        if(hasChocolateChips)
+        {
+            subtotal += (1.00 * quantity);
+        }
+
+        if(hasFrosting)
+        {
+            subtotal += (2.00 * quantity);
+        }
+
+        return (subtotal * TaxRate) + subtotal;
     }
 
 }

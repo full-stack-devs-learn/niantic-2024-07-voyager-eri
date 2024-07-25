@@ -21,7 +21,18 @@ public class ElliotsYardCare
      */
     public double  calculateCost(int width, int length, boolean  isTrimming)
     {
-        return 0;
+        double totalPer1000SqFt = (width * length) / 1000.00;
+        double cost = 0;
+
+        if(isTrimming)
+        {
+            cost = totalPer1000SqFt * 3.00;
+        }
+        else
+        {
+            cost = totalPer1000SqFt * 2.50;
+        }
+        return cost;
     }
 
     /*
@@ -41,7 +52,7 @@ public class ElliotsYardCare
      */
     public double  calculateProfit(int width, int length, boolean  isTrimming, int amountCharged)
     {
-        return 0;
+        return amountCharged - calculateCost(width, length, isTrimming);
     }
 
     /*
@@ -62,7 +73,18 @@ public class ElliotsYardCare
      */
     public double calculateTime(int width, int length, boolean  isTrimming)
     {
-        return 0;
+        double totalPer1000SqFt = (width * length) / 1000.00;
+        double time = 0;
+
+        if(isTrimming)
+        {
+            time = (totalPer1000SqFt * 45) / 60;
+        }
+        else
+        {
+            time = (totalPer1000SqFt * 30) / 60;
+        }
+        return time;
     }
 
     /*
@@ -93,6 +115,14 @@ public class ElliotsYardCare
      */
     public double  calculatePrice(int width, int length, boolean  isTrimming)
     {
-        return 0;
+        int minCharge = 25;
+        double cost = calculateCost(width, length, isTrimming);
+        double time = calculateTime(width, length, isTrimming);
+
+        while((minCharge - cost)/time < 10)
+        {
+            minCharge += 25;
+        }
+        return minCharge;
     }
 }

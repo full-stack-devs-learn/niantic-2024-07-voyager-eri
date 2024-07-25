@@ -24,9 +24,10 @@ public class BackyardBasketball
      */
     public int calculateWinningPercentage(int gamesWon, int gamesLost)
     {
-        return 0;
+        int gamesTotal = gamesWon + gamesLost;
+        double winningPercentage = (double)gamesWon / gamesTotal * 100;
+        return (int) winningPercentage;
     }
-
 
     /*
      * The calculatePointsScored function should calculate
@@ -43,7 +44,19 @@ public class BackyardBasketball
      */
     public int calculatePointsScored(int shotPercentage, int shotsTaken, boolean isThree)
     {
-        return 0;
+        double shotsSuccessful = shotsTaken * (shotPercentage * .01);
+        int pointsScored = 0;
+
+        if(isThree)
+        {
+            pointsScored = (int)shotsSuccessful * 3;
+        }
+        else
+        {
+            pointsScored = (int)shotsSuccessful * 2;
+        }
+
+        return pointsScored;
     }
 
 
@@ -69,6 +82,20 @@ public class BackyardBasketball
      */
     public int calculateShotsRequired(int shotPercentage, int desiredScore, boolean isThree)
     {
-        return 0;
+        double minShots = 0;
+        double shotsRequired = 0;
+
+        if(isThree)
+        {
+            minShots = Math.ceil((double)desiredScore / 3);
+        }
+        else
+        {
+            minShots = Math.ceil((double)desiredScore / 2);
+        }
+
+        shotsRequired = Math.ceil(minShots / (shotPercentage * .01));
+
+        return (int)shotsRequired;
     }
 }

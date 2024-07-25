@@ -334,7 +334,14 @@ public class Main
         // his students. How many cookies will each student
         // receive? (Students can only receive whole cookies)
 
+        int students = 14;
+        int cookies = 3 * 12;
+        int cookiesLeftover = cookies % students;
+        int cookiesPerStudent = (cookies - cookiesLeftover) / students;
 
+        System.out.println("19) Cookies per student");
+        System.out.println("cookiesPerStudent: " + cookiesPerStudent);
+        System.out.println();
 
         // 20. Sean has 14 students in his class.
         // He has bought 3 dozen cookies for his class.
@@ -343,7 +350,9 @@ public class Main
         // his students. After giving the students their
         // cookies, how many cookies will be left over?
 
-
+        System.out.println("20) Cookies left over");
+        System.out.println("cookiesLeftover: " + cookiesLeftover);
+        System.out.println();
 
         // 21. Sean's class has earned a cookie party.
 
@@ -351,7 +360,13 @@ public class Main
         // does he need to buy from Claire's Cookies so that
         // each student can receive 3 cookies.
 
+        int cookiesPerBatch = 12;
+        int howManyDozen = 4;
+        cookiesPerStudent = (cookiesPerBatch * howManyDozen) / students;
 
+        System.out.println("21) Cookies to buy");
+        System.out.println("howManyDozen: " + howManyDozen);
+        System.out.println();
 
         // 22. Sean's class has earned a cookie party. The number
         // of cookies that a student receives depends on
@@ -369,12 +384,26 @@ public class Main
 
         // How many dozen cookies does Sean need to buy.
 
+        int studentsWith100 = 2;
+        int studentsAbove90 = 4;
+        int studentsBelow90 = students - studentsWith100 - studentsAbove90;
+        int totalCookies = (studentsWith100 * 4) + (studentsAbove90 * 3) + (studentsBelow90 * 2);
+        howManyDozen = totalCookies / 12;
 
+        System.out.println("22) Cookies based on score");
+        System.out.println("howManyDozen: " + howManyDozen);
+        System.out.println();
 
         // 23. If Claire's Cookies sells each dozen cookies for 12.99,
         // how much will it cost Sean to buy 4 dozen cookies.
 
+        double pricePerDozen = 12.99;
+        howManyDozen = 4;
+        double totalPrice = pricePerDozen * howManyDozen;
 
+        System.out.println("23) Price four 4 dozen cookies");
+        System.out.println("totalPrice: " + totalPrice);
+        System.out.println();
 
         // (Use this information for the next several questions)
         // Claire now charges different prices for different
@@ -396,15 +425,37 @@ public class Main
         // 24. How many total dozen cookies does Sean need to buy?
 
 
+        int snickerDoodles = 9;
+        int chocolateChip = 15;
+        int frostedChocolateChip = 18;
+
+        int snickerDoodlesDozens = (snickerDoodles / 12) + 1;
+        int chocolateChipDozens = (chocolateChip / 12) + 1;
+        int frostedChocolateChipDozens = (frostedChocolateChip / 12) + 1;
+
+        int totalDozens = snickerDoodlesDozens + chocolateChipDozens + frostedChocolateChipDozens;
+
+        System.out.println("24) Total dozen cookies to buy");
+        System.out.println("totalDozens: " + totalDozens);
+        System.out.println();
 
         // 25. What is the total cost of this order?
 
+        totalPrice = (snickerDoodlesDozens * 12.99) + (chocolateChipDozens * 13.99) + (frostedChocolateChipDozens * 15.99);
 
+        System.out.println("25) Total price of the order");
+        System.out.println("totalPrice: " + totalPrice);
+        System.out.println();
 
         // 26. How many cookies will be left over of each type of cookie?
         // (Snicker Doodles, Chocolate Chip, Frosted Chocolate Chip)
 
+        int snickerDoodlesLeftover = (12 % snickerDoodles);
+        int chocolateChipLeftover = (chocolateChipDozens * 12) - chocolateChip;
 
+        System.out.println("25) Cookies left over");
+        System.out.println("cookiesLeftover: " + chocolateChipLeftover);
+        System.out.println();
 
         // 27. How much money could Sean have saved if he would
         // have bought: 2 dz Frosted Chocolate Chip
