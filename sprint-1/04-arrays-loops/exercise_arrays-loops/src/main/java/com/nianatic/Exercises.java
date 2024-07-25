@@ -89,7 +89,7 @@ public class Exercises
      */
     public String firstDayOfWeek(String[] daysOfTheWeek)
     {
-        return null;
+        return daysOfTheWeek[0];
     }
 
     /*
@@ -111,7 +111,7 @@ public class Exercises
      */
     public String lastDayOfWeek(String[] daysOfTheWeek)
     {
-        return null;
+        return daysOfTheWeek[daysOfTheWeek.length - 1];
     }
 
     /*
@@ -130,7 +130,7 @@ public class Exercises
      */
     public String monthName(String[] months, int monthNumber)
     {
-        return null;
+        return months[monthNumber - 1];
     }
 
     /*
@@ -152,6 +152,13 @@ public class Exercises
      */
     public boolean hasName(String[] names, String nameToFind)
     {
+        for (int i = 0; i < names.length; i++)
+        {
+            if (names[i].equalsIgnoreCase(nameToFind))
+            {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -173,7 +180,16 @@ public class Exercises
      */
     public int countName(String[] names, String nameToFind)
     {
-        return -1;
+        int numberOfNames = 0;
+
+        for (int i = 0; i < names.length; i++)
+        {
+            if (names[i].equalsIgnoreCase(nameToFind))
+            {
+                numberOfNames++;
+            }
+        }
+        return numberOfNames;
     }
 
     /*
