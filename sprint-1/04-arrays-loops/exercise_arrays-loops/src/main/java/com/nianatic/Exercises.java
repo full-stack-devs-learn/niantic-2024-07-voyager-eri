@@ -11,7 +11,8 @@ public class Exercises
      */
     public String[] daysOfTheWeek()
     {
-        return null;
+        String[] daysofTheWeek = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+        return daysofTheWeek;
     }
 
     /*
@@ -23,7 +24,8 @@ public class Exercises
      */
     public String[] monthsOfTheYear()
     {
-        return null;
+        String[] monthsOfTheYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return monthsOfTheYear;
     }
 
     /*
@@ -38,7 +40,13 @@ public class Exercises
      */
     public int[] oneToFifty()
     {
-        return null;
+        int[] oneToFifty = new int[50];
+
+        for (int i = 0; i < 50; i++)
+        {
+            oneToFifty[i] = i + 1;
+        }
+        return oneToFifty;
     }
 
     /*
@@ -53,7 +61,13 @@ public class Exercises
      */
     public int[] evenNumbers()
     {
-        return null;
+        int[] evenNumbers = new int[100];
+
+        for (int i = 0; i < 100; i++)
+        {
+            evenNumbers[i] = (i + 1) * 2;
+        }
+        return evenNumbers;
     }
 
     /*
