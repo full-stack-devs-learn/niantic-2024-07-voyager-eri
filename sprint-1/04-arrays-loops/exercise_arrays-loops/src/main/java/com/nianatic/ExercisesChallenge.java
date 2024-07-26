@@ -97,9 +97,10 @@ public class ExercisesChallenge
 
         int [] combinedArray = new int[arrayCellTotal];
 
+
         for (int row = 0; row < numbers.length; row++)
         {
-            for (int col = 0; col < numbers.length; col++)
+            for (int col = 0; col < numbers[row].length; col++)
             {
                 combinedArray[i] = numbers[row][col];
                 i++;
