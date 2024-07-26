@@ -85,7 +85,7 @@ public class ExercisesChallenge
     public int[] combineArrays(int[][] numbers)
     {
         int arrayCellTotal = 0;
-        int i = 0;
+        int currentIndex = 0;
 
         for (int row = 0; row < numbers.length; row++)
         {
@@ -102,8 +102,8 @@ public class ExercisesChallenge
         {
             for (int col = 0; col < numbers[row].length; col++)
             {
-                combinedArray[i] = numbers[row][col];
-                i++;
+                combinedArray[currentIndex] = numbers[row][col];
+                currentIndex++;
             }
         }
 
