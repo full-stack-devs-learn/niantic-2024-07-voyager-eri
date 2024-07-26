@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Main
 {
     private static Scanner userInput = new Scanner(System.in);
-    private static int[] scores;
+    private static int[] scores = new int[0];
 
     public static void main(String[] args)
     {
@@ -66,12 +66,12 @@ public class Main
 
         scores = new int[numberOfScores];
 
+        System.out.println("Add your scores one at a time, pressing enter after every score");
+
         for (int i = 0; i < scores.length; i++)
         {
             scores[i] = Integer.parseInt(userInput.nextLine());
         }
-
-        System.out.println(Arrays.toString(scores));
 
     }
 
