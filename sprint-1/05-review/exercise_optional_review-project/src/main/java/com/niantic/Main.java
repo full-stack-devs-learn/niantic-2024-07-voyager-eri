@@ -1,5 +1,6 @@
 package com.niantic;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main
@@ -41,7 +42,7 @@ public class Main
     public static int getHomeSelection()
     {
         System.out.println();
-        System.out.println("Welcome to <<Enter app name>>!");
+        System.out.println("Welcome to Test Score Tools");
         System.out.println("------------------------------");
         System.out.println();
         System.out.println("What would you like to do?");
@@ -55,14 +56,30 @@ public class Main
         return Integer.parseInt(userInput.nextLine());
     }
 
-    private static void createNewTestScores()
+    private static int [] createNewTestScores()
     {
-        System.out.println("Enter code to create a new array and ask for test scores");
+        int numberOfScores;
+
+        System.out.println();
+        System.out.println("How many scores would you like to enter?");
+        numberOfScores = Integer.parseInt(userInput.nextLine());
+
+        int[] testScores = new int[numberOfScores];
+
+        for (int i = 0; i < testScores.length; i++)
+        {
+            testScores[i] = Integer.parseInt(userInput.nextLine());
+        }
+
+        System.out.println(Arrays.toString(testScores));
+
+        return testScores;
     }
 
     private static void calculateAverage()
     {
         System.out.println("Add logic to calculate the average of all test scores, and display it");
+
     }
 
     private static void findHighestScore()
