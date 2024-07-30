@@ -26,7 +26,18 @@ public class ExerciseChallenge
      */
     public String reformatName(String fullName)
     {
-        return null;
+        String[] eachPartOfName = fullName.replace(",", "").split(" ");
+        String reformattedName = eachPartOfName[1] + ", " + eachPartOfName [0];
+
+        if (eachPartOfName.length > 2)
+        {
+            for (int i = 2; i < eachPartOfName.length; i++)
+            {
+                reformattedName += ", " + eachPartOfName[i];
+            }
+        }
+
+        return reformattedName;
     }
 
     /*
@@ -50,7 +61,7 @@ public class ExerciseChallenge
      */
     public String createJSON(int id, String name)
     {
-        return  null;
+        return String.format("{ \"id\": %d, \"name\": \"%s\" }", id, name);
     }
 
 }
