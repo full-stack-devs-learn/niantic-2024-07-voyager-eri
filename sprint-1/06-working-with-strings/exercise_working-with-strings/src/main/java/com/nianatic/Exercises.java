@@ -18,7 +18,7 @@ public class Exercises
      */
     public String changeCase(String word, boolean toUpperCase)
     {
-        return null;
+        return (toUpperCase) ? word.toUpperCase() : word.toLowerCase();
     }
 
     /*
@@ -49,7 +49,7 @@ public class Exercises
      */
     public String createHtml(String content, String elementName)
     {
-        return null;
+        return String.format("<%s>%s</%s>", elementName, content, elementName);
     }
 
     /*
@@ -71,7 +71,7 @@ public class Exercises
      */
     public String moreHtml(String content, String elementName)
     {
-        return null;
+        return (content.equals("")) ? String.format("<%s />", elementName) : createHtml(content, elementName);
     }
 
     /*
@@ -94,7 +94,7 @@ public class Exercises
      */
     public String createXml(int id, String name)
     {
-        return  null;
+        return String.format("<customer><id>%d</id><name>%s</name></customer>", id, name);
     }
 
     /*
@@ -131,7 +131,7 @@ public class Exercises
      */
     public String formattedXml(int id, String name)
     {
-        return null;
+        return String.format("<customer>\n  <id>%d</id>\n  <name>%s</name>\n</customer>", id, name);
     }
 
     /*
@@ -155,7 +155,18 @@ public class Exercises
      */
     public String formatFullName(String firstName, String middleName, String lastName, String suffix)
     {
-        return  null;
+        String fullName;
+
+        if (middleName.isEmpty())
+        {
+            fullName = firstName + " " + lastName;
+        }
+        else
+        {
+            fullName = firstName + " " + middleName + " " + lastName;
+        }
+
+        return (suffix.isEmpty()) ? fullName : fullName.concat(", " + suffix);
     }
 
     /*
@@ -186,6 +197,17 @@ public class Exercises
      */
     public String createUserName(String fullName)
     {
-        return null;
+        // Suffix doesn't matter so we're going to separate it
+        String[] suffixSplit = fullName.split(",");
+        String suffixRemoved = suffixSplit[0];
+
+        String[] eachPartOfName = suffixRemoved.toLowerCase().split(" ");
+        if (eachPartOfName.length == 3)
+        {
+            String middleName = eachPartOfName[1];
+            return String.format("%s.%s.%s", eachPartOfName[0], middleName.charAt(0), eachPartOfName[2]);
+        }
+
+        return String.format("%s.%s", eachPartOfName[0], eachPartOfName[1]);
     }
 }
