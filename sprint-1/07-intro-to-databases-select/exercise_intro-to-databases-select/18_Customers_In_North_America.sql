@@ -1,5 +1,11 @@
 USE northwind;
 
+SELECT company_name
+	, country
+FROM customers
+WHERE country = 'Canada' OR country = 'USA' OR country = 'Mexico'
+ORDER BY country ASC;
+
 -- The name and country
 -- of all customers in North America
 -- Canada, USA, Mexico
