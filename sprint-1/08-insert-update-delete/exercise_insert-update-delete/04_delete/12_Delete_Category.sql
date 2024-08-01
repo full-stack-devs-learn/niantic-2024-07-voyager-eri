@@ -13,3 +13,8 @@ USE northwind;
 -- script that holds the Category Name.
 -- The sript should do the rest
 
+DELETE FROM products
+WHERE category_id = 9;
+
+DELETE FROM categories
+WHERE category_id = 9;

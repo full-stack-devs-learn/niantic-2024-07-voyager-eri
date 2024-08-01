@@ -38,10 +38,94 @@ Order:
     Ship Address: The company address information
 
 OrderDetails: (Create 5 line items)
-    Order Id: the one created above
+    Order Id: the one created above LAST INSERT ID @ ORDERID,
     Product Id: use the product names to select/find the id of each product
     Unit Price: use the default list price of each product
     Quantity: you decide - between 1-10
     Discount: 0
 */
 
+-- ------------------------
+-- SETTING ALL VARIABLES
+-- ------------------------
+
+SET @product_id_1 = 68;
+SET @product_id_2 = 69;
+SET @product_id_3 = 70;
+SET @product_id_4 = 71;
+SET @product_id_5 = 72;
+
+SET @customer_id = 'CAGFA'
+	, @company_name = 'Cat Girl Factory'
+    , @contact_name = 'Chairman Meow'
+    , @address = '123 Cat Girl Ave.'
+    , @city = 'Seattle'
+    , @region = 'Washington'
+    , @postal_code = '98104'
+    , @country = 'USA';
+    
+-- ------------------------
+-- GENERATING A CUSTOMER
+-- ------------------------
+
+INSERT INTO customers
+(
+	customer_id
+    , company_name
+    , contact_name
+    , address
+    , city
+    , region
+    , postal_code
+    , country
+)
+VALUES
+(
+	@customer_id
+    , @company_name
+    , @contact_name
+    , @address
+    , @city
+    , @region
+    , @postal_code
+    , @country
+);
+
+-- ------------------------
+-- GENERATING ORDER
+-- ------------------------
+
+INSERT INTO orders
+(
+	customer_id
+    , order_date
+    , ship_name
+    , ship_address
+)
+VALUES
+(
+	@customer_id
+    , NOW()
+    , @contact_name
+    , @address
+);
+
+-- ------------------------
+-- GENERATING ORDER DETAILS
+-- ------------------------
+
+SET @order_id = LAST_INSERT_ID();
+
+INSERT INTO order_details
+(
+	order_id
+	, product_id
+    , unit_price
+    , quantity
+)
+VALUES (@order_id, @product_id_1, (SELECT unit_price FROM products WHERE product_id = @product_id_1), 6)
+	, (@order_id, @product_id_2, (SELECT unit_price FROM products WHERE product_id = @product_id_2), 7)
+    , (@order_id, @product_id_3, (SELECT unit_price FROM products WHERE product_id = @product_id_3), 8)
+    , (@order_id, @product_id_4, (SELECT unit_price FROM products WHERE product_id = @product_id_4), 9)
+    , (@order_id, @product_id_5, (SELECT unit_price FROM products WHERE product_id = @product_id_5), 10);
+	

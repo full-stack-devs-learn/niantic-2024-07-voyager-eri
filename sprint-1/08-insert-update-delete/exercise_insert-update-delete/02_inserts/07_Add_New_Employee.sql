@@ -11,3 +11,25 @@ USE northwind;
     -- home address
 -- leave all other fields null by default
 
+INSERT INTO employees
+(
+	last_name
+    , first_name
+    , title
+    , title_of_courtesy
+    , birth_date
+    , hire_date
+    , address
+    , notes
+)
+VALUES
+(
+	'Ishikawa'
+    , 'Eri'
+    , 'Sales Associate'
+    , 'Ms.'
+    , '2000-02-03'
+    , NOW()
+    , '123 Main St.'
+    , ''
+);
