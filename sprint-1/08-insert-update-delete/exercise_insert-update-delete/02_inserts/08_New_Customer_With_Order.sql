@@ -1,3 +1,5 @@
+USE northwind;
+
 -- Create a full script with variables that allows you 
 -- to add a new Customer into the database. Then create an order for them
 -- that includes 5 products. Create 5 variables at the top of the script
@@ -49,11 +51,11 @@ OrderDetails: (Create 5 line items)
 -- SETTING ALL VARIABLES
 -- ------------------------
 
-SET @product_id_1 = 68;
-SET @product_id_2 = 69;
-SET @product_id_3 = 70;
-SET @product_id_4 = 71;
-SET @product_id_5 = 72;
+SET @product_1 = 'Scottish Longbreads';
+SET @product_2 = 'Gudbrandsdalsost';
+SET @product_3 = 'Outback Lager';
+SET @product_4 = 'Flotemysost';
+SET @product_5 = 'Mozzarella di Giovanni';
 
 SET @customer_id = 'CAGFA'
 	, @company_name = 'Cat Girl Factory'
@@ -68,28 +70,28 @@ SET @customer_id = 'CAGFA'
 -- GENERATING A CUSTOMER
 -- ------------------------
 
-INSERT INTO customers
-(
-	customer_id
-    , company_name
-    , contact_name
-    , address
-    , city
-    , region
-    , postal_code
-    , country
-)
-VALUES
-(
-	@customer_id
-    , @company_name
-    , @contact_name
-    , @address
-    , @city
-    , @region
-    , @postal_code
-    , @country
-);
+-- INSERT INTO customers
+-- (
+-- 	customer_id
+--     , company_name
+--     , contact_name
+--     , address
+--     , city
+--     , region
+--     , postal_code
+--     , country
+-- )
+-- VALUES
+-- (
+-- 	@customer_id
+--     , @company_name
+--     , @contact_name
+--     , @address
+--     , @city
+--     , @region
+--     , @postal_code
+--     , @country
+-- );
 
 -- ------------------------
 -- GENERATING ORDER
@@ -114,18 +116,54 @@ VALUES
 -- GENERATING ORDER DETAILS
 -- ------------------------
 
+-- PRODUCT 1
+-- ------------------------
 SET @order_id = LAST_INSERT_ID();
 
-INSERT INTO order_details
-(
-	order_id
-	, product_id
-    , unit_price
-    , quantity
-)
-VALUES (@order_id, @product_id_1, (SELECT unit_price FROM products WHERE product_id = @product_id_1), 6)
-	, (@order_id, @product_id_2, (SELECT unit_price FROM products WHERE product_id = @product_id_2), 7)
-    , (@order_id, @product_id_3, (SELECT unit_price FROM products WHERE product_id = @product_id_3), 8)
-    , (@order_id, @product_id_4, (SELECT unit_price FROM products WHERE product_id = @product_id_4), 9)
-    , (@order_id, @product_id_5, (SELECT unit_price FROM products WHERE product_id = @product_id_5), 10);
+SELECT @product_id_1 = product_id
+	, @product_price_1 := unit_price
+FROM products
+WHERE product_name = @product_1;
+
+INSERT INTO order_details (order_id, product_id, unit_price)
+VALUES (@order_id, @product_id_1, @product_price_1);
+
+-- PRODUCT 2
+-- ------------------------
+SELECT @product_id_2 = product_id
+	, @product_price_2 := unit_price
+FROM products
+WHERE product_name = @product_2;
+
+INSERT INTO order_details (order_id, product_id, unit_price)
+VALUES (@order_id, @product_id_2, @product_price_2);
 	
+-- PRODUCT 3
+-- ------------------------
+SELECT @product_id_3 = product_id
+	, @product_price_3 := unit_price
+FROM products
+WHERE product_name = @product_3;
+
+INSERT INTO order_details (order_id, product_id, unit_price)
+VALUES (@order_id, @product_id_3, @product_price_3);
+
+-- PRODUCT 4
+-- ------------------------
+SELECT @product_id_4 = product_id
+	, @product_price_4 := unit_price
+FROM products
+WHERE product_name = @product_4;
+
+INSERT INTO order_details (order_id, product_id, unit_price)
+VALUES (@order_id, @product_id_4, @product_price_4);
+
+-- PRODUCT 5
+-- ------------------------
+SELECT @product_id_5 = product_id
+	, @product_price_5 := unit_price
+FROM products
+WHERE product_name = @product_5;
+
+INSERT INTO order_details (order_id, product_id, unit_price)
+VALUES (@order_id, @product_id_5, @product_price_5);
