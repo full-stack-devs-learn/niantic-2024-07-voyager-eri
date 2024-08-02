@@ -58,8 +58,8 @@ CREATE TABLE IF NOT EXISTS people
 -- -------------------------------
 
 INSERT INTO people (person_name)
-VALUES ('John')
-	, ('Sarah');
+VALUES ('Kirby')
+	, ('Waddle Dee');
 
 -- -------------------------------
 -- INSERTING VALUES INTO VENDORS
@@ -140,26 +140,26 @@ INSERT INTO transactions
     , amount
     , notes
 )
-VALUES ('2024-05-01', 1, 1, 1, 1200, 'Monthly rent payment')
-	, ('2024-05-03', 2, 2, 2, 40, 'Filled up the car''s tank')
-    , ('2024-05-05', 1, 3, 3, 150, 'Weekly grocery shopping')
-    , ('2024-05-07', 2, 4, 4, 20, 'Prescription refill')
-    , ('2024-05-10', 1, 5, 5, 30, 'Movie night out')
-    , ('2024-05-12', 2, 6, 6, 300, 'Booked flight for upcoming trip')
-    , ('2024-05-15', 1, 7, 7, 100, 'Electricity bill payment')
-    , ('2024-05-17', 2, 8, 8, 20, 'Monthly subway pass')
-    , ('2024-05-20', 1, 9, 9, 25, 'Dinner with friends')
-    , ('2024-05-22', 2, 10, 10, 50, 'Routine check-up')
-    , ('2024-05-25', 1, 11, 11, 15, 'Monthly subscription fee')
-    , ('2024-05-28', 2, 12, 12, 200, 'Hotel booking for vacation')
-    , ('2024-06-01', 2, 7, 13, 50, 'Water bill payment')
-    , ('2024-06-04', 1, 13, 14, 100, 'Car oil change')
-    , ('2024-06-09', 2, 14, 15, 10, 'Snacks for movie night')
-	, ('2024-06-14', 1, 15, 16, 15, 'Cold medicine')
-    , ('2024-06-18', 2, 16, 17, 50, 'Tickets to a baseball game')
-    , ('2024-06-23', 1, 17, 18, 150, 'Rental car for trip')
-    , ('2024-06-26', 2, 3, 19, 80, 'Fresh produce and groceries')
-    , ('2024-06-30', 1, 18, 20, 60, 'Internet service provider bill');
+VALUES ('2024-05-01', 1, 1, 1, 1200, 'Dream Land rent payment')
+	, ('2024-05-03', 2, 2, 2, 40, 'Filled up the Warp Star''s tank')
+    , ('2024-05-05', 1, 3, 3, 150, 'Weekly Maxim Tomato shopping')
+    , ('2024-05-07', 2, 4, 4, 20, 'Hammer upgrade prescription refill')
+    , ('2024-05-10', 1, 5, 5, 30, 'Movie night out in Cappy Town')
+    , ('2024-05-12', 2, 6, 6, 300, 'Booked a trip to the Fountain of Dreams')
+    , ('2024-05-15', 1, 7, 7, 100, 'Electricity bill payment for the Kirby Cafe')
+    , ('2024-05-17', 2, 8, 8, 20, 'Monthly Warp Star pass')
+    , ('2024-05-20', 1, 9, 9, 25, 'Dinner with King Dedede')
+    , ('2024-05-22', 2, 10, 10, 50, 'Routine check-up with Meta Knight')
+    , ('2024-05-25', 1, 11, 11, 15, 'Monthly subscription fee to the Kirby Fan Club')
+    , ('2024-05-28', 2, 12, 12, 200, 'Hotel booking in Dream Land')
+    , ('2024-06-01', 2, 7, 13, 50, 'Water bill payment for the Fountain of Dreams')
+    , ('2024-06-04', 1, 13, 14, 100, 'Warp Star oil change')
+    , ('2024-06-09', 2, 14, 15, 10, 'Snacks for a movie night in Cappy Town')
+	, ('2024-06-14', 1, 15, 16, 15, 'Cold medicine for the Waddle Dees')
+    , ('2024-06-18', 2, 16, 17, 50, 'Tickets to a Hammer Swing competition')
+    , ('2024-06-23', 1, 17, 18, 150, 'Rental Warp Star for a trip')
+    , ('2024-06-26', 2, 3, 19, 80, 'Fresh Maxim Tomatoes and groceries')
+    , ('2024-06-30', 1, 18, 20, 60, 'Internet service provider bill for the Kirby Cafe');
     
 -- -----------------------------------
 -- INSERTING FOREIGN KEYS
@@ -181,5 +181,22 @@ ALTER TABLE subcategories
 ADD CONSTRAINT fk_subcategories_categories
 FOREIGN KEY (category_id) REFERENCES categories(category_id);
 
-SELECT *
-FROM transactions;
+-- -----------------------
+-- USING THE TABLES
+-- -----------------------
+
+-- ALL CATEGORIES BY MONTH
+SELECT category_id
+    , SUM(amount)
+FROM transactions
+JOIN subcategories ON transactions.subcategory_id = subcategories.subcategory_id
+WHERE MONTH(transaction_date) = 5
+GROUP BY category_id;
+
+-- HOUSING EXPENSES BY MONTH
+SELECT transactions.subcategory_id
+	, sum(amount)
+FROM transactions
+JOIN subcategories ON transactions.subcategory_id = subcategories.subcategory_id
+WHERE MONTH(transaction_date) = 5 AND category_id = 1
+GROUP BY transactions.subcategory_id;
