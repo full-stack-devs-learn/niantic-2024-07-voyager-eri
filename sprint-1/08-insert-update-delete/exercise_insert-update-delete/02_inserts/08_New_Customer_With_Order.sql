@@ -70,28 +70,28 @@ SET @customer_id = 'CAGFA'
 -- GENERATING A CUSTOMER
 -- ------------------------
 
--- INSERT INTO customers
--- (
--- 	customer_id
---     , company_name
---     , contact_name
---     , address
---     , city
---     , region
---     , postal_code
---     , country
--- )
--- VALUES
--- (
--- 	@customer_id
---     , @company_name
---     , @contact_name
---     , @address
---     , @city
---     , @region
---     , @postal_code
---     , @country
--- );
+INSERT INTO customers
+(
+	customer_id
+    , company_name
+    , contact_name
+    , address
+    , city
+    , region
+    , postal_code
+    , country
+)
+VALUES
+(
+	@customer_id
+    , @company_name
+    , @contact_name
+    , @address
+    , @city
+    , @region
+    , @postal_code
+    , @country
+);
 
 -- ------------------------
 -- GENERATING ORDER
