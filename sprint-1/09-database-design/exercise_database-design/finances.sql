@@ -180,23 +180,3 @@ FOREIGN KEY (person_id) REFERENCES people(person_id);
 ALTER TABLE subcategories
 ADD CONSTRAINT fk_subcategories_categories
 FOREIGN KEY (category_id) REFERENCES categories(category_id);
-
--- -----------------------
--- USING THE TABLES
--- -----------------------
-
--- ALL CATEGORIES BY MONTH
-SELECT category_id
-    , SUM(amount)
-FROM transactions
-JOIN subcategories ON transactions.subcategory_id = subcategories.subcategory_id
-WHERE MONTH(transaction_date) = 5
-GROUP BY category_id;
-
--- HOUSING EXPENSES BY MONTH
-SELECT transactions.subcategory_id
-	, sum(amount)
-FROM transactions
-JOIN subcategories ON transactions.subcategory_id = subcategories.subcategory_id
-WHERE MONTH(transaction_date) = 5 AND category_id = 1
-GROUP BY transactions.subcategory_id;
