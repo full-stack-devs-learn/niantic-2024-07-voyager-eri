@@ -1,7 +1,5 @@
 package com.niantic.exercises;
-
 import com.niantic.models.TestScore;
-
 import java.util.ArrayList;
 
 public class TestScores
@@ -14,7 +12,16 @@ public class TestScores
      */
     public ArrayList<TestScore> getScoresByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return null;
+        ArrayList<TestScore> scoresByTestName = new ArrayList<TestScore>();
+
+        for (var score : testScores)
+        {
+            if (score.getTestName().equals(testName))
+            {
+                scoresByTestName.add(score);
+            }
+        }
+        return scoresByTestName;
     }
 
     /*
@@ -24,7 +31,16 @@ public class TestScores
      */
     public ArrayList<TestScore> getScoresByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return null;
+        ArrayList<TestScore> scoresByStudent = new ArrayList<TestScore>();
+
+        for (var score : testScores)
+        {
+            if (score.getStudentName().equals(student))
+            {
+                scoresByStudent.add(score);
+            }
+        }
+        return scoresByStudent;
     }
 
     /*
@@ -33,7 +49,14 @@ public class TestScores
      */
     public int getHighestScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        int highestScore = 0;
+
+        for (var score : testScores)
+        {
+            highestScore = Math.max(score.getScore(), highestScore);
+        }
+
+        return highestScore;
     }
 
     /*
@@ -42,7 +65,13 @@ public class TestScores
      */
     public int getLowestScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        int lowestScore = 0;
+
+        for (var score : testScores)
+        {
+            lowestScore = Math.min(score.getScore(), lowestScore);
+        }
+        return lowestScore;
     }
 
     /*

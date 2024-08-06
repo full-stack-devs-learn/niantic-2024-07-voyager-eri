@@ -12,7 +12,14 @@ public class ArrayListIntro
      */
     public ArrayList<String> getHeroesList()
     {
-        return null;
+        ArrayList<String> heroes = new ArrayList<String>();
+        heroes.add("Thor");
+        heroes.add("Iron Man");
+        heroes.add("Captain America");
+        heroes.add("Black Widow");
+        heroes.add("Black Panther");
+
+        return heroes;
     }
 
     /*
@@ -24,7 +31,16 @@ public class ArrayListIntro
      */
     public ArrayList<Integer> findEvens(ArrayList<Integer> numbers)
     {
-        return null;
+        ArrayList<Integer> evenNumbers = new ArrayList<Integer>();
+
+        for (int number : numbers)
+        {
+            if (number % 2 == 0)
+            {
+                evenNumbers.add(number);
+            }
+        }
+        return evenNumbers;
     }
 
     /*
@@ -35,7 +51,13 @@ public class ArrayListIntro
      */
     public int sum(ArrayList<Integer> numbers)
     {
-        return 0;
+        int total = 0;
+
+        for (int number : numbers)
+        {
+            total += number;
+        }
+        return total;
     }
 
     /*
@@ -46,7 +68,13 @@ public class ArrayListIntro
      */
     public int max(ArrayList<Integer> numbers)
     {
-        return 0;
+        int highestNumber = numbers.get(0);
+
+        for (int number : numbers)
+        {
+            highestNumber = Math.max(number, highestNumber);
+        }
+        return highestNumber;
     }
 
     /*
@@ -57,7 +85,13 @@ public class ArrayListIntro
      */
     public int min(ArrayList<Integer> numbers)
     {
-        return 0;
+        int lowestNumber = numbers.get(0);
+
+        for (int number : numbers)
+        {
+            lowestNumber = Math.min(number, lowestNumber);
+        }
+        return lowestNumber;
     }
 
     /*
@@ -69,7 +103,14 @@ public class ArrayListIntro
      */
     public int average(ArrayList<Integer> numbers)
     {
-        return 0;
+        int total = 0;
+
+        for (int number : numbers)
+        {
+            total += number;
+        }
+
+        return total/numbers.size();
     }
 
     /*
@@ -88,6 +129,22 @@ public class ArrayListIntro
      */
     public ArrayList<Integer> buildFibonacci(int size)
     {
-        return null;
+        ArrayList<Integer> fib = new ArrayList<Integer>();
+        int numberToAdd = 0;
+
+        for (int i = 0; i < size; i++)
+        {
+            fib.add(numberToAdd);
+
+            if (i == 0)
+            {
+                numberToAdd = fib.get(i) + 1;
+            }
+            else
+            {
+                numberToAdd = fib.get(i) + fib.get(i-1);
+            }
+        }
+        return fib;
     }
 }
