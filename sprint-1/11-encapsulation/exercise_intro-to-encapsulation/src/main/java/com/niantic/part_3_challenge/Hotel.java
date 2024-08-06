@@ -7,7 +7,6 @@ public class Hotel
     private int bookedRooms;
     private int bookedSuites;
     private int availableRooms;
-    private int bookedCoachSeats;
 
     public Hotel(int numberOfRooms, int numberOfSuites)
     {
@@ -51,11 +50,6 @@ public class Hotel
     public int getAvailableSuites()
     {
         return numberOfSuites - bookedSuites;
-    }
-
-    public int getBookedCoachSeats()
-    {
-        return bookedCoachSeats;
     }
 
     public boolean makeReservation(int numberOfRooms, boolean isSuite)
