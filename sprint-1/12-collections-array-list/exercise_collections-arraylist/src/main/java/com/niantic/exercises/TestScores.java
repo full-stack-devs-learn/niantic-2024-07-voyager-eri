@@ -65,7 +65,7 @@ public class TestScores
      */
     public int getLowestScore(ArrayList<TestScore> testScores)
     {
-        int lowestScore = 0;
+        int lowestScore = 100;
 
         for (var score : testScores)
         {
@@ -80,7 +80,13 @@ public class TestScores
      */
     public int getAverageScore(ArrayList<TestScore> testScores)
     {
-        return 0;
+        int total = 0;
+
+        for (var score: testScores)
+        {
+            total += score.getScore();
+        }
+        return total/testScores.size();
     }
 
     /*
@@ -89,7 +95,16 @@ public class TestScores
      */
     public int getHighestScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        int highestScore = 0;
+
+        for (var score : testScores)
+        {
+            if (score.getTestName().equals(testName))
+            {
+                highestScore = Math.max(highestScore, score.getScore());
+            }
+        }
+        return highestScore;
     }
 
     /*
@@ -98,7 +113,16 @@ public class TestScores
      */
     public int getLowestScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        int lowestScore = 100;
+
+        for (var score : testScores)
+        {
+            if (score.getTestName().equals(testName))
+            {
+                lowestScore = Math.min(lowestScore, score.getScore());
+            }
+        }
+        return lowestScore;
     }
 
     /*
@@ -107,7 +131,18 @@ public class TestScores
      */
     public int getAverageScoreByTest(ArrayList<TestScore> testScores, String testName)
     {
-        return 0;
+        int totalScores = 0;
+        int totalNumberOfScores = 0;
+
+        for (var score : testScores)
+        {
+            if (score.getTestName().equals(testName))
+            {
+                totalScores += score.getScore();
+                totalNumberOfScores++;
+            }
+        }
+        return totalScores / totalNumberOfScores;
     }
 
     /*
@@ -116,7 +151,16 @@ public class TestScores
      */
     public int getHighestScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        int highestScore = 0;
+
+        for (var score : testScores)
+        {
+            if (score.getStudentName().equals(student))
+            {
+                highestScore = Math.max(highestScore, score.getScore());
+            }
+        }
+        return highestScore;
     }
 
     /*
@@ -125,7 +169,16 @@ public class TestScores
      */
     public int getLowestScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        int lowestScore = 100;
+
+        for (var score : testScores)
+        {
+            if (score.getStudentName().equals(student))
+            {
+                lowestScore = Math.min(lowestScore, score.getScore());
+            }
+        }
+        return lowestScore;
     }
 
     /*
@@ -134,6 +187,17 @@ public class TestScores
      */
     public int getAverageScoreByStudent(ArrayList<TestScore> testScores, String student)
     {
-        return 0;
+        int totalScores = 0;
+        int totalNumberOfScores = 0;
+
+        for (var score : testScores)
+        {
+            if (score.getStudentName().equals(student))
+            {
+                totalScores += score.getScore();
+                totalNumberOfScores++;
+            }
+        }
+        return totalScores / totalNumberOfScores;
     }
 }
