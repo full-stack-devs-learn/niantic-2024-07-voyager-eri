@@ -48,7 +48,7 @@ public class Refrigerator
     {
         if (isDoorOpen && (availableCapacity - capacity > 0))
         {
-            this.availableCapacity -= capacity;
+            availableCapacity -= capacity;
             return true;
         }
         return false;
@@ -58,7 +58,7 @@ public class Refrigerator
     {
         if (isDoorOpen && availableCapacity + capacity < maxCapacity)
         {
-            this.availableCapacity += capacity;
+            availableCapacity += capacity;
             return true;
         }
         return false;

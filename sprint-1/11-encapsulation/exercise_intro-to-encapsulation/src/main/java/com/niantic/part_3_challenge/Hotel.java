@@ -58,7 +58,7 @@ public class Hotel
         {
             if (numberOfRooms <= getAvailableSuites())
             {
-                this.bookedSuites += numberOfRooms;
+                bookedSuites += numberOfRooms;
                 return true;
             }
             return false;
@@ -66,7 +66,7 @@ public class Hotel
 
         if (numberOfRooms <= getAvailableRooms())
         {
-            this.bookedRooms += numberOfRooms;
+            bookedRooms += numberOfRooms;
             return true;
         }
 
