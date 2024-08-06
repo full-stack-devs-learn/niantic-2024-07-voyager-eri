@@ -18,7 +18,7 @@ The database should be able to handle all financial transactions and allow you t
 
 ### Sample data set
 
-Following is a sample dataset of transactions that you will need to store in your database. Although this is a simple spreadsheet, as you design your database consider how you might design a database with multiple tables.
+Following is a sample dataset of https://app.diagrams.net/?src=abouttransactions that you will need to store in your database. Although this is a simple spreadsheet, as you design your database consider how you might design a database with multiple tables.
 
 ![Dataset](images/sample-dataset.jpg "Sample Dataset")
 
