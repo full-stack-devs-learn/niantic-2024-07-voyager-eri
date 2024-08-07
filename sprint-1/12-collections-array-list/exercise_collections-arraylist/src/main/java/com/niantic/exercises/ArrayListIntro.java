@@ -132,18 +132,13 @@ public class ArrayListIntro
         ArrayList<Integer> fib = new ArrayList<Integer>();
         int numberToAdd = 0;
 
-        for (int i = 0; i < size; i++)
+        fib.add(numberToAdd);
+        numberToAdd = 1;
+
+        for (int i = 1; i < size; i++)
         {
             fib.add(numberToAdd);
-
-            if (i == 0)
-            {
-                numberToAdd = fib.get(i) + 1;
-            }
-            else
-            {
-                numberToAdd = fib.get(i) + fib.get(i-1);
-            }
+            numberToAdd = fib.get(i) + fib.get(i-1);
         }
         return fib;
     }
