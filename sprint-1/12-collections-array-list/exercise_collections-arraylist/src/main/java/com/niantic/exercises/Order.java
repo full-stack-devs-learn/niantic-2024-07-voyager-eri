@@ -25,6 +25,25 @@ public class Order
      */
     public void addItem(OrderLineItem item)
     {
+        if (shoppingCart.contains(item))
+        {
+            // I thought this would be funny to do. Realistically I'd do the method below this.
+            shoppingCart.get(shoppingCart.indexOf(item)).setQuantity(shoppingCart.get(shoppingCart.indexOf(item)).getQuantity() + item.getQuantity());
+
+            /*
+            for (var itemsInCart : shoppingCart)
+            {
+                if (itemsInCart.equals(item))
+                {
+                    itemsInCart.setQuantity(item.getQuantity() + itemsInCart.getQuantity());
+                }
+            }
+            */
+        }
+        else
+        {
+            shoppingCart.add(item);
+        }
     }
 
     /*
@@ -33,6 +52,7 @@ public class Order
      */
     public void removeItem(OrderLineItem item)
     {
+        shoppingCart.remove(item);
     }
 
     /*
@@ -43,7 +63,21 @@ public class Order
      */
     public OrderLineItem findHighestPriceProduct()
     {
-        return null;
+        var highest = shoppingCart.getFirst();
+
+        if (shoppingCart.isEmpty())
+        {
+            return null;
+        }
+
+        for (var item : shoppingCart)
+        {
+            if (item.getPrice() > highest.getPrice())
+            {
+                highest = item;
+            }
+        }
+        return highest;
     }
 
     /*
@@ -54,7 +88,21 @@ public class Order
      */
     public OrderLineItem findMostExpensiveLineItem()
     {
-        return null;
+        var mostExpensive = shoppingCart.getFirst();
+
+        if (shoppingCart.isEmpty())
+        {
+            return null;
+        }
+
+        for (var item : shoppingCart)
+        {
+            if (item.getLineTotal() > mostExpensive.getLineTotal())
+            {
+                mostExpensive = item;
+            }
+        }
+        return mostExpensive;
     }
 
     /*
@@ -62,7 +110,13 @@ public class Order
      */
     public double getOrderTotal()
     {
-        return 0;
+        double total = 0;
+
+        for (var item : shoppingCart)
+        {
+            total += item.getLineTotal();
+        }
+        return total;
     }
 
     /*
@@ -70,7 +124,13 @@ public class Order
      */
     public int getTotalItemCount()
     {
-        return 0;
+        int total = 0;
+
+        for (var item : shoppingCart)
+        {
+            total += item.getQuantity();
+        }
+        return total;
     }
 
     /*
@@ -78,6 +138,6 @@ public class Order
      */
     public double getAveragePricePerItem()
     {
-        return 0;
+        return getOrderTotal()/getTotalItemCount();
     }
 }
