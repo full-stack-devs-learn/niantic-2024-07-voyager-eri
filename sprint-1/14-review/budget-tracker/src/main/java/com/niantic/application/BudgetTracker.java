@@ -1,6 +1,8 @@
 package com.niantic.application;
 
+import com.niantic.models.Category;
 import com.niantic.models.User;
+import com.niantic.services.CategoryDao;
 import com.niantic.services.UserDao;
 
 import java.util.Scanner;
@@ -9,6 +11,7 @@ public class BudgetTracker
 {
     Scanner userInput = new Scanner(System.in);
     UserDao userDao = new UserDao();
+    CategoryDao categoryDao = new CategoryDao();
 
     public void run()
     {
@@ -19,7 +22,7 @@ public class BudgetTracker
             switch(choice)
             {
                 case 1:
-                    System.out.println("add transaction");
+                    addTransaction();
                     break;
                 case 2:
                     System.out.println("reports");
@@ -28,13 +31,13 @@ public class BudgetTracker
                     addUser();
                     break;
                 case 4:
-                    System.out.println("add category");
+                    addCategory();
                     break;
                 case 5:
-                    System.out.println("add sub category");
+                    addSubCategory();
                     break;
                 case 6:
-                    System.out.println("add vendor");
+                    addVendor();
                     break;
                 case 0:
                     System.out.println();
@@ -69,8 +72,19 @@ public class BudgetTracker
         return getUserInt("Enter an option (ﾉ´ヮ`)ﾉ: ");
     }
 
+    private void addTransaction()
+    {
+        System.out.println();
+        System.out.println("Add a transaction!");
+        System.out.println("-".repeat(100));
+    }
+
     private void addUser()
     {
+        System.out.println();
+        System.out.println("Add a user!");
+        System.out.println("-".repeat(100));
+
         String userName = getUserString("User name: ");
         String firstName = getUserString("First name: ");
         String lastName = getUserString("Last name: ");
@@ -88,10 +102,44 @@ public class BudgetTracker
 
         userDao.addUser(user);
 
-        System.out.printf("%s has been added!", userName);
+        System.out.printf("User %s has been added!", userName);
     }
 
-    // HELPER FUNCTIONS
+    private void addCategory()
+    {
+        System.out.println();
+        System.out.println("Add a category!");
+        System.out.println("-".repeat(100));
+
+        String categoryName = getUserString("Category name: ");
+        String description = getUserString("Description: ");
+
+        var category = new Category()
+        {{
+            setCategoryName(categoryName);
+            setDescription(description);
+        }};
+
+        categoryDao.addCategory(category);
+
+        System.out.printf("Category %s has been added!", categoryName);
+    }
+
+    private void addSubCategory()
+    {
+        System.out.println();
+        System.out.println("Add a subcategory!");
+        System.out.println("-".repeat(100));
+    }
+
+    private void addVendor()
+    {
+        System.out.println();
+        System.out.println("Add a vendor!");
+        System.out.println("-".repeat(100));
+    }
+
+    // <editor-fold desc="HELPER FUNCTIONS">
 
     private void waitForUser()
     {
@@ -101,7 +149,7 @@ public class BudgetTracker
 
     private String getUserString(String message)
     {
-        System.out.println(message);
+        System.out.print(message);
         return userInput.nextLine();
     }
 
@@ -109,4 +157,6 @@ public class BudgetTracker
     {
         return Integer.parseInt(getUserString(message));
     }
+
+    // </editor-fold>
 }
