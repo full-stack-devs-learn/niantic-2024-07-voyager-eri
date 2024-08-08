@@ -1,8 +1,10 @@
 package com.niantic.application;
 
 import com.niantic.models.Category;
+import com.niantic.models.SubCategory;
 import com.niantic.models.User;
 import com.niantic.services.CategoryDao;
+import com.niantic.services.SubCategoryDao;
 import com.niantic.services.UserDao;
 
 import java.util.Scanner;
@@ -10,8 +12,10 @@ import java.util.Scanner;
 public class BudgetTracker
 {
     Scanner userInput = new Scanner(System.in);
-    UserDao userDao = new UserDao();
+
     CategoryDao categoryDao = new CategoryDao();
+    SubCategoryDao subCategoryDao = new SubCategoryDao();
+    UserDao userDao = new UserDao();
 
     public void run()
     {
@@ -130,6 +134,19 @@ public class BudgetTracker
         System.out.println();
         System.out.println("Add a subcategory!");
         System.out.println("-".repeat(100));
+
+        int categoryId = getUserInt("Category Id: ");
+        String categoryName = getUserString("Sub Category Name: ");
+        String description = getUserString("Description: ");
+
+        var subCategory = new SubCategory()
+        {{
+            setCategoryId(categoryId);
+            setSubCategoryName(categoryName);
+            setDescription(description);
+        }};
+
+        subCategoryDao.addSubCategory(subCategory);
     }
 
     private void addVendor()
