@@ -1,10 +1,15 @@
 package com.niantic.application;
 
+import com.niantic.models.User;
+import com.niantic.services.UserDao;
+
 import java.util.Scanner;
 
 public class BudgetTracker
 {
     Scanner userInput = new Scanner(System.in);
+    UserDao userDao = new UserDao();
+
     public void run()
     {
 
@@ -20,7 +25,7 @@ public class BudgetTracker
                     System.out.println("reports");
                     break;
                 case 3:
-                    System.out.println("add user");
+                    addUser();
                     break;
                 case 4:
                     System.out.println("add category");
@@ -48,8 +53,8 @@ public class BudgetTracker
     private int homeScreenSelection()
     {
         System.out.println();
-        System.out.println("Budget Tracker");
-        System.out.println("--------------------------------------");
+        System.out.println("☆ﾟ.*･｡ﾟ Budget Tracker ﾟ｡･*.ﾟ☆ ( ´ ▽ ` )ﾉ");
+        System.out.println("-".repeat(100));
         System.out.println("Select from the following options:");
         System.out.println();
         System.out.println("  1) Add Transaction");
@@ -61,9 +66,47 @@ public class BudgetTracker
         System.out.println("  0) Quit");
         System.out.println();
 
-        System.out.print("Enter an option: ");
-        return Integer.parseInt(userInput.nextLine());
+        return getUserInt("Enter an option (ﾉ´ヮ`)ﾉ: ");
     }
 
+    private void addUser()
+    {
+        String userName = getUserString("User name: ");
+        String firstName = getUserString("First name: ");
+        String lastName = getUserString("Last name: ");
+        String phone = getUserString("Phone number: ");
+        String email = getUserString("Email address: ");
 
+        var user = new User()
+        {{
+            setUserName(userName);
+            setFirstName(firstName);
+            setLastName(lastName);
+            setPhone(phone);
+            setEmail(email);
+        }};
+
+        userDao.addUser(user);
+
+        System.out.printf("%s has been added!", userName);
+    }
+
+    // HELPER FUNCTIONS
+
+    private void waitForUser()
+    {
+        System.out.println();
+        System.out.println("Press ENTER to continue...");
+    }
+
+    private String getUserString(String message)
+    {
+        System.out.println(message);
+        return userInput.nextLine();
+    }
+
+    private int getUserInt(String message)
+    {
+        return Integer.parseInt(getUserString(message));
+    }
 }
