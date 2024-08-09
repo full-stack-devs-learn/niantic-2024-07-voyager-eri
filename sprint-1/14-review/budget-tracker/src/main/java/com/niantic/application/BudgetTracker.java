@@ -63,6 +63,7 @@ public class BudgetTracker
                 case 3 -> getTransactions("year");
                 case 4 -> getTransactions("sub category");
                 case 5 -> getTransactions("category");
+                case 6 -> getTransactionById();
                 case 0 -> {return;}
                 default -> System.out.println("That was an invalid selection, please select from the available options.");
             }
@@ -91,17 +92,34 @@ public class BudgetTracker
             default -> throw new IllegalStateException("Unexpected value: " + reportType);
         };
 
-        System.out.println("Transactions for " + filterKey);
+        System.out.println("Transactions for " + reportType + " " + filterKey);
         System.out.println("-".repeat(50));
-        System.out.printf("%-13s %-10s %-15s%n", "Date", "Amount", "Notes");
+        System.out.printf("%-13s %-11s %-15s%n", "Date", "Amount", "Notes");
         System.out.println("-".repeat(50));
 
         for (var eachTransaction : transaction)
         {
-            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+            System.out.printf("%-13tF $%-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
         Helper.waitForUser();
+    }
+
+    public void getTransactionById()
+    {
+        System.out.println();
+        System.out.println("Get a transaction by its id!");
+        System.out.println("-".repeat(50));
+
+        int transactionId = Helper.getUserInt("Enter transaction id: ");
+        System.out.println();
+        var transaction = transactionDao.getTransactionById(transactionId);
+
+        System.out.println("Transaction for id " + transactionId);
+        System.out.println("-".repeat(50));
+        System.out.printf("%-13s %-11s %-15s%n", "Date", "Amount", "Notes");
+        System.out.println("-".repeat(50));
+        System.out.printf("%-13tF $%-10.2f %-15s%n", transaction.getDate(), transaction.getAmount(), transaction.getNotes());
     }
 
     // </editor-fold>

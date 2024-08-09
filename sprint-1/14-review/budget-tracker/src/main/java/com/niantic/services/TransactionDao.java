@@ -131,12 +131,13 @@ public class TransactionDao
         String sql = """
                 SELECT transaction_id
                     , user_id
-                    , sub_category_id
+                    , transactions.sub_category_id
                     , vendor_id
                     , transaction_date
                     , amount
                     , notes
                 FROM transactions
+                INNER JOIN sub_categories ON transactions.sub_category_id = sub_categories.sub_category_id
                 WHERE category_id = ?;
                 """;
 

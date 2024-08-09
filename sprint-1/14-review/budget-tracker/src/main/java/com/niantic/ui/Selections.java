@@ -35,6 +35,7 @@ public class Selections
         System.out.println("  3) Transactions by Year");
         System.out.println("  4) Transactions by Sub Category");
         System.out.println("  5) Transactions by Category");
+        System.out.println("  6) Transaction by Id");
         System.out.println("  0) Back");
         System.out.println();
 
