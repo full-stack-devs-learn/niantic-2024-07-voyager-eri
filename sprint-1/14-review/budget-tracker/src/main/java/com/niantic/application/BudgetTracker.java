@@ -177,6 +177,72 @@ public class BudgetTracker
         waitForUser();
     }
 
+    private void getTransactionsByYear()
+    {
+        System.out.println();
+        System.out.println("Get transactions by year!");
+        System.out.println("-".repeat(50));
+
+        int year = getUserInt("Enter year: ");
+        System.out.println();
+
+        var transaction = transactionDao.getTransactionByYear(year);
+
+        System.out.println("Transactions for " + year);
+        System.out.println("-".repeat(50));
+
+        for (var eachTransaction : transaction)
+        {
+            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+        }
+
+        waitForUser();
+    }
+
+    private void getTransactionsBySubCategory()
+    {
+        System.out.println();
+        System.out.println("Get transactions by sub category!");
+        System.out.println("-".repeat(50));
+
+        int subCategoryId = getUserInt("Enter sub category id: ");
+        System.out.println();
+
+        var transaction = transactionDao.getTransactionBySubCategory(subCategoryId);
+
+        System.out.println("Transactions for sub category " + subCategoryId);
+        System.out.println("-".repeat(50));
+
+        for (var eachTransaction : transaction)
+        {
+            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+        }
+
+        waitForUser();
+    }
+
+    private void getTransactionsByCategory()
+    {
+        System.out.println();
+        System.out.println("Get transactions by category!");
+        System.out.println("-".repeat(50));
+
+        int categoryId = getUserInt("Enter category id: ");
+        System.out.println();
+
+        var transaction = transactionDao.getTransactionByCategory(categoryId);
+
+        System.out.println("Transactions for " + categoryId);
+        System.out.println("-".repeat(50));
+
+        for (var eachTransaction : transaction)
+        {
+            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+        }
+
+        waitForUser();
+    }
+
     // </editor-fold>
 
     // <editor-fold desc="ADD FUNCTIONS">

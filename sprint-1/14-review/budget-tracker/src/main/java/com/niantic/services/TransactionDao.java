@@ -88,6 +88,100 @@ public class TransactionDao
         return rowActions(row);
     }
 
+    public ArrayList<Transaction> getTransactionByYear(int year)
+    {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE YEAR(transaction_date) = ?;
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql, year);
+
+        return rowActions(row);
+    }
+
+    public ArrayList<Transaction> getTransactionBySubCategory(int subCategoryId)
+    {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE sub_category_id = ?;
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql, subCategoryId);
+
+        return rowActions(row);
+    }
+
+    public ArrayList<Transaction> getTransactionByCategory(int categoryId)
+    {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE category_id = ?;
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql, categoryId);
+
+        return rowActions(row);
+    }
+
+    public Transaction getTransactionById(int transactionId)
+    {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE transaction_id = ?;
+                """;
+        var row = jdbcTemplate.queryForRowSet(sql, transactionId);
+
+        if(row.next())
+        {
+            int userId = row.getInt("user_id");
+            int subCategoryId = row.getInt("sub_category_id");
+            int vendorId = row.getInt("vendor_id");
+
+            LocalDate transactionDate = null;
+            Date date = row.getDate("transaction_date");
+            if(date != null)
+            {
+                transactionDate = date.toLocalDate();
+            }
+
+            BigDecimal amount = row.getBigDecimal("amount");
+            String notes = row.getString("notes");
+
+            return new Transaction(transactionId, userId, subCategoryId, vendorId, transactionDate, amount, notes);
+        }
+
+        return null;
+    }
+
     public ArrayList<Transaction> rowActions(SqlRowSet row)
     {
         ArrayList<Transaction> transactions = new ArrayList<>();
