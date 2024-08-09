@@ -2,6 +2,7 @@ package com.niantic.application;
 
 import com.niantic.models.*;
 import com.niantic.services.*;
+import com.niantic.ui.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -25,10 +26,9 @@ public class BudgetTracker
 
     public void run()
     {
-
         while(true)
         {
-            int choice = homeScreenSelection();
+            int choice = Selections.homeScreenSelection();
             switch(choice)
             {
                 case 1:
@@ -62,30 +62,11 @@ public class BudgetTracker
         }
     }
 
-    private int homeScreenSelection()
-    {
-        System.out.println();
-        System.out.println("☆ﾟ.*･｡ﾟ Budget Tracker ﾟ｡･*.ﾟ☆ ( ´ ▽ ` )ﾉ");
-        System.out.println("-".repeat(70));
-        System.out.println("Select from the following options:");
-        System.out.println();
-        System.out.println("  1) Add Transaction");
-        System.out.println("  2) Reports");
-        System.out.println("  3) Add User");
-        System.out.println("  4) Add Category");
-        System.out.println("  5) Add Sub Category");
-        System.out.println("  6) Add Vendor");
-        System.out.println("  0) Quit");
-        System.out.println();
-
-        return getUserInt("Enter an option (ﾉ´ヮ`)ﾉ: ");
-    }
-
     private void displayReports()
     {
         while(true)
         {
-            int choice = reportsSelection();
+            int choice = Selections.reportsSelection();
             switch(choice)
             {
                 case 1:
@@ -95,37 +76,19 @@ public class BudgetTracker
                     getTransactionsByMonth();
                     break;
                 case 3:
-                    System.out.println("by year");
+                    getTransactionsByYear();
                     break;
                 case 4:
-                    System.out.println("by sub category");
+                    getTransactionsBySubCategory();
                     break;
                 case 5:
-                    System.out.println("by category");
+                    getTransactionsByCategory();
                 case 0:
                     return;
                 default:
                     System.out.println("That was an invalid selection, please select from the available options.");
             }
         }
-    }
-
-    private int reportsSelection()
-    {
-        System.out.println();
-        System.out.println("Reports");
-        System.out.println("--------------------------------------");
-        System.out.println("Select from the following options:");
-        System.out.println();
-        System.out.println("  1) Transactions by User");
-        System.out.println("  2) Transactions by Month");
-        System.out.println("  3) Transactions by Year");
-        System.out.println("  4) Transactions by Sub Category");
-        System.out.println("  5) Transactions by Category");
-        System.out.println("  0) Back");
-        System.out.println();
-
-        return getUserInt("Enter your selection: ");
     }
 
     // </editor-fold>
@@ -138,13 +101,15 @@ public class BudgetTracker
         System.out.println("Get transactions by user!");
         System.out.println("-".repeat(50));
 
-        int userId = getUserInt("Enter user id: ");
+        int userId = Helper.getUserInt("Enter user id: ");
         System.out.println();
 
         var transaction = transactionDao.getTransactionByUser(userId);
 
-        // System.out.println("Date" + " ".repeat(10) + "Amount" + " ".repeat(10) + "Notes" + " ".repeat(10));
+        System.out.println();
         System.out.println("Transactions for " + userId);
+        System.out.println("-".repeat(50));
+        System.out.printf("%-13s %-10s %-15s%n", "Date", "Amount", "Notes");
         System.out.println("-".repeat(50));
 
         for (var eachTransaction : transaction)
@@ -152,7 +117,7 @@ public class BudgetTracker
             System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
-        waitForUser();
+        Helper.waitForUser();
     }
 
     private void getTransactionsByMonth()
@@ -161,7 +126,7 @@ public class BudgetTracker
         System.out.println("Get transactions by month!");
         System.out.println("-".repeat(50));
 
-        int month = getUserInt("Enter month number: ");
+        int month = Helper.getUserInt("Enter month number: ");
         System.out.println();
 
         var transaction = transactionDao.getTransactionByMonth(month);
@@ -174,7 +139,7 @@ public class BudgetTracker
             System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
-        waitForUser();
+        Helper.waitForUser();
     }
 
     private void getTransactionsByYear()
@@ -183,7 +148,7 @@ public class BudgetTracker
         System.out.println("Get transactions by year!");
         System.out.println("-".repeat(50));
 
-        int year = getUserInt("Enter year: ");
+        int year = Helper.getUserInt("Enter year: ");
         System.out.println();
 
         var transaction = transactionDao.getTransactionByYear(year);
@@ -196,7 +161,7 @@ public class BudgetTracker
             System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
-        waitForUser();
+        Helper.waitForUser();
     }
 
     private void getTransactionsBySubCategory()
@@ -205,7 +170,7 @@ public class BudgetTracker
         System.out.println("Get transactions by sub category!");
         System.out.println("-".repeat(50));
 
-        int subCategoryId = getUserInt("Enter sub category id: ");
+        int subCategoryId = Helper.getUserInt("Enter sub category id: ");
         System.out.println();
 
         var transaction = transactionDao.getTransactionBySubCategory(subCategoryId);
@@ -218,7 +183,7 @@ public class BudgetTracker
             System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
-        waitForUser();
+        Helper.waitForUser();
     }
 
     private void getTransactionsByCategory()
@@ -227,7 +192,7 @@ public class BudgetTracker
         System.out.println("Get transactions by category!");
         System.out.println("-".repeat(50));
 
-        int categoryId = getUserInt("Enter category id: ");
+        int categoryId = Helper.getUserInt("Enter category id: ");
         System.out.println();
 
         var transaction = transactionDao.getTransactionByCategory(categoryId);
@@ -240,7 +205,7 @@ public class BudgetTracker
             System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
-        waitForUser();
+        Helper.waitForUser();
     }
 
     // </editor-fold>
@@ -252,13 +217,13 @@ public class BudgetTracker
         System.out.println("Add a transaction!");
         System.out.println("-".repeat(50));
 
-        int userId = getUserInt("User Id: ");
-        int subCategoryId = getUserInt("Sub Category Id: ");
-        int vendorId = getUserInt("Vendor Id: ");
-        LocalDate date = LocalDate.parse(getUserString("Date (format YYYY-MM-DD): "));
+        int userId = Helper.getUserInt("User Id: ");
+        int subCategoryId = Helper.getUserInt("Sub Category Id: ");
+        int vendorId = Helper.getUserInt("Vendor Id: ");
+        LocalDate date = LocalDate.parse(Helper.getUserString("Date (format YYYY-MM-DD): "));
         System.out.print("Amount: ");
         BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(userInput.nextLine()));
-        String notes = getUserString("Notes: ");
+        String notes = Helper.getUserString("Notes: ");
 
         var transaction = new Transaction()
         {{
@@ -281,11 +246,11 @@ public class BudgetTracker
         System.out.println("Add a user!");
         System.out.println("-".repeat(50));
 
-        String userName = getUserString("User name: ");
-        String firstName = getUserString("First name: ");
-        String lastName = getUserString("Last name: ");
-        String phone = getUserString("Phone number: ");
-        String email = getUserString("Email address: ");
+        String userName = Helper.getUserString("User name: ");
+        String firstName = Helper.getUserString("First name: ");
+        String lastName = Helper.getUserString("Last name: ");
+        String phone = Helper.getUserString("Phone number: ");
+        String email = Helper.getUserString("Email address: ");
 
         var user = new User()
         {{
@@ -307,8 +272,8 @@ public class BudgetTracker
         System.out.println("Add a category!");
         System.out.println("-".repeat(50));
 
-        String categoryName = getUserString("Category name: ");
-        String description = getUserString("Description: ");
+        String categoryName = Helper.getUserString("Category name: ");
+        String description = Helper.getUserString("Description: ");
 
         var category = new Category()
         {{
@@ -327,9 +292,9 @@ public class BudgetTracker
         System.out.println("Add a subcategory!");
         System.out.println("-".repeat(50));
 
-        int categoryId = getUserInt("Category Id: ");
-        String categoryName = getUserString("Sub Category Name: ");
-        String description = getUserString("Description: ");
+        int categoryId = Helper.getUserInt("Category Id: ");
+        String categoryName = Helper.getUserString("Sub Category Name: ");
+        String description = Helper.getUserString("Description: ");
 
         var subCategory = new SubCategory()
         {{
@@ -347,8 +312,8 @@ public class BudgetTracker
         System.out.println("Add a vendor!");
         System.out.println("-".repeat(50));
 
-        String vendorName = getUserString("Vendor name: ");
-        String website = getUserString("Website: ");
+        String vendorName = Helper.getUserString("Vendor name: ");
+        String website = Helper.getUserString("Website: ");
 
         var vendor = new Vendor()
         {{
@@ -362,26 +327,5 @@ public class BudgetTracker
     }
 
     // </editor-fold>
-
-    // <editor-fold desc="HELPER FUNCTIONS">
-
-    private void waitForUser()
-    {
-        System.out.println();
-        System.out.println("Press ENTER to continue...");
-        userInput.nextLine();
-    }
-
-    private String getUserString(String message)
-    {
-        System.out.print(message);
-        return userInput.nextLine();
-    }
-
-    private int getUserInt(String message)
-    {
-        return Integer.parseInt(getUserString(message));
-    }
-
-    // </editor-fold>
+    
 }
