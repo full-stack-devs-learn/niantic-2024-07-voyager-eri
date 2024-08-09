@@ -7,6 +7,7 @@ import com.niantic.ui.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 
 public class BudgetTracker
@@ -16,7 +17,7 @@ public class BudgetTracker
     Scanner userInput = new Scanner(System.in);
     CategoryDao categoryDao = new CategoryDao();
     SubCategoryDao subCategoryDao = new SubCategoryDao();
-    TransactionDao transactionDao = new TransactionDao();
+    static TransactionDao transactionDao = new TransactionDao();
     UserDao userDao = new UserDao();
     VendorDao vendorDao = new VendorDao();
 
@@ -31,33 +32,21 @@ public class BudgetTracker
             int choice = Selections.homeScreenSelection();
             switch(choice)
             {
-                case 1:
-                    addTransaction();
-                    break;
-                case 2:
-                    displayReports();
-                    break;
-                case 3:
-                    addUser();
-                    break;
-                case 4:
-                    addCategory();
-                    break;
-                case 5:
-                    addSubCategory();
-                    break;
-                case 6:
-                    addVendor();
-                    break;
-                case 0:
+                case 1 -> addTransaction();
+                case 2 -> displayReports();
+                case 3 -> addUser();
+                case 4 -> addCategory();
+                case 5 -> addSubCategory();
+                case 6 -> addVendor();
+                case 0 ->
+                {
                     System.out.println();
                     System.out.println("Thank you for using Northwind!");
                     System.out.println("Goodbye");
                     System.out.println();
                     System.exit(0);
-                default:
-                    System.out.println("invalid selection");
-                    break;
+                }
+                default -> System.out.println("invalid selection");
             }
         }
     }
@@ -69,135 +58,42 @@ public class BudgetTracker
             int choice = Selections.reportsSelection();
             switch(choice)
             {
-                case 1:
-                    getTransactionByUser();
-                    break;
-                case 2:
-                    getTransactionsByMonth();
-                    break;
-                case 3:
-                    getTransactionsByYear();
-                    break;
-                case 4:
-                    getTransactionsBySubCategory();
-                    break;
-                case 5:
-                    getTransactionsByCategory();
-                case 0:
-                    return;
-                default:
-                    System.out.println("That was an invalid selection, please select from the available options.");
+                case 1 -> getTransactions("user");
+                case 2 -> getTransactions("month");
+                case 3 -> getTransactions("year");
+                case 4 -> getTransactions("sub category");
+                case 5 -> getTransactions("category");
+                case 0 -> {return;}
+                default -> System.out.println("That was an invalid selection, please select from the available options.");
             }
         }
     }
 
     // </editor-fold>
 
-    // <editor-fold desc="REPORT FUNCTIONS">
+    // <editor-fold desc="REPORT FUNCTION">
 
-    private void getTransactionByUser()
+    public static void getTransactions(String reportType)
     {
         System.out.println();
-        System.out.println("Get transactions by user!");
+        System.out.println("Get transactions by " + reportType + "!");
         System.out.println("-".repeat(50));
 
-        int userId = Helper.getUserInt("Enter user id: ");
+        int filterKey = Helper.getUserInt("Enter " + reportType + ": ");
         System.out.println();
 
-        var transaction = transactionDao.getTransactionByUser(userId);
+        ArrayList<Transaction> transaction = switch (reportType) {
+            case "user" -> transactionDao.getTransactionByUser(filterKey);
+            case "month" -> transactionDao.getTransactionByMonth(filterKey);
+            case "year" -> transactionDao.getTransactionByYear(filterKey);
+            case "sub category" -> transactionDao.getTransactionBySubCategory(filterKey);
+            case "category" -> transactionDao.getTransactionByCategory(filterKey);
+            default -> throw new IllegalStateException("Unexpected value: " + reportType);
+        };
 
-        System.out.println();
-        System.out.println("Transactions for " + userId);
+        System.out.println("Transactions for " + filterKey);
         System.out.println("-".repeat(50));
         System.out.printf("%-13s %-10s %-15s%n", "Date", "Amount", "Notes");
-        System.out.println("-".repeat(50));
-
-        for (var eachTransaction : transaction)
-        {
-            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
-        }
-
-        Helper.waitForUser();
-    }
-
-    private void getTransactionsByMonth()
-    {
-        System.out.println();
-        System.out.println("Get transactions by month!");
-        System.out.println("-".repeat(50));
-
-        int month = Helper.getUserInt("Enter month number: ");
-        System.out.println();
-
-        var transaction = transactionDao.getTransactionByMonth(month);
-
-        System.out.println("Transactions for month " + month);
-        System.out.println("-".repeat(50));
-
-        for (var eachTransaction : transaction)
-        {
-            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
-        }
-
-        Helper.waitForUser();
-    }
-
-    private void getTransactionsByYear()
-    {
-        System.out.println();
-        System.out.println("Get transactions by year!");
-        System.out.println("-".repeat(50));
-
-        int year = Helper.getUserInt("Enter year: ");
-        System.out.println();
-
-        var transaction = transactionDao.getTransactionByYear(year);
-
-        System.out.println("Transactions for " + year);
-        System.out.println("-".repeat(50));
-
-        for (var eachTransaction : transaction)
-        {
-            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
-        }
-
-        Helper.waitForUser();
-    }
-
-    private void getTransactionsBySubCategory()
-    {
-        System.out.println();
-        System.out.println("Get transactions by sub category!");
-        System.out.println("-".repeat(50));
-
-        int subCategoryId = Helper.getUserInt("Enter sub category id: ");
-        System.out.println();
-
-        var transaction = transactionDao.getTransactionBySubCategory(subCategoryId);
-
-        System.out.println("Transactions for sub category " + subCategoryId);
-        System.out.println("-".repeat(50));
-
-        for (var eachTransaction : transaction)
-        {
-            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
-        }
-
-        Helper.waitForUser();
-    }
-
-    private void getTransactionsByCategory()
-    {
-        System.out.println();
-        System.out.println("Get transactions by category!");
-        System.out.println("-".repeat(50));
-
-        int categoryId = Helper.getUserInt("Enter category id: ");
-        System.out.println();
-
-        var transaction = transactionDao.getTransactionByCategory(categoryId);
-
-        System.out.println("Transactions for " + categoryId);
         System.out.println("-".repeat(50));
 
         for (var eachTransaction : transaction)
