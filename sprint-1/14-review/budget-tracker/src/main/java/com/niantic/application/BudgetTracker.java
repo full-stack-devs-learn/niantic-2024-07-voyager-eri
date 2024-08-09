@@ -1,14 +1,10 @@
 package com.niantic.application;
 
-import com.niantic.models.Category;
-import com.niantic.models.SubCategory;
-import com.niantic.models.User;
-import com.niantic.models.Vendor;
-import com.niantic.services.CategoryDao;
-import com.niantic.services.SubCategoryDao;
-import com.niantic.services.UserDao;
-import com.niantic.services.VendorDao;
+import com.niantic.models.*;
+import com.niantic.services.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class BudgetTracker
@@ -17,6 +13,7 @@ public class BudgetTracker
 
     CategoryDao categoryDao = new CategoryDao();
     SubCategoryDao subCategoryDao = new SubCategoryDao();
+    TransactionDao transactionDao = new TransactionDao();
     UserDao userDao = new UserDao();
     VendorDao vendorDao = new VendorDao();
 
@@ -64,7 +61,7 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("☆ﾟ.*･｡ﾟ Budget Tracker ﾟ｡･*.ﾟ☆ ( ´ ▽ ` )ﾉ");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(70));
         System.out.println("Select from the following options:");
         System.out.println();
         System.out.println("  1) Add Transaction");
@@ -83,14 +80,36 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("Add a transaction!");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(50));
+
+        int userId = getUserInt("User Id: ");
+        int subCategoryId = getUserInt("Sub Category Id: ");
+        int vendorId = getUserInt("Vendor Id: ");
+        LocalDate date = LocalDate.parse(getUserString("Date (format YYYY-MM-DD): "));
+        System.out.print("Amount: ");
+        BigDecimal amount = BigDecimal.valueOf(Double.parseDouble(userInput.nextLine()));
+        String notes = getUserString("Notes: ");
+
+        var transaction = new Transaction()
+        {{
+            setUserId(userId);
+            setSubCategoryId(subCategoryId);
+            setVendorId(vendorId);
+            setDate(date);
+            setAmount(amount);
+            setNotes(notes);
+        }};
+
+        transactionDao.addTransaction(transaction);
+
+        System.out.println("Transaction has been added!");
     }
 
     private void addUser()
     {
         System.out.println();
         System.out.println("Add a user!");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(50));
 
         String userName = getUserString("User name: ");
         String firstName = getUserString("First name: ");
@@ -116,7 +135,7 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("Add a category!");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(50));
 
         String categoryName = getUserString("Category name: ");
         String description = getUserString("Description: ");
@@ -136,7 +155,7 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("Add a subcategory!");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(50));
 
         int categoryId = getUserInt("Category Id: ");
         String categoryName = getUserString("Sub Category Name: ");
@@ -156,7 +175,7 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("Add a vendor!");
-        System.out.println("-".repeat(100));
+        System.out.println("-".repeat(50));
 
         String vendorName = getUserString("Vendor name: ");
         String website = getUserString("Website: ");
@@ -178,6 +197,7 @@ public class BudgetTracker
     {
         System.out.println();
         System.out.println("Press ENTER to continue...");
+        userInput.nextLine();
     }
 
     private String getUserString(String message)
