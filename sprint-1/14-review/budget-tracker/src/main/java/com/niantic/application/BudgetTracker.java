@@ -3,9 +3,11 @@ package com.niantic.application;
 import com.niantic.models.Category;
 import com.niantic.models.SubCategory;
 import com.niantic.models.User;
+import com.niantic.models.Vendor;
 import com.niantic.services.CategoryDao;
 import com.niantic.services.SubCategoryDao;
 import com.niantic.services.UserDao;
+import com.niantic.services.VendorDao;
 
 import java.util.Scanner;
 
@@ -16,6 +18,7 @@ public class BudgetTracker
     CategoryDao categoryDao = new CategoryDao();
     SubCategoryDao subCategoryDao = new SubCategoryDao();
     UserDao userDao = new UserDao();
+    VendorDao vendorDao = new VendorDao();
 
     public void run()
     {
@@ -154,6 +157,19 @@ public class BudgetTracker
         System.out.println();
         System.out.println("Add a vendor!");
         System.out.println("-".repeat(100));
+
+        String vendorName = getUserString("Vendor name: ");
+        String website = getUserString("Website: ");
+
+        var vendor = new Vendor()
+        {{
+            setVendorName(vendorName);
+            setWebsite(website);
+        }};
+
+        vendorDao.addVendor(vendor);
+
+        System.out.printf("Vendor %s has been added!", vendorName);
     }
 
     // <editor-fold desc="HELPER FUNCTIONS">
