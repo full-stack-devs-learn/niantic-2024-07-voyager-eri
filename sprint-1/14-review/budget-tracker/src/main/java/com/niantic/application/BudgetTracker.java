@@ -7,15 +7,21 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+
 public class BudgetTracker
 {
-    Scanner userInput = new Scanner(System.in);
+    // <editor-fold desc="INITIALIZING">
 
+    Scanner userInput = new Scanner(System.in);
     CategoryDao categoryDao = new CategoryDao();
     SubCategoryDao subCategoryDao = new SubCategoryDao();
     TransactionDao transactionDao = new TransactionDao();
     UserDao userDao = new UserDao();
     VendorDao vendorDao = new VendorDao();
+
+    // </editor-fold>
+
+    // <editor-fold desc="MENU">
 
     public void run()
     {
@@ -29,7 +35,7 @@ public class BudgetTracker
                     addTransaction();
                     break;
                 case 2:
-                    System.out.println("reports");
+                    displayReports();
                     break;
                 case 3:
                     addUser();
@@ -54,7 +60,6 @@ public class BudgetTracker
                     break;
             }
         }
-
     }
 
     private int homeScreenSelection()
@@ -76,6 +81,79 @@ public class BudgetTracker
         return getUserInt("Enter an option (ﾉ´ヮ`)ﾉ: ");
     }
 
+    private void displayReports()
+    {
+        while(true)
+        {
+            int choice = reportsSelection();
+            switch(choice)
+            {
+                case 1:
+                    getTransactionByUser();
+                    break;
+                case 2:
+                    System.out.println("by month");
+                    break;
+                case 3:
+                    System.out.println("by year");
+                    break;
+                case 4:
+                    System.out.println("by sub category");
+                    break;
+                case 5:
+                    System.out.println("by category");
+                case 0:
+                    return;
+                default:
+                    System.out.println("That was an invalid selection, please select from the available options.");
+            }
+        }
+    }
+
+    private int reportsSelection()
+    {
+        System.out.println();
+        System.out.println("Reports");
+        System.out.println("--------------------------------------");
+        System.out.println("Select from the following options:");
+        System.out.println();
+        System.out.println("  1) Transactions by User");
+        System.out.println("  2) Transactions by Month");
+        System.out.println("  3) Transactions by Year");
+        System.out.println("  4) Transactions by Sub Category");
+        System.out.println("  5) Transactions by Category");
+        System.out.println("  0) Back");
+        System.out.println();
+
+        return getUserInt("Enter your selection: ");
+    }
+
+    // </editor-fold>
+
+    private void getTransactionByUser()
+    {
+        System.out.println();
+        System.out.println("Get transactions by User!");
+        System.out.println("-".repeat(50));
+
+        int userId = getUserInt("Enter user id: ");
+        System.out.println();
+
+        var transaction = transactionDao.getTransactionByUser(userId);
+
+        // System.out.println("Date" + " ".repeat(10) + "Amount" + " ".repeat(10) + "Notes" + " ".repeat(10));
+        System.out.println("Transactions for " + userId);
+        System.out.println("-".repeat(50));
+
+        for (var eachTransaction : transaction)
+        {
+            System.out.printf("%-15tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+        }
+
+        waitForUser();
+    }
+
+    // <editor-fold desc="ADD FUNCTIONS">
     private void addTransaction()
     {
         System.out.println();
@@ -190,6 +268,8 @@ public class BudgetTracker
 
         System.out.printf("Vendor %s has been added!", vendorName);
     }
+
+    // </editor-fold>
 
     // <editor-fold desc="HELPER FUNCTIONS">
 
