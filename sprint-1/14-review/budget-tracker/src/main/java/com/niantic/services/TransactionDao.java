@@ -3,6 +3,8 @@ package com.niantic.services;
 import com.niantic.models.Transaction;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -64,9 +66,36 @@ public class TransactionDao
 
         var row = jdbcTemplate.queryForRowSet(sql, userId);
 
+        return rowActions(row);
+    }
+
+    public ArrayList<Transaction> getTransactionByMonth(int month)
+    {
+        String sql = """
+                SELECT transaction_id
+                    , user_id
+                    , sub_category_id
+                    , vendor_id
+                    , transaction_date
+                    , amount
+                    , notes
+                FROM transactions
+                WHERE MONTH(transaction_date) = ?;
+                """;
+
+        var row = jdbcTemplate.queryForRowSet(sql, month);
+
+        return rowActions(row);
+    }
+
+    public ArrayList<Transaction> rowActions(SqlRowSet row)
+    {
+        ArrayList<Transaction> transactions = new ArrayList<>();
+
         while(row.next())
         {
             int transactionId = row.getInt("transaction_id");
+            int userId = row.getInt("user_id");
             int subCategoryId = row.getInt("sub_category_id");
             int vendorId = row.getInt("vendor_id");
 

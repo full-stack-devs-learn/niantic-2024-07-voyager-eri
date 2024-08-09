@@ -92,7 +92,7 @@ public class BudgetTracker
                     getTransactionByUser();
                     break;
                 case 2:
-                    System.out.println("by month");
+                    getTransactionsByMonth();
                     break;
                 case 3:
                     System.out.println("by year");
@@ -130,10 +130,12 @@ public class BudgetTracker
 
     // </editor-fold>
 
+    // <editor-fold desc="REPORT FUNCTIONS">
+
     private void getTransactionByUser()
     {
         System.out.println();
-        System.out.println("Get transactions by User!");
+        System.out.println("Get transactions by user!");
         System.out.println("-".repeat(50));
 
         int userId = getUserInt("Enter user id: ");
@@ -147,11 +149,35 @@ public class BudgetTracker
 
         for (var eachTransaction : transaction)
         {
-            System.out.printf("%-15tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
         }
 
         waitForUser();
     }
+
+    private void getTransactionsByMonth()
+    {
+        System.out.println();
+        System.out.println("Get transactions by month!");
+        System.out.println("-".repeat(50));
+
+        int month = getUserInt("Enter month number: ");
+        System.out.println();
+
+        var transaction = transactionDao.getTransactionByMonth(month);
+
+        System.out.println("Transactions for month " + month);
+        System.out.println("-".repeat(50));
+
+        for (var eachTransaction : transaction)
+        {
+            System.out.printf("%-13tF %-10.2f %-15s%n", eachTransaction.getDate(), eachTransaction.getAmount(), eachTransaction.getNotes());
+        }
+
+        waitForUser();
+    }
+
+    // </editor-fold>
 
     // <editor-fold desc="ADD FUNCTIONS">
     private void addTransaction()
