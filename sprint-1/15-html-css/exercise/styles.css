@@ -1,0 +1,57 @@
+body
+{
+    color: #000;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 100%;
+    margin: auto;
+}
+
+.navbar
+{
+    font-weight: 700;
+    background-color: #000;
+    position: sticky;
+}
+
+.navbar ul
+{
+    list-style: none;
+    display: flex;
+}
+
+.navbar a
+{
+    display: inline-block;
+    padding: 20px 15px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.logo
+{
+    width: 175px;
+    vertical-align: middle;
+}
+
+.container
+{
+    max-width: 1440px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin: auto;
+}
+
+.container.flex
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h2
+{
+    font-family: Roboto Slab, sans-serif;
+    font-weight: 900;
+    font-size: 5.5em;
+}
