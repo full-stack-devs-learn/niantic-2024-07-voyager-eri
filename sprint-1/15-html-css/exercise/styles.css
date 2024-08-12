@@ -148,12 +148,19 @@ nav a
 /*========= CARD =========*/
 /*========================*/
 
+.card-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2%;
+}
+
 .card
 {
     border-radius: 16px;
     border: 2px solid #3d098e;
-    margin: 0 10px;
-    width: 350px;
+    width: 23.5%;
 }
 
 .card img
@@ -161,7 +168,7 @@ nav a
     border-radius: 16px 16px 0 0;
 }
 
-.card-container
+.card-details
 {
     padding: 3px 16px;
 }
