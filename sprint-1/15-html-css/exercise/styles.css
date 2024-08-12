@@ -1,3 +1,72 @@
+/*=================================*/
+/*========= TYPE SETTINGS =========*/
+/*=================================*/
+
+h1
+{
+    font-family: Roboto Slab, sans-serif;
+    font-weight: 900;
+    font-size: 5em;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+h1.top-page
+{
+    margin-top: 150px;
+}
+
+h2
+{
+    font-family: Roboto Slab, sans-serif;
+    font-weight: 900;
+    font-size: 4em;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.checkout-form h2
+{
+    font-size: 3em;
+}
+
+b
+{
+    font-family: Roboto Slab, sans-serif;
+    font-weight: 900;
+    font-size: 2em;
+}
+
+/*===================================*/
+/*========= MAIN COMPONENTS =========*/
+/*===================================*/
+
+img
+{
+    width: 100%;
+}
+
+img.social-media
+{
+    width: 25px;
+    margin: 3px;
+}
+
+footer
+{
+    background: url(images/footer.svg), linear-gradient(102.43deg, #3d098e, #f700f6);
+    background-blend-mode: luminosity, normal;
+    background-position: 50%;
+    background-size: cover;
+    color: #fff;
+    padding: 20px;
+}
+
+section
+{
+    padding-bottom: 50px;
+}
+
 body
 {
     color: #000;
@@ -13,7 +82,7 @@ main
     margin-bottom: 100px;
 }
 
-.navbar
+nav
 {
     font-weight: 700;
     background-color: #000;
@@ -23,13 +92,13 @@ main
     width: 100%;
 }
 
-.navbar ul
+nav ul
 {
     list-style: none;
     display: flex;
 }
 
-.navbar a
+nav a
 {
     display: inline-block;
     padding: 20px 15px;
@@ -51,45 +120,33 @@ main
     margin: auto;
 }
 
-.container.flex
+.flex
 {
     display: flex;
     justify-content: space-between;
     align-items: stretch;
 }
 
-h2
+.grid-container
 {
-    font-family: Roboto Slab, sans-serif;
-    font-weight: 900;
-    font-size: 4.5em;
-    margin-top: 20px;
-    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
-h1
+.checkout-column-right
 {
-    font-family: Roboto Slab, sans-serif;
-    font-weight: 900;
-    font-size: 5em;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    width: 40%;
 }
 
-h1.top-page
+.checkout-column-left
 {
-    margin-top: 150px;
+    width: 60%;
+    padding-right: 2%;
 }
 
-footer
-{
-    background: url(images/footer.svg), linear-gradient(102.43deg, #3d098e, #f700f6);
-    background-blend-mode: luminosity, normal;
-    background-position: 50%;
-    background-size: cover;
-    color: #fff;
-    padding: 20px;
-}
+/*========================*/
+/*========= CARD =========*/
+/*========================*/
 
 .card
 {
@@ -109,14 +166,86 @@ footer
     padding: 3px 16px;
 }
 
-b
+/*===================================*/
+/*========= CARD HORIZONTAL =========*/
+/*===================================*/
+
+.card-horizontal
 {
-    font-family: Roboto Slab, sans-serif;
-    font-weight: 900;
-    font-size: 2em;
+    display: flex;
+    justify-content: space-evenly;
+    border-radius: 16px;
+    border: 2px solid #3d098e;
 }
 
-section
+.card-horizontal img
 {
-    padding-bottom: 50px;
+    width: 50%;
+    overflow: hidden;
+    position: 50%;
+}
+
+.card-horizontal-contents
+{
+    padding: 15px 20px 20px 20px
+}
+
+.card-horizontal-price
+{
+    font-size: 90%;
+    color: #6d6d6d;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.card-horizontal-pizza-det
+{
+    margin-top: 10px;
+}
+
+/*========================*/
+/*========= FORM =========*/
+/*========================*/
+
+.flex-form
+{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+input
+{
+    border-radius: 100px;
+    border: 1.5px solid #6d6d6d;
+    width: 75%;
+    height: 40px;
+    padding: 0 20px;
+    margin-top: 9px;
+    margin-bottom: 17px;
+    font-family: "Montserrat", sans-serif;
+}
+
+label
+{
+    font-weight: 600;
+}
+
+select
+{
+    font-family: "Montserrat", sans-serif;
+    border-radius: 100px;
+    border: 1.5px solid #6d6d6d;
+    width: 50%;
+    height: 40px;
+    padding-left: 20px;
+    margin-bottom: 17px;
+
+    /* Modifying the dropdown arrow icon */
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("images/caret-down-solid.svg");
+    background-size: 12px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 16px) center;
 }

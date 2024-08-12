@@ -12,7 +12,7 @@
         <header>
             <nav class="navbar">
                 <div class="container flex">
-                    <a href="https://www.mellowmushroom.com"><img class="logo" src="./images/logo.webp"></a>
+                    <a href="index.html"><img class="logo" src="./images/logo.webp"></a>
                     <ul>
                         <li><a href="details.html">Details</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
@@ -22,15 +22,69 @@
         </header>
 
         <main>
-            <section id="checkout-form">
+            <section id="checkout-form" class="checkout-form">
                 <div class="container">
                     <h1 class="top-page">Checkout</h1>
-                    <form>
-                        <label for="first-name">First name:</label><br>
-                        <input type="text" id="first-name" name="first-name"><br>
-                        <label for="last-name">Last name:</label><br>
-                        <input type="text" id="last-name" name="last-name"><br>
-                    </form>
+                    <div class="flex-form">
+                        <form class="checkout-column-left">
+                            <h2>Select Pizza</h2>
+                            <select name="pizzas" id="pizzas">
+                                <option value="super-pepp">Super Pepp</option>
+                                <option value="marley">The Marley</option>
+                                <option value="maui">Maui Wowie</option>
+                                <option value="sriracha-wings">Honey Sriracha Wings</option>
+                            </select>
+                            <h2>Your Info</h2>
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <label for="first-name">First Name</label><br>
+                                    <input type="text" id="first-name" name="first-name"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="last-name">Last Name</label><br>
+                                    <input type="text" id="last-name" name="last-name"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="address">Address</label><br>
+                                    <input type="text" id="address" name="address"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="phone">Phone Number</label><br>
+                                    <input type="text" id="phone" name="phone"><br>
+                                </div>
+                            </div>
+                            <h2>Payment</h2>
+                            <div class="grid-container">
+                                <div class="grid-item">
+                                    <label for="credit-card-num">Credit Card Number</label><br>
+                                    <input type="text" id="credit-card-num" name="credit-card-num"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="credit-card-exp">Expiration (MM/YY)</label><br>
+                                    <input type="text" id="credit-card-exp" name="credit-card-exp"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="credit-card-sec">Security Code</label><br>
+                                    <input type="text" id="credit-card-sec" name="credit-card-sec"><br>
+                                </div>
+                                <div class="grid-item">
+                                    <label for="credit-card-zip">Zip Code</label><br>
+                                    <input type="text" id="credit-card-zip" name="credit-card-zip"><br>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="checkout-column-right">
+                            <h2>Your Order</h2>
+                            <div class="card-horizontal">
+                                <img src="images/pepperoni.avif">
+                                <div class="card-horizontal-contents">
+                                    <b>Super Pepp</b>
+                                    <p class="card-horizontal-price">$33.99</p>
+                                    <p class="card-horizontal-pizza-det">Large, Regular Crust</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -47,9 +101,9 @@
                 </div>
                 <div id="footer-social">
                     <h3>Follow Us</h3>
-                    <img src="images/facebook.svg">
-                    <img src="images/instagram.svg">
-                    <img src="images/tiktok.svg">
+                    <img class="social-media" src="images/facebook.svg">
+                    <img class="social-media" src="images/instagram.svg">
+                    <img class="social-media" src="images/tiktok.svg">
                 </div>
             </div>
         </footer>
