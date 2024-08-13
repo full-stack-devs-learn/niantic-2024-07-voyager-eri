@@ -1,3 +1,14 @@
+/*=====================================*/
+/*========= CUSTOM PROPERTIES =========*/
+/*=====================================*/
+
+:root
+{
+    /* COLORS */
+    --purple: #3d098e;
+    --gray: #6d6d6d;
+}
+
 /*=================================*/
 /*========= TYPE SETTINGS =========*/
 /*=================================*/
@@ -54,7 +65,7 @@ img.social-media
 
 footer
 {
-    background: url(images/footer.svg), linear-gradient(102.43deg, #3d098e, #f700f6);
+    background: url(images/footer.svg), linear-gradient(102.43deg, var(--purple), #f700f6);
     background-blend-mode: luminosity, normal;
     background-position: 50%;
     background-size: cover;
@@ -80,30 +91,6 @@ main
 {
     margin-top: 90px;
     margin-bottom: 100px;
-}
-
-nav
-{
-    font-weight: 700;
-    background-color: #000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-nav ul
-{
-    list-style: none;
-    display: flex;
-}
-
-nav a
-{
-    display: inline-block;
-    padding: 20px 15px;
-    text-decoration: none;
-    color: #fff;
 }
 
 .logo
@@ -144,6 +131,46 @@ nav a
     padding-right: 2%;
 }
 
+/*==========================*/
+/*========= NAVBAR =========*/
+/*==========================*/
+
+nav
+{
+    font-weight: 700;
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+nav ul
+{
+    list-style: none;
+    display: flex;
+}
+
+nav a
+{
+    display: inline-block;
+    padding: 20px;
+    text-decoration: none;
+    color: #fff;
+}
+
+nav a.last-link
+{
+    margin-right: -20px;
+}
+
+.nav-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
 /*========================*/
 /*========= CARD =========*/
 /*========================*/
@@ -159,7 +186,7 @@ nav a
 .card
 {
     border-radius: 16px;
-    border: 2px solid #3d098e;
+    border: 2px solid var(--purple);
     width: 23.5%;
 }
 
@@ -182,7 +209,7 @@ nav a
     display: flex;
     justify-content: space-evenly;
     border-radius: 16px;
-    border: 2px solid #3d098e;
+    border: 2px solid var(--purple);
 }
 
 .card-horizontal img
@@ -200,7 +227,7 @@ nav a
 .card-horizontal-price
 {
     font-size: 90%;
-    color: #6d6d6d;
+    color: var(--gray);
     margin-top: 10px;
     margin-bottom: 0px;
 }
@@ -224,7 +251,7 @@ nav a
 input
 {
     border-radius: 100px;
-    border: 1.5px solid #6d6d6d;
+    border: 1.5px solid var(--gray);
     width: 75%;
     height: 40px;
     padding: 0 20px;
@@ -242,7 +269,7 @@ select
 {
     font-family: "Montserrat", sans-serif;
     border-radius: 100px;
-    border: 1.5px solid #6d6d6d;
+    border: 1.5px solid var(--gray);
     width: 50%;
     height: 40px;
     padding-left: 20px;
