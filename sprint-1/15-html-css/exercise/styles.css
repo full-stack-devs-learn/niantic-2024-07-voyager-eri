@@ -7,6 +7,10 @@
     /* COLORS */
     --purple: #3d098e;
     --gray: #6d6d6d;
+    
+    /* FONTS */
+    --header-font: Roboto Slab, sans-serif;
+    --body-font: Montserrat, sans-serif;
 }
 
 /*=================================*/
@@ -15,10 +19,9 @@
 
 h1
 {
-    font-family: Roboto Slab, sans-serif;
+    font-family: var(--header-font);
     font-weight: 900;
     font-size: 5em;
-    margin-top: 10px;
     margin-bottom: 30px;
 }
 
@@ -29,7 +32,7 @@ h1.top-page
 
 h2
 {
-    font-family: Roboto Slab, sans-serif;
+    font-family: var(--header-font);
     font-weight: 900;
     font-size: 4em;
     margin-top: 20px;
@@ -43,25 +46,24 @@ h2
 
 b
 {
-    font-family: Roboto Slab, sans-serif;
+    font-family: var(--header-font);
     font-weight: 900;
     font-size: 2em;
+}
+
+p
+{
+    line-height: 1.4em;
+}
+
+p.pizza-details
+{
+    font-size: 1.2em;
 }
 
 /*===================================*/
 /*========= MAIN COMPONENTS =========*/
 /*===================================*/
-
-img
-{
-    width: 100%;
-}
-
-img.social-media
-{
-    width: 25px;
-    margin: 3px;
-}
 
 footer
 {
@@ -81,7 +83,7 @@ section
 body
 {
     color: #000;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--body-font);
     font-weight: 500;
     font-size: 100%;
     margin: auto;
@@ -99,6 +101,7 @@ main
     vertical-align: middle;
 }
 
+/* This class is used to set all constraint width on the page */
 .container
 {
     max-width: 1440px;
@@ -129,6 +132,79 @@ main
 {
     width: 60%;
     padding-right: 2%;
+}
+
+.welcome-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 30px;
+    gap: 10%;
+}
+
+.detail-container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 7%;
+}
+
+/*=========================*/
+/*========= TABLE =========*/
+/*=========================*/
+
+table
+{
+    border: 1px solid;
+    border-color: #cccccc;
+    border-radius: 20px;
+    padding: 0px;
+}
+
+th
+{
+    padding: 20px;
+    text-align: center;
+}
+
+td
+{
+    padding: 10px 20px 25px;
+}
+
+td img
+{
+    height: 100px;
+    width: 300px;
+    object-fit: cover;
+}
+
+
+/*==========================*/
+/*========= IMAGES =========*/
+/*==========================*/
+
+img
+{
+    width: 100%;
+}
+
+img.social-media
+{
+    width: 25px;
+    margin: 3px;
+}
+
+img.main
+{
+    border-radius: 16px;
+}
+
+img.pizza-details
+{
+    width: 90%;
 }
 
 /*==========================*/
@@ -257,7 +333,7 @@ input
     padding: 0 20px;
     margin-top: 9px;
     margin-bottom: 17px;
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--body-font);
 }
 
 label
@@ -267,7 +343,7 @@ label
 
 select
 {
-    font-family: "Montserrat", sans-serif;
+    font-family: var(--body-font);
     border-radius: 100px;
     border: 1.5px solid var(--gray);
     width: 50%;
