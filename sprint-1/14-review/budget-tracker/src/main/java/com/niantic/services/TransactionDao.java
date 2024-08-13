@@ -159,6 +159,7 @@ public class TransactionDao
                 FROM transactions
                 WHERE transaction_id = ?;
                 """;
+        
         var row = jdbcTemplate.queryForRowSet(sql, transactionId);
 
         if(row.next())

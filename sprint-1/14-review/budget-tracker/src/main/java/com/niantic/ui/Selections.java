@@ -48,6 +48,6 @@ public class Selections
         System.out.println("  0) Back");
         System.out.println();
 
-        return Helper.getUserInt("Enter your selection: ");
+        return Helper.getUserInt("Enter an option (ﾉ´ヮ`)ﾉ: ");
     }
 }

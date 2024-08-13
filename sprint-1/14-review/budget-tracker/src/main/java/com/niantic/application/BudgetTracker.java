@@ -39,7 +39,7 @@ public class BudgetTracker
                 case 5 -> addSubCategory();
                 case 6 -> addVendor();
                 case 0 -> Selections.quit();
-                default -> System.out.println("invalid selection");
+                default -> System.out.println("Invalid selection!");
             }
         }
     }
@@ -58,7 +58,7 @@ public class BudgetTracker
                 case 5 -> getTransactions("category");
                 case 6 -> getTransactionById();
                 case 0 -> {return;}
-                default -> System.out.println("That was an invalid selection, please select from the available options.");
+                default -> System.out.println("Invalid selection!");
             }
         }
     }
