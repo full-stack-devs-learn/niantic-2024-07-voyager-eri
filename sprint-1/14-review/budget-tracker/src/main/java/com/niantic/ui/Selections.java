@@ -4,6 +4,15 @@ import static com.niantic.ui.Helper.getUserInt;
 
 public class Selections
 {
+    public static void quit()
+    {
+        System.out.println();
+        System.out.println("Thank you for using Northwind!");
+        System.out.println("Goodbye");
+        System.out.println();
+        System.exit(0);
+    }
+
     public static int homeScreenSelection()
     {
         System.out.println();

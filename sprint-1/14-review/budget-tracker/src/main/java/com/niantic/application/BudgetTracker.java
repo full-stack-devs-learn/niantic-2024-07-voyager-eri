@@ -38,14 +38,7 @@ public class BudgetTracker
                 case 4 -> addCategory();
                 case 5 -> addSubCategory();
                 case 6 -> addVendor();
-                case 0 ->
-                {
-                    System.out.println();
-                    System.out.println("Thank you for using Northwind!");
-                    System.out.println("Goodbye");
-                    System.out.println();
-                    System.exit(0);
-                }
+                case 0 -> Selections.quit();
                 default -> System.out.println("invalid selection");
             }
         }
