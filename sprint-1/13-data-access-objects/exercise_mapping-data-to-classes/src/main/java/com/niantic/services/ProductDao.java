@@ -106,12 +106,12 @@ public class ProductDao
         String sql = """
                 INSERT INTO products
                 (category_id
-               , product_name
-               , quantity_per_unit
-               , unit_price
-               , units_in_stock
-               , units_on_order
-               , reorder_level)
+                    , product_name
+                    , quantity_per_unit
+                    , unit_price
+                    , units_in_stock
+                    , units_on_order
+                    , reorder_level)
                VALUES
                (?, ?, ?, ?, ?, ?, ?);
                """;
@@ -134,12 +134,13 @@ public class ProductDao
         String sql = """
                 UPDATE products
                 SET category_id = ?
-                , product_name = ?
-                , quantity_per_unit = ?
-                , unit_price = ?
-                , units_in_stock = ?
-                , units_on_order = ?
-                , reorder_level = ?
+                    , product_name = ?
+                    , quantity_per_unit = ?
+                    , unit_price = ?
+                    , units_in_stock = ?
+                    , units_on_order = ?
+                    , reorder_level = ?
+                WHERE product_id = ?;
                 """;
 
         jdbcTemplate.update(sql
@@ -149,7 +150,8 @@ public class ProductDao
                 , product.getUnitPrice()
                 , product.getUnitsInStock()
                 , product.getUnitsOnOrder()
-                , product.getReorderLevel());
+                , product.getReorderLevel()
+                , product.getProductId());
     }
 
     /*

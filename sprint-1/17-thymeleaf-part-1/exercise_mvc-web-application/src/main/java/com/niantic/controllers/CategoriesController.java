@@ -22,6 +22,7 @@ public class CategoriesController
         StringBuilder builder = new StringBuilder();
 
         model.addAttribute("categories", categories);
+
         return "categories/index";
     }
 
@@ -30,6 +31,15 @@ public class CategoriesController
     {
         var category = categoryDao.getCategoryById(id);
         model.addAttribute("category", category);
+
         return "categories/details";
+    }
+
+    @GetMapping("/categories/add")
+    public String addCategory(Model model)
+    {
+        model.addAttribute("category", new Category());
+        model.addAttribute("action", "add");
+        return "actors/add_edit";
     }
 }
