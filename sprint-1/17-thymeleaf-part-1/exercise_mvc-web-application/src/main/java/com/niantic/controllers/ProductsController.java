@@ -60,6 +60,9 @@ public class ProductsController
     @GetMapping("/products/add")
     public String addProduct(Model model)
     {
+        ArrayList<Category> categories = categoriesDao.getCategories();
+
+        model.addAttribute("categories", categories);
         model.addAttribute("product", new Product());
         model.addAttribute("action", "add");
         model.addAttribute("headTitle", "Add New Product | Northwind Traders");

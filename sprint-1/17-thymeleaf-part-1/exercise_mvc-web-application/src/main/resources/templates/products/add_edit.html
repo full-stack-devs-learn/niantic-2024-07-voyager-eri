@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<div th:replace="fragments/head :: head"></div>
+
 <body>
+<div th:replace="fragments/navigation.html :: nav"></div>
+<main class="container mt-4">
+    <h1 th:if="${action} =='add'">Add Product</h1>
+    <h1 th:if="${action} =='edit'">Edit Product</h1>
+
+    <form action="#" th:object="${product}" method="post">
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{productName}">
+            <label th:for="*{productName}">Product name</label>
+        </div>
+        <div class="form-floating mb-3">
+            <select class="form-select" th:field="*{categoryId}">
+                <option th:each="category:${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+            </select>
+            <label th:for="*{categoryId}">Category</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{quantityPerUnit}">
+            <label th:for="*{quantityPerUnit}">Quantity per unit</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{unitPrice}">
+            <label th:for="*{unitPrice}">Unit price</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{unitsInStock}">
+            <label th:for="*{unitsInStock}">Units in stock</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{unitsOnOrder}">
+            <label th:for="*{unitsOnOrder}">Units on order</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{reorderLevel}">
+            <label th:for="*{reorderLevel}">Reorder level</label>
+        </div>
 
 </body>
 </html>
