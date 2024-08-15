@@ -89,6 +89,14 @@ public class CategoriesController
         }
 
         model.addAttribute("category", category);
+        model.addAttribute("headTitle", category.getCategoryName() + " | Delete Category | Northwind Traders");
         return "categories/delete";
+    }
+
+    @PostMapping("categories/{id}/delete")
+    public String deleteCategory(@PathVariable int id)
+    {
+        categoriesDao.deleteCategory(id);
+        return "redirect:/categories";
     }
 }

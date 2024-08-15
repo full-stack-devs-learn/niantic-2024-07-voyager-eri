@@ -8,9 +8,11 @@
     <a href="/categories">Back</a>
 
     <h1>Category Details</h1>
-    <div><strong>Id:</strong> <span th:text="${category.categoryId}"></span></div>
-    <div><strong>Category name:</strong> <span th:text="${category.categoryName}"></span></div>
-    <div><strong>Description:</strong> <span th:text="${category.description}"></span></div>
+    <table class="table">
+        <tr><th>Category Id:</th> <td th:text="${category.categoryId}"></td></tr>
+        <tr><th>Category name:</th> <td th:text="${category.categoryName}"></td></tr>
+        <tr><th>Description:</th> <td th:text="${category.description}"></td></tr>
+    </table>
 </main>
 </body>
 </html>

@@ -6,7 +6,7 @@
 <div th:replace="fragments/navigation.html :: nav"></div>
 <main class="container mt-4">
     <h1>Categories</h1>
-    <a th:href="@{/categories/add}">Add new category</a>
+    <a th:href="@{/categories/add}" class="btn btn-primary my-4">Add new category</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -19,8 +19,8 @@
                 <td th:text="${category.categoryId}"></td>
                 <td><a th:href="@{|/categories/${category.categoryId}|}" th:text="${category.categoryName}"></a></td>
                 <td>
-                    <a th:href="@{|/categories/${category.categoryId}/edit|}" class="btn btn-outline-warning">Edit</a>
-                    <a th:href="@{|/categories/${category.categoryId}/delete|}" class="btn btn-outline-danger">Delete</a>
+                    <a th:href="@{|/categories/${category.categoryId}/edit|}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{|/categories/${category.categoryId}/delete|}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </tbody>
