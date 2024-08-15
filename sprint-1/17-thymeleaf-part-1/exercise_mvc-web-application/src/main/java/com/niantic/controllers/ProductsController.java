@@ -24,6 +24,7 @@ public class ProductsController
     {
         ArrayList<Product> products;
         Category category;
+        ArrayList<Category> categories = categoriesDao.getCategories();
 
         if(catId == null)
         {
@@ -47,6 +48,7 @@ public class ProductsController
 
         model.addAttribute("products", products);
         model.addAttribute("category", category);
+        model.addAttribute("categories", categories);
         model.addAttribute("headTitle", "Products in " + category.getCategoryName() + " | Northwind Traders");
 
         return "products/index";

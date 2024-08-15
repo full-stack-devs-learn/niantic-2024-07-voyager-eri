@@ -5,12 +5,16 @@
 <body>
 <div th:replace="fragments/navigation.html :: nav"></div>
 <main class="container mt-4">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <form action="products" method="get" class="form-floating mb-3 w-25 d-flex">
+            <select class="form-select my-4" name="catId">
+                <option th:each="category:${categories}" th:value="${category.categoryId}" th:text="${category.categoryName}"></option>
+            </select>
+            <input class="btn btn-secondary my-4" type="submit" value="Search">
+        </form>
+        <a th:href="@{/products/add}" class="btn btn-primary my-4">+ Add new product</a>
+    </div>
     <h1 th:text="'Products: ' + ${category.categoryName}"></h1>
-    <form action="products" method="get">
-        <input type="text" name="catId" placeholder="Category Id">
-        <input type="submit" value="Search">
-    </form>
-    <a th:href="@{/products/add}" class="btn btn-primary my-4">Add new product</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -20,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="product:${products}">
+            <tr th:each="product:${products}" class="align-middle">
                 <td th:text="${product.productId}"></td>
                 <td><a th:href="@{|/products/${product.productId}|}" th:text="${product.productName}"></a></td>
                 <td th:text="${#numbers.formatCurrency(product.unitPrice)}"></td>
