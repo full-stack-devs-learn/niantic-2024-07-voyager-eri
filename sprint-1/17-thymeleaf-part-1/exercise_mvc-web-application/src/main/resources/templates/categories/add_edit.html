@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
-<head>
-    <meta charset="UTF-8">
-    <title>Add Category</title>
+<div th:replace="fragments/head :: head"></div>
 
-</head>
 <body>
+<div th:replace="fragments/navigation.html :: nav"></div>
+<main class="container mt-4">
+    <h1 th:if="${action} =='add'">Add Category</h1>
+    <h1 th:if="${action} =='edit'">Edit Category</h1>
 
+    <form action="#" th:object="${category}" method="post">
+        <label th:for="*{categoryName}">Category Name</label>
+        <input type="text" th:field="*{categoryName}">
+        <label th:for="*{description}">Description</label>
+        <input type="text" th:field="*{description}">
+        <input class="btn btn-outline-danger" type="submit" value="Save">
+    </form>
+</main>
 </body>
 </html>

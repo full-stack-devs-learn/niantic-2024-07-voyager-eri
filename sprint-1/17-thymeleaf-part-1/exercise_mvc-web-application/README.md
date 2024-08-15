@@ -58,7 +58,7 @@ Add functionality to the `ProductsController` to display lists of products and t
 
 1. Update the category list view template (`categories/index`) to include a link to display all
    products in a category. 
-    - The link should navigate to `http://localhost:8080/products/1` where `1` is the id of the selected category
+    - The link should navigate to `http://localhost:8080/products?catId=1` where `1` is the id of the selected category
 
 2. Add an `@GetMapping()` method to handle the `/products?catId=1` path
     - Use the ProductDao object to get all products by categoryId
