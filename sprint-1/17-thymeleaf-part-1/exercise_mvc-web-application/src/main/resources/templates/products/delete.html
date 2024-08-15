@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
+<div th:replace="fragments/head :: head"></div>
 
+<body>
+<div th:replace="fragments/navigation.html :: nav"></div>
+<main class="container mt-4">
+    <h1>Delete Product</h1>
+    <p>You are about to delete the following product.</p>
+
+    <table class="table">
+        <tr><th>Product Id:</th> <td th:text="${product.productId}"></td></tr>
+        <tr><th>Product name:</th> <td th:text="${product.productName}"></td></tr>
+        <tr><th>Category:</th> <td th:text="${product.categoryId}"></td></tr>
+        <tr><th>Quantity per unit:</th> <td th:text="${product.quantityPerUnit}"></td></tr>
+        <tr><th>Unit price:</th> <td th:text="${product.unitPrice}"></td></tr>
+        <tr><th>Units in stock:</th> <td th:text="${product.unitsInStock}"></td></tr>
+        <tr><th>Units on order:</th> <td th:text="${product.unitsOnOrder}"></td></tr>
+        <tr><th>Reorder level:</th> <td th:text="${product.reorderLevel}"></td></tr>
+    </table>
+
+    <form method="post">
+        <input type="submit" class="btn btn-danger" value="Delete">
+        <a href="/products" class="btn btn-secondary">Cancel</a>
+    </form>
+
+</main>
 </body>
 </html>

@@ -82,9 +82,12 @@ public class ProductsController
     @GetMapping("products/{id}/edit")
     public String editProduct(Model model, @PathVariable int id)
     {
+        ArrayList<Category> categories = categoriesDao.getCategories();
         Product product = productsDao.getProduct(id);
 
+        model.addAttribute("categories", categories);
         model.addAttribute("product", product);
+        model.addAttribute("action", "edit");
         model.addAttribute("headTitle", product.getProductName() + " | Edit Product | Northwind Traders");
 
         return "products/add_edit";
@@ -111,7 +114,7 @@ public class ProductsController
         }
 
         model.addAttribute("product", product);
-        model.addAttribute("headTitle", product.getProductName() + " | Delete Category | Northwind Traders");
+        model.addAttribute("headTitle", product.getProductName() + " | Delete Product | Northwind Traders");
         return "products/delete";
     }
 

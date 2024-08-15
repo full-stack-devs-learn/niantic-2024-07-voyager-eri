@@ -5,12 +5,16 @@
 <body>
 <div th:replace="fragments/navigation.html :: nav"></div>
 <main class="container mt-4">
-    <h1 th:if="${action} =='add'">Add Product</h1>
-    <h1 th:if="${action} =='edit'">Edit Product</h1>
+    <h1 th:if="${action} == 'add'">Add Product</h1>
+    <h1 th:if="${action} == 'edit'">Edit Product</h1>
 
     <form action="#" th:object="${product}" method="post">
+        <div th:if="${action} == 'edit'" class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{productId}">
+            <label th:for="*{productId}">Product Id</label>
+        </div>
         <div class="form-floating mb-3">
-            <input class="form-control" type="text" th:field="*{productName}">
+            <input class="form-control" type="text" th:field="*{productName}" placeholder="dslkfjsdlkf">
             <label th:for="*{productName}">Product name</label>
         </div>
         <div class="form-floating mb-3">
@@ -39,6 +43,6 @@
             <input class="form-control" type="text" th:field="*{reorderLevel}">
             <label th:for="*{reorderLevel}">Reorder level</label>
         </div>
-
+        <input class="btn btn-outline-danger" type="submit" value="Save">
 </body>
 </html>
