@@ -10,6 +10,7 @@
         <input type="text" name="catId" placeholder="Category Id">
         <input type="submit" value="Search">
     </form>
+    <a th:href="@{/products/add}" class="btn btn-primary my-4">Add new product</a>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -23,6 +24,10 @@
                 <td th:text="${product.productId}"></td>
                 <td><a th:href="@{|/products/${product.productId}|}" th:text="${product.productName}"></a></td>
                 <td th:text="${#numbers.formatCurrency(product.unitPrice)}"></td>
+                <td>
+                    <a th:href="@{|/products/${product.productId}/edit|}" class="btn btn-warning">Edit</a>
+                    <a th:href="@{|/products/${product.productId}/delete|}" class="btn btn-danger">Delete</a>
+                </td>
             </tr>
         </tbody>
     </table>

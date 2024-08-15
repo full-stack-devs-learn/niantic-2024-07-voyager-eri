@@ -53,6 +53,7 @@ public class ProductsController
 
         model.addAttribute("product", product);
         model.addAttribute("category", category);
+        model.addAttribute("headTitle", product.getProductName() + " | Product Details | Northwind Traders");
 
         return "products/details";
     }
