@@ -34,6 +34,13 @@ public class ProductsController
         {
             products = productsDao.getProductsByCategory(catId);
             category = categoriesDao.getCategoryById(catId);
+
+            if(category == null)
+            {
+                model.addAttribute("message", String.format("There is no category with id %d.", catId));
+                model.addAttribute("type", "products");
+                return "404";
+            }
         }
 
         StringBuilder builder = new StringBuilder();
@@ -50,6 +57,13 @@ public class ProductsController
     {
         var product = productsDao.getProduct(id);
         Category category = categoriesDao.getCategoryById(id);
+
+        if(product == null)
+        {
+            model.addAttribute("message", String.format("There is no product with id %d.", id));
+            model.addAttribute("type", "products");
+            return "404";
+        }
 
         model.addAttribute("product", product);
         model.addAttribute("category", category);
@@ -85,6 +99,13 @@ public class ProductsController
         ArrayList<Category> categories = categoriesDao.getCategories();
         Product product = productsDao.getProduct(id);
 
+        if(product == null)
+        {
+            model.addAttribute("message", String.format("There is no product with id %d.", id));
+            model.addAttribute("type", "products");
+            return "404";
+        }
+
         model.addAttribute("categories", categories);
         model.addAttribute("product", product);
         model.addAttribute("action", "edit");
@@ -109,7 +130,8 @@ public class ProductsController
 
         if(product == null)
         {
-            model.addAttribute("message", String.format("There is no product with id %d", id));
+            model.addAttribute("message", String.format("There is no product with id %d.", id));
+            model.addAttribute("type", "products");
             return "404";
         }
 

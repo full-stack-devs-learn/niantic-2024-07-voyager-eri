@@ -8,14 +8,16 @@
     <a href="/products" class="btn btn-secondary my-4">Back</a>
 
     <h1>Product Details</h1>
-    <div><strong>Product name:</strong> <span th:text="${product.productName}"></span></div>
-    <div><strong>Product Id:</strong> <span th:text="${product.productId}"></span></div>
-    <div><strong>Category:</strong> <span th:text="${category.categoryName}"></span></div>
-    <div><strong>Quantity per unit:</strong> <span th:text="${product.quantityPerUnit}"></span></div>
-    <div><strong>Unit price:</strong> <span th:text="${product.unitPrice}"></span></div>
-    <div><strong>Units in stock:</strong> <span th:text="${product.unitsInStock}"></span></div>
-    <div><strong>Units on order:</strong> <span th:text="${product.unitsOnOrder}"></span></div>
-    <div><strong>Reorder level:</strong> <span th:text="${product.reorderLevel}"></span></div>
+    <table class="table">
+        <tr><th>Product Id:</th> <td th:text="${product.productId}"></td></tr>
+        <tr><th>Product name:</th> <td th:text="${product.productName}"></td></tr>
+        <tr><th>Category:</th> <td th:text="${product.categoryId}"></td></tr>
+        <tr><th>Quantity per unit:</th> <td th:text="${product.quantityPerUnit}"></td></tr>
+        <tr><th>Unit price:</th> <td th:text="${product.unitPrice}"></td></tr>
+        <tr><th>Units in stock:</th> <td th:text="${product.unitsInStock}"></td></tr>
+        <tr><th>Units on order:</th> <td th:text="${product.unitsOnOrder}"></td></tr>
+        <tr><th>Reorder level:</th> <td th:text="${product.reorderLevel}"></td></tr>
+    </table>
 </main>
 </body>
 </html>

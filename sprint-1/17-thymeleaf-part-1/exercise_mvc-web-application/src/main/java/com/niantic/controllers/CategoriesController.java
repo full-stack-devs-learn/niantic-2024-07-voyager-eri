@@ -33,6 +33,14 @@ public class CategoriesController
     public String details(Model model, @PathVariable int id)
     {
         var category = categoriesDao.getCategoryById(id);
+
+        if(category == null)
+        {
+            model.addAttribute("message", String.format("There is no category with id %d.", id));
+            model.addAttribute("type", "categories");
+            return "404";
+        }
+
         model.addAttribute("category", category);
         model.addAttribute("headTitle", category.getCategoryName() + " | Category Details | Northwind Traders");
 
@@ -66,6 +74,13 @@ public class CategoriesController
         model.addAttribute("action", "edit");
         model.addAttribute("headTitle", category.getCategoryName() + " | Edit Category | Northwind Traders");
 
+        if(category == null)
+        {
+            model.addAttribute("message", String.format("There is no category with id %d.", id));
+            model.addAttribute("type", "categories");
+            return "404";
+        }
+
         return "categories/add_edit";
     }
 
@@ -85,7 +100,8 @@ public class CategoriesController
 
         if(category == null)
         {
-            model.addAttribute("message", String.format("There is no category with id %d", id));
+            model.addAttribute("message", String.format("There is no category with id %d.", id));
+            model.addAttribute("type", "categories");
             return "404";
         }
 
