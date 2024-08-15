@@ -63,6 +63,7 @@ public class CategoriesController
         Category category = categoriesDao.getCategoryById(id);
 
         model.addAttribute("category", category);
+        model.addAttribute("action", "edit");
         model.addAttribute("headTitle", category.getCategoryName() + " | Edit Category | Northwind Traders");
 
         return "categories/add_edit";

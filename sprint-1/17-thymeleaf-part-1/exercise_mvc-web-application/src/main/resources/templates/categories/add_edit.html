@@ -9,6 +9,10 @@
     <h1 th:if="${action} =='edit'">Edit Category</h1>
 
     <form action="#" th:object="${category}" method="post">
+        <div th:if="${action} =='edit'" class="form-floating mb-3">
+            <input class="form-control" type="text" th:field="*{categoryId}">
+            <label th:for="*{categoryId}">Category Id</label>
+        </div>
         <div class="form-floating mb-3">
             <input class="form-control" type="text" th:field="*{categoryName}">
             <label th:for="*{categoryName}">Category name</label>
