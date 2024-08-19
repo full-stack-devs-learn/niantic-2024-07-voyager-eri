@@ -38,23 +38,32 @@ Class: Quiz
     Bug 1:
 
         Describe the bug/error:
+        getPercent() was returning 0 every time, because integer division was truncating the decimals off
 
         Where was the bug? (function, line number)
+        Function: getPercent()
+        Line: 37
 
         What test helped you find the bug?
+        getPercent_shouldReturn_percentage()
 
         What did you do to fix the bug?
+        Multiplied score by 100 first, instead of last, so the calculation is never less than 1.
 
     Bug 2:
 
         Describe the bug/error:
+        getLetterGrade() is not returning the correct letter grade because it is not inclusive of the boundaries. It is also not accounting for letter grade D correctly.
 
         Where was the bug? (function, line number)
+        Function: getLetterGrade()
+        Line: 44
 
         What test helped you find the bug?
+        getLetterGrade_shouldReturn_theCorrectLetterGrade_forF()
 
         What did you do to fix the bug?
-
+        Made all signs >= instead of > and modified the condition for returning D
 
 *** Optional / Challenge ***
 
