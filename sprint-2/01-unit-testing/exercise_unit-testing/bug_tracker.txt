@@ -5,34 +5,32 @@ Class: Rectangle
     Bug 1:
 
         Describe the bug/error:
+        getPerimeter() is adding width and height together, which is not the formula for getting the perimeter of a rectangle
 
         Where was the bug? (function, line number)
+        Function: getPerimeter()
+        Line: 52
 
         What test helped you find the bug?
+        getPerimeter_shouldReturn_thePerimeterOfRectangle()
 
         What did you do to fix the bug?
+        Changed the return statement to the proper formula for calculating the perimeter of a rectangle
 
     Bug 2:
 
         Describe the bug/error:
+        getArea() does not check if the height or width is negative, so it calculates a negative area.
 
         Where was the bug? (function, line number)
+        Function: getArea()
+        Line: 40
 
         What test helped you find the bug?
+        getArea_shouldReturnZero_whenWidthOrHeightIsZeroOrLess()
 
         What did you do to fix the bug?
-
-    Bug 3:
-
-        Describe the bug/error:
-
-        Where was the bug? (function, line number)
-
-        What test helped you find the bug?
-
-        What did you do to fix the bug?
-
-
+        Added a conditional statement that returns 0 if the width or height is 0 or less.
 
 
 Class: Quiz
