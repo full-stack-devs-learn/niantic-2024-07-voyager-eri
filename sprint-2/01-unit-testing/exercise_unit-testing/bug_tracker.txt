@@ -137,19 +137,59 @@ Class: Printer
     Bug 1:
 
         Describe the bug/error:
+        Print() is able to print even when the number of prints to make is a negative number
 
         Where was the bug? (function, line number)
+        Function: print()
+        Line: 27
 
         What test helped you find the bug?
+        print_shouldNotPrint_whenPagesToPrintIsLessThanZero()
 
         What did you do to fix the bug?
+        Added a conditional to check if pages to print is less than zero
 
     Bug 2:
 
         Describe the bug/error:
+        Toner is able to exceed max capacity when calling replaceToner()
 
         Where was the bug? (function, line number)
+        Function: replaceToner()
+        Line: 55
 
         What test helped you find the bug?
+        replaceToner_shouldResetToner_toMaxCapacity()
 
         What did you do to fix the bug?
+        Replaced the += to just =, because toner will always be reset to max capacity when replaceToner() is called
+
+    Bug 3:
+
+        Describe the bug/error:
+        addPaper() is able to add sheets beyond max sheet capacity
+
+        Where was the bug? (function, line number)
+        Function: addPaper()
+        Line: 43
+
+        What test helped you find the bug?
+        addPaper_shouldNotAddSheets_beyondMaxSheetCapacity()
+
+        What did you do to fix the bug?
+        Replaced the += to just =, because toner will always be reset to max capacity when replaceToner() is called
+
+    Bug 4:
+
+        Describe the bug/error:
+        addPaper() is able to add sheets when sheets to add is negative
+
+        Where was the bug? (function, line number)
+        Function: addPaper()
+        Line: 43
+
+        What test helped you find the bug?
+        addPaper_shouldNotAddSheets_ifSheetsToAddAreNegative()
+
+        What did you do to fix the bug?
+        Added a condition to check if sheets to add is less than zero
