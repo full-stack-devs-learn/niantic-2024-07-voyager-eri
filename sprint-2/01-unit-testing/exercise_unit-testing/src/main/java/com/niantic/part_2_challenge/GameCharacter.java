@@ -36,7 +36,10 @@ public class GameCharacter
 
     public void heal(int amount)
     {
-        energyLevel += amount;
+        if(energyLevel != 0)
+        {
+            energyLevel = (energyLevel + amount > maxEnergyLevel) ? maxEnergyLevel : energyLevel + amount;
+        }
     }
 
     public boolean isKnockedOut()

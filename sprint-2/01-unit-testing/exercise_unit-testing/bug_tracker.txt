@@ -101,6 +101,35 @@ Class: GameCharacter
         What did you do to fix the bug?
         Added a condition that if damage > energyLevel, set energyLevel to 0
 
+    Bug 3:
+
+        Describe the bug/error:
+        energyLevel is able to go above maxEnergyLevel when calling heal()
+
+        Where was the bug? (function, line number)
+        Function: heal()
+        Line: 37
+
+        What test helped you find the bug?
+        heal_shouldNotIncreaseEnergyLevel_AboveMaxEnergyLevel()
+
+        What did you do to fix the bug?
+        Added a condition to check if energyLevel + heal amount would go above maxEnergyLevel
+
+    Bug 4:
+
+        Describe the bug/error:
+        GameCharacter is able to heal even at 0 energyLevel
+
+        Where was the bug? (function, line number)
+        Function: heal()
+        Line: 39
+
+        What test helped you find the bug?
+        heal_shouldNotIncreaseEnergyLevel_ifEnergyLevelIsZero()
+
+        What did you do to fix the bug?
+        Added a condition to check if energyLevel != 0.
 
 
 Class: Printer
