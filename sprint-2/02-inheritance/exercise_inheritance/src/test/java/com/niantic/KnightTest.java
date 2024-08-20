@@ -26,16 +26,13 @@ class KnightTest extends ReflectionBase<Knight>
         // ARRANGE
         int damagePoints = 20;
         int expectedHealth = 90;
-        int expectedArmor = armor;
 
         // ACT
         knight.takeDamage(damagePoints);
         int actualHealth = knight.getHealth();
-        int actualArmor = knight.getArmor();
 
         // ASSERT
         assertEquals(expectedHealth, actualHealth, "Health: 100 - Armor: 10 - Attack damage: 20 - Knight should have taken 10 damage in total");
-        assertEquals(expectedArmor, actualArmor, "Because armor should not decrease");
     }
 
     @Test
@@ -44,15 +41,27 @@ class KnightTest extends ReflectionBase<Knight>
         // ARRANGE
         int damagePoints = 5;
         int expectedHealth = 100;
-        int expectedArmor = armor;
 
         // ACT
         knight.takeDamage(damagePoints);
         int actualHealth = knight.getHealth();
-        int actualArmor = knight.getArmor();
 
         // ASSERT
         assertEquals(expectedHealth,actualHealth, "Health: 100 - Armor: 10 - Attack damage: 5 - Knight should not have taken any damage");
+    }
+
+    @Test
+    public void takeDamage_shouldNotReduceArmor()
+    {
+        // ARRANGE
+        int damagePoints = 5;
+        int expectedArmor = armor;
+
+        // ACT
+        knight.takeDamage(damagePoints);
+        int actualArmor = knight.getArmor();
+
+        // ASSERT
         assertEquals(expectedArmor, actualArmor, "Because armor should not decrease");
     }
 
