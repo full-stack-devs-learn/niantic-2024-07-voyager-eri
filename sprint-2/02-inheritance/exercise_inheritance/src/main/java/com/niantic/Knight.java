@@ -23,7 +23,7 @@ public class Knight extends Character
         if(damage > armor)
         {
             reducedDamage = damage - armor;
-            takeDamage(reducedDamage);
+            super.takeDamage(reducedDamage);
         }
     }
 
