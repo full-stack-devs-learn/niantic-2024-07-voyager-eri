@@ -74,23 +74,32 @@ Class: GameCharacter
     Bug 1:
 
         Describe the bug/error:
+        GameCharacter is constructed with 0 energyLevel
 
         Where was the bug? (function, line number)
+        Function: GameCharacter
+        Line: 29
 
         What test helped you find the bug?
+        takeHit_shouldReduceEnergyLevel_byAmountOfEnergySpecified()
 
         What did you do to fix the bug?
+        Initialized energyLevel to maxEnergyLevel
 
     Bug 2:
 
         Describe the bug/error:
+        energyLevel is able to fall below 0
 
         Where was the bug? (function, line number)
+        Function: takeHit()
+        Line: 32
 
         What test helped you find the bug?
+        takeHit_shouldNotReduce_energyLevelBelowZero()
 
         What did you do to fix the bug?
-
+        Added a condition that if damage > energyLevel, set energyLevel to 0
 
 
 
