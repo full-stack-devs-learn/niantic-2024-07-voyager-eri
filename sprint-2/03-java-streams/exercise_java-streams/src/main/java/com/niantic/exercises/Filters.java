@@ -5,6 +5,7 @@ import com.niantic.models.LineItem;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Filters
 {
 
@@ -15,7 +16,9 @@ public class Filters
      */
     public List<LineItem> filterByCompanyName(List<LineItem> lineItems, String companyName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                        .filter(lineItem -> lineItem.getCompanyName().toLowerCase().contains(companyName.toLowerCase()))
+                        .toList();
     }
 
     /*
@@ -25,7 +28,9 @@ public class Filters
      */
     public List<LineItem> filterByCategory(List<LineItem> lineItems, String categoryName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                        .filter(lineItem -> lineItem.getCategoryName().toLowerCase().contains(categoryName.toLowerCase()))
+                        .toList();
     }
 
     /*
@@ -35,7 +40,9 @@ public class Filters
      */
     public List<LineItem> filterByProduct(List<LineItem> lineItems, String productName)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                        .filter(lineItem -> lineItem.getProductName().toLowerCase().contains(productName.toLowerCase()))
+                        .toList();
     }
 
     /*
@@ -44,7 +51,9 @@ public class Filters
      */
     public List<LineItem> filterByYear(List<LineItem> lineItems, int year)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(lineItem -> Integer.valueOf(lineItem.getOrderDate().getYear()).equals(year))
+                .toList();
     }
 
 
@@ -54,6 +63,8 @@ public class Filters
      */
     public List<LineItem> filterByOrderId(List<LineItem> lineItems, int orderId)
     {
-        return new ArrayList<>();
+        return lineItems.stream()
+                .filter(lineItem -> Integer.valueOf(lineItem.getOrderId()).equals(orderId))
+                .toList();
     }
 }
