@@ -16,7 +16,9 @@ public class Reducers
      */
     public double totalSales(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                        .map(LineItem::getLineTotal)
+                        .reduce(0.0, Double::sum);
     }
 
     /*
@@ -26,7 +28,7 @@ public class Reducers
      */
     public double averageSalesPerLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        return totalSales(lineItems) / lineItems.size();
     }
 
     /*
@@ -40,7 +42,11 @@ public class Reducers
      */
     public double averageSalesPerItem(List<LineItem> lineItems)
     {
-        return 0;
+        var quantityOfItems = lineItems.stream()
+                                       .map(LineItem::getQuantity)
+                                       .reduce(0, Integer::sum);
+
+        return totalSales(lineItems) / quantityOfItems;
     }
 
     /*
@@ -52,7 +58,9 @@ public class Reducers
      */
     public int totalItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        return lineItems.stream()
+                        .map(LineItem::getQuantity)
+                        .reduce(0, Integer::sum);
     }
 
     /*
@@ -62,7 +70,7 @@ public class Reducers
      */
     public double averageItemCount(List<LineItem> lineItems)
     {
-        return 0;
+        return (double)totalItemCount(lineItems) / lineItems.size();
     }
 
     /*
@@ -71,7 +79,11 @@ public class Reducers
      */
     public double maxLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        var maxLineItem = lineItems.stream()
+                                   .map(LineItem::getLineTotal)
+                                   .max(Double::compare);
+
+        return (maxLineItem.isPresent()) ? maxLineItem.get() : 0;
     }
 
     /*
@@ -82,7 +94,11 @@ public class Reducers
      */
     public double minLineItem(List<LineItem> lineItems)
     {
-        return 0;
+        var minLineItem = lineItems.stream()
+                                   .map(LineItem::getLineTotal)
+                                   .min(Double::compare);
+
+        return (minLineItem.isPresent()) ? minLineItem.get() : 0;
     }
 
 }
