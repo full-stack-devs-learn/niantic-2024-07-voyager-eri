@@ -4,6 +4,10 @@
 
 -- (21 rows)
 
+USE northwind;
 
-
+SELECT country
+	, COUNT(company_name) AS total_customer_count
+FROM customers
+GROUP BY country;
 

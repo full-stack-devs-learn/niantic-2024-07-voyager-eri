@@ -14,7 +14,15 @@
 
 -- (3 rows)
 
+USE northwind;
 
+SELECT category_name
+	, SUM(quantity) AS quantity_purchased
+    , COUNT(DISTINCT(order_id)) AS orders_placed
+FROM customer_orders
+GROUP BY category_name
+ORDER BY quantity_purchased DESC
+LIMIT 3;
 
 
 

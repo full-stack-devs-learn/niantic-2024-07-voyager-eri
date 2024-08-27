@@ -2,5 +2,8 @@
 
 -- (1 row)
 
+USE northwind;
 
+SELECT MAX(sales_price)
+FROM customer_orders;
 

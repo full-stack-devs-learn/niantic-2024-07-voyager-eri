@@ -10,5 +10,28 @@
 
 -- (78 Rows)
 
+USE northwind;
+SELECT company_name
+	, contact_name
+	, contact_title
+    , RTRIM
+    (
+		REPLACE
+		(
+			CONCAT
+			(
+				city
+				, ", "
+				, IFNULL(region, "")
+				, " "
+				, IFNULL(postal_code, "")
+			)
+				, "  "
+				, " "
+		) 
+    )
+    AS city_state_zip
+FROM customers
+WHERE country != "USA";
 
 

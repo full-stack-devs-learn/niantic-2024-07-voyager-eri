@@ -5,8 +5,14 @@
 
 -- (10 rows)
 
+USE northwind;
 
-
+SELECT city
+	, COUNT(company_name) AS total_customer_count
+FROM customers
+GROUP BY city
+HAVING COUNT(company_name) > 1
+ORDER BY total_customer_count DESC
 
 
 
