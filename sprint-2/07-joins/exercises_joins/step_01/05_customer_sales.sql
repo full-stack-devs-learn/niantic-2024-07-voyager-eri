@@ -15,4 +15,12 @@
 
 USE northwind;
 
-
+SELECT company_name
+	, SUM(((unit_price * quantity) * (1 - discount))) AS sales_total
+FROM customers AS c
+INNER JOIN orders AS o
+	ON c.customer_id = o.customer_id
+INNER JOIN order_details AS od
+	ON o.order_id = od.order_id
+GROUP BY company_name
+ORDER BY sales_total DESC;
