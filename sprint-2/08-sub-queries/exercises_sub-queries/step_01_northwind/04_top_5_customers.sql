@@ -13,4 +13,13 @@
 
 USE northwind;
 
-
+SELECT (
+		SELECT company_name
+		FROM customers AS c
+		WHERE c.customer_id = o.customer_id
+		) AS customer_name
+	, COUNT(DISTINCT(o.order_id)) AS number_of_orders
+FROM orders AS o
+GROUP BY customer_name
+ORDER BY number_of_orders DESC
+LIMIT 5;

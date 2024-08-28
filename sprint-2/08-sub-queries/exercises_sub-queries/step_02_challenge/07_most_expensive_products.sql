@@ -23,4 +23,14 @@
 
 USE northwind;
 
-
+SELECT c.category_name
+	, p.product_name
+    , p.unit_price
+FROM products AS p
+INNER JOIN categories AS c
+	ON p.category_id = c.category_id
+WHERE p.unit_price = (
+    SELECT MAX(unit_price)
+    FROM products
+    WHERE category_id = p.category_id
+);
