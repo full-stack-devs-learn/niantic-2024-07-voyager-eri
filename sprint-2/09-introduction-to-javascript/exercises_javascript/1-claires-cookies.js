@@ -16,7 +16,8 @@
 
 function calculateOrderSubtotal(quantity)
 {
-	return 0;
+	const costPerDozen = 12.95;
+	return quantity * costPerDozen;
 }
 
 
@@ -40,7 +41,9 @@ function calculateOrderSubtotal(quantity)
 
 function calculateTax(quantity)
 {
-	return 0;
+	const taxRate = 0.0575;
+	const tax = calculateOrderSubtotal(quantity) * taxRate
+	return Math.round(tax * 100) / 100;
 }
 
 
@@ -63,7 +66,11 @@ function calculateTax(quantity)
 
 */
 
-// create your function here
+function calculateOrderTotal(quantity)
+{
+	const orderTotal = calculateOrderSubtotal(quantity) + calculateTax(quantity);
+	return Math.round(orderTotal * 100) / 100;
+}
 
 
 /*
@@ -105,7 +112,16 @@ function calculateTax(quantity)
 
 */
 
-// create your function here
+function placeOrder(customerName, cookieQuantity)
+{
+	return {
+		customer: customerName,
+		quantity: cookieQuantity,
+		subtotal: calculateOrderSubtotal(cookieQuantity),
+		tax: calculateTax(cookieQuantity),
+		total: calculateOrderTotal(cookieQuantity)
+	};
+}
 
 
 /*
@@ -127,4 +143,13 @@ function calculateTax(quantity)
 
 */
 
-// create your function here
+function calculateCookiesNeeded(aStudents = 0, bStudents = 0, otherStudents = 0)
+{
+	const cookiesPerAStudent = 4;
+	const cookiesPerBStudent = 3;
+	const cookiersPerOtherStudent = 2;
+
+	const totalCookies = (aStudents * cookiesPerAStudent) + (bStudents * cookiesPerBStudent) + (otherStudents * cookiersPerOtherStudent);
+
+	return Math.ceil(totalCookies / 12);
+}
