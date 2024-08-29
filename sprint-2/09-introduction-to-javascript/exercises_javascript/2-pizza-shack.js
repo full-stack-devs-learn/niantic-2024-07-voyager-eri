@@ -13,7 +13,25 @@
 
 */
 
+const pizzas = {
+	hawaiian: ["Ham","Pineapple","Mushroom"],
+	cowboy: ["Pepperoni", "Sausage", "Beef"],
+	supreme: ["Pepperoni", "Sausage", "Pepper", "Onion", "Black Olives"],
+	vegetarian: ["Spinach", "Zucchini", "Mushroom", "Artichoke", "Tomato", "Onion"],
+	cheese: ["Cheese"]
+}
 
+function getToppings(pizzaName)
+{
+	pizzaName = pizzaName.toLowerCase();
+
+	if(!pizzas[pizzaName])
+	{
+		return [];
+	}
+
+	return pizzas[pizzaName];
+}
 
 
 /*
@@ -30,7 +48,20 @@
 
 */
 
+function makePizza(pizzaName)
+{
+	const toppings = getToppings(pizzaName)
 
+	if(toppings.length == 0)
+	{
+		return {};
+	}
+
+	return {
+		name: pizzaName,
+		toppings: toppings
+	};
+}
 
 
 /*
@@ -64,7 +95,20 @@
 
 */
 
+function makeCustom(topping1, topping2, topping3)
+{
+	const toppings = [topping1, topping2, topping3].filter(Boolean);
 
+	if(toppings.length == 0)
+	{
+		return {};
+	}
+
+	return {
+		name: "Custom",
+		toppings: toppings
+	};
+}
 
 
 /*
@@ -114,3 +158,27 @@
 
 */
 
+function createOrder(customerName, isHawaiian, isCowboy, isSupreme, isVegetarian, isCheese)
+{
+	const pizzaNames = ["Hawaiian", "Cowboy", "Supreme", "Vegetarian", "Cheese"];
+	const pizzasOrdered = [isHawaiian, isCowboy, isSupreme, isVegetarian, isCheese];
+	const pizzasMade = [];
+
+	if(pizzasOrdered.filter(Boolean) == 0)
+	{
+		return {};
+	}
+
+	for (let i = 0; i < pizzasOrdered.length; i++)
+	{
+		if(pizzasOrdered[i])
+		{
+			pizzasMade.push(makePizza(pizzaNames[i]));
+		}
+	}
+
+	return {
+		customer: customerName,
+		pizzas: pizzasMade
+	};
+}
