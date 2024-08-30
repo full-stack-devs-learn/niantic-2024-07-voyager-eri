@@ -1,6 +1,8 @@
 class ShoppingService {
 
-    getListName() {
+    getListName() 
+    {
+        return "Eri's Personal Shopping List";
     }
 
     getShoppingList() {
@@ -16,6 +18,54 @@ class ShoppingService {
                 title: 'Frozen Pizza',
                 quantity: 4,
                 isComplete: true
+            },
+            {
+                id: 3,
+                title: 'Natto',
+                quantity: 200,
+                isComplete: true
+            },
+            {
+                id: 4,
+                title: 'Takuan',
+                quantity: 25,
+                isComplete: true
+            },
+            {
+                id: 5,
+                title: 'Koya Tofu',
+                quantity: 5,
+                isComplete: true
+            },
+            {
+                id: 6,
+                title: 'Tofu',
+                quantity: 5,
+                isComplete: true
+            },
+            {
+                id: 7,
+                title: 'Udon',
+                quantity: 4,
+                isComplete: false
+            },
+            {
+                id: 8,
+                title: 'Aonori',
+                quantity: 1,
+                isComplete: false
+            },
+            {
+                id: 9,
+                title: 'Tomato',
+                quantity: 2,
+                isComplete: false
+            },
+            {
+                id: 10,
+                title: 'MSG',
+                quantity: 2,
+                isComplete: false
             }
         ];
     }
