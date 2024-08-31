@@ -32,13 +32,14 @@ function createGroceryDiv(groceryItem, parent)
     const groceryDiv = document.createElement("div");
 
     groceryDiv.classList.add("list-item");
+    //groceryDiv.classList.add("checkbox");
     groceryDiv.textContent = groceryItem.title;
 
     parent.appendChild(groceryDiv);
 
     buildQuantity(groceryItem, groceryDiv);
-    clickToComplete(groceryItem, groceryDiv);
-    buildCheckbox(groceryDiv);
+    const checkboxDiv = buildCheckbox(groceryDiv);
+    clickToComplete(groceryItem, groceryDiv, checkboxDiv);
 }
 
 function buildQuantity(groceryItem, parent)
@@ -64,10 +65,12 @@ function buildQuantityLabel(parent)
 
 function buildCheckbox(parent)
 {
-    const checkboxDiv = document.createElement("img");
-    checkboxDiv.setAttribute("src", "/img/square-regular.svg");
-    checkboxDiv.setAttribute("width", "15px");
+    const checkboxDiv = document.createElement("div");
+    checkboxDiv.classList.add("checkbox");
+    
     parent.appendChild(checkboxDiv);
+
+    return checkboxDiv;
 }
 
 /**
@@ -82,14 +85,16 @@ function markAllCompleted()
     });
 }
 
-function clickToComplete(groceryItem, parent)
+function clickToComplete(groceryItem, parent, checkboxDiv)
 {
     parent.addEventListener("click", function() {
         parent.classList.toggle("complete");
-
+        checkboxDiv.classList.toggle("checkboxIsActive");
         groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
     }, false);
 }
+
+// TODO: STRIKETHROUGH IS ON QUANTITY TOO
 
 displayListTitle();
 displayGroceries();

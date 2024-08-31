@@ -69,6 +69,21 @@ body {
     text-decoration: line-through;
 }
 
+.checkbox {
+    background-image: url(/img/square-regular.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 15px;
+    background-origin: content-box;
+    height: 15px;
+    width: 15px;
+}
+
+.checkboxIsActive {
+    background-image: url(/img/square-check-regular.svg);
+    background-repeat: no-repeat;
+}
+
 
 .quantity-container {
     display: flex;
