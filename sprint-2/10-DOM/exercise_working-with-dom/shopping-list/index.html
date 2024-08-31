@@ -20,11 +20,12 @@
     <div class="container">
         <h1 id="title">SHOPPING LIST</h1>
         <div>
-            <form>
-                <input type="text" id="grocery-name" placeholder="New item">
-                <input type="text" id="grocery-quantity" placeholder="Quantity">
-                <button id="add">Add</button>
+            <form class="form-flex">
+                <input type="text" class="add-item" id="grocery-name" placeholder="Add new item">
+                <input type="text" class="add-item add-quantity" id="grocery-quantity" placeholder="Quantity">
+                <button class="add-button" id="add"><img width="15px" src="/img/plus-solid.svg"></button>
             </form>
+            <hr>
             <div class="list-container">
                 <div class="shopping-list" id="shopping-list">
                     <!-- your shopping list divs go here -->
