@@ -23,23 +23,41 @@ function displayGroceries()
     const groceryListContainer = document.getElementById("shopping-list");
 
     groceries.forEach(groceryItem => {
-        createGroceryDiv(groceryItem, groceryListContainer);
+        createGroceryItemDiv(groceryItem, groceryListContainer);
     });
 }
 
-function createGroceryDiv(groceryItem, parent)
+function createGroceryItemDiv(groceryItem, parent)
 {
-    const groceryDiv = document.createElement("div");
+    const groceryItemDiv = document.createElement("label");
+    groceryItemDiv.classList.add("list-item");
+    groceryItemDiv.setAttribute("onmouseover", "hoverCheckmark(this)");
+    groceryItemDiv.setAttribute("onmouseout", "hoverOutCheckmark(this)");
+    parent.appendChild(groceryItemDiv);
 
-    groceryDiv.classList.add("list-item");
-    //groceryDiv.classList.add("checkbox");
-    groceryDiv.textContent = groceryItem.title;
+    const checkboxSpan = buildCheckbox(groceryItemDiv);
+    buildGroceryName(groceryItem, groceryItemDiv);
 
-    parent.appendChild(groceryDiv);
+    buildQuantity(groceryItem, groceryItemDiv);
+    clickToComplete(groceryItem, groceryItemDiv, checkboxSpan);
+}
 
-    buildQuantity(groceryItem, groceryDiv);
-    const checkboxDiv = buildCheckbox(groceryDiv);
-    clickToComplete(groceryItem, groceryDiv, checkboxDiv);
+function hoverCheckmark(groceryItemDiv)
+{
+    groceryItemDiv.classList.add("hover");
+}
+
+function hoverOutCheckmark(groceryItemDiv)
+{
+    groceryItemDiv.classList.remove("hover");
+}
+
+function buildGroceryName(groceryItem, parent)
+{
+    const groceryNameDiv = document.createElement("div");
+    groceryNameDiv.textContent = groceryItem.title;
+
+    parent.appendChild(groceryNameDiv);
 }
 
 function buildQuantity(groceryItem, parent)
@@ -65,12 +83,17 @@ function buildQuantityLabel(parent)
 
 function buildCheckbox(parent)
 {
-    const checkboxDiv = document.createElement("div");
-    checkboxDiv.classList.add("checkbox");
+    const checkboxDiv = document.createElement("input");
+    const checkboxSpan = document.createElement("span");
+
+    checkboxDiv.setAttribute("type", "checkbox");
+    checkboxDiv.classList.add("hideDefaultCheckbox");
+    checkboxSpan.classList.add("checkmark");
     
     parent.appendChild(checkboxDiv);
+    parent.appendChild(checkboxSpan);
 
-    return checkboxDiv;
+    return checkboxSpan;
 }
 
 /**
@@ -79,17 +102,23 @@ function buildCheckbox(parent)
  */
 function markAllCompleted() 
 {
-    const divs = document.querySelectorAll(".list-item");
-    divs.forEach(div => {
-        div.classList.add("complete");
+    const groceryList = document.querySelectorAll(".list-item");
+    const checkmarks = document.querySelectorAll(".checkmark");
+
+    groceryList.forEach(div => {
+        div.classList.toggle("complete-all");
     });
+
+    checkmarks.forEach(div => {
+        div.classList.toggle("completed");
+    })
 }
 
-function clickToComplete(groceryItem, parent, checkboxDiv)
+function clickToComplete(groceryItem, parent, checkboxSpan)
 {
-    parent.addEventListener("click", function() {
-        parent.classList.toggle("complete");
-        checkboxDiv.classList.toggle("checkboxIsActive");
+    parent.addEventListener("change", function() {
+        parent.classList.toggle("complete-all");
+        checkboxSpan.classList.toggle("completed");
         groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
     }, false);
 }

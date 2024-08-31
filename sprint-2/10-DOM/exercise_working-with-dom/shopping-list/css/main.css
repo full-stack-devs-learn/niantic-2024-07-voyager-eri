@@ -11,8 +11,8 @@
     --bg-primary-light: #ffffff66;
     --bg-danger: #ffdfdf;
     --bg-warning: #ffefdf;
-    --font-size: 16px;
-    --font-family: 'Kanit', sans-serif;
+    --font-size: 100%;
+    --font-family: 'Suse', sans-serif;
 }
 
 * {
@@ -21,22 +21,28 @@
     box-sizing: border-box;
 }
 
-body {
-    background:var(--bg-primary) ;
+body
+{
+    background: linear-gradient(43deg, #ddd6f3, #faaca8);
+    background-blend-mode: luminosity, normal;
+    background-size: auto;
+    height: 100%;
+    background-attachment: fixed;
     font-family: var(--font-family);
 }
 
 .container{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    width: 90%;
+    width: 50%;
     margin: 50px auto;
     gap: 10px;
     align-items: flex-start;
 }
 
 #title {
-    color: var(--color-success);
+    color: white;
+    font-weight: 800;
 }
 
 .list-container {
@@ -57,31 +63,16 @@ body {
     padding: 5px 15px;
     background-color: var(--color-light);
     width: 100%;
-    border-radius: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    box-shadow: 2px 2px 7px rgba(168, 36, 80, 0.2);
     margin-bottom: 10px;
     cursor: pointer;
 }
 
-.complete {
+.complete-all {
     background-color: var(--bg-primary-light);
     color: var(--color-complete);
     text-decoration: line-through;
-}
-
-.checkbox {
-    background-image: url(/img/square-regular.svg);
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 15px;
-    background-origin: content-box;
-    height: 15px;
-    width: 15px;
-}
-
-.checkboxIsActive {
-    background-image: url(/img/square-check-regular.svg);
-    background-repeat: no-repeat;
 }
 
 
@@ -97,15 +88,58 @@ body {
 }
 
 .btn {
-    border-radius: 10px;
+    border-radius: 30px;
     border: 0;
-    background-color: var(--color-danger);
-    padding: 10px;
+    background-color: #f14167;
+    box-shadow: 2px 2px 7px rgba(168, 36, 80, 0.2);
+    padding: 15px 20px;
     color: var(--color-light);
     cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 1em;
+    font-weight: 600;
 }
 
 .btn:hover {
     background-color: var(--color-danger-hover);
 
 }
+
+html
+{
+    height: 100%;
+}
+
+input.hideDefaultCheckbox
+{
+    position: absolute;
+    opacity: 0;
+    height: 0;
+    width: 0;
+}
+
+.checkmark
+{
+    background-image: url(/img/square-regular.svg);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 15px;
+    background-origin: content-box;
+    height: 15px;
+    width: 15px;
+}
+
+.completed
+{
+    background-image: url(/img/square-check-regular.svg);
+    opacity: 33%;
+    background-repeat: no-repeat;
+}
+
+.hover > .checkmark
+{
+    background-image: url(/img/square-check-regular.svg);
+    background-repeat: no-repeat;
+}
+
+
