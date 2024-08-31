@@ -19,13 +19,20 @@
 
     <div class="container">
         <h1 id="title">SHOPPING LIST</h1>
-        <div class="list-container">
-            <div class="shopping-list" id="shopping-list">
-                <!-- your shopping list divs go here -->
+        <div>
+            <form>
+                <input type="text" id="grocery-name" placeholder="New item">
+                <input type="text" id="grocery-quantity" placeholder="Quantity">
+                <button id="add">Add</button>
+            </form>
+            <div class="list-container">
+                <div class="shopping-list" id="shopping-list">
+                    <!-- your shopping list divs go here -->
+                </div>
+                <button class="btn" onclick="markAllCompleted()">
+                    Mark All Completed
+                </button>
             </div>
-            <button class="btn" onclick="markAllCompleted()">
-                Mark All Completed
-            </button>
         </div>
     </div>
 

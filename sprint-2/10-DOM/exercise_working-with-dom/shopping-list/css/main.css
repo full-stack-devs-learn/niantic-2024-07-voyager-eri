@@ -69,13 +69,6 @@ body
     cursor: pointer;
 }
 
-.complete-all {
-    background-color: var(--bg-primary-light);
-    color: var(--color-complete);
-    text-decoration: line-through;
-}
-
-
 .quantity-container {
     display: flex;
     flex-direction: column;
@@ -110,6 +103,16 @@ html
     height: 100%;
 }
 
+.completed {
+    background-color: var(--bg-primary-light);
+    color: var(--color-complete);
+}
+
+.completed > .grocery-name
+{
+    text-decoration: line-through;
+}
+
 input.hideDefaultCheckbox
 {
     position: absolute;
@@ -129,11 +132,16 @@ input.hideDefaultCheckbox
     width: 15px;
 }
 
-.completed
+.checkmark-completed
 {
     background-image: url(/img/square-check-regular.svg);
     opacity: 33%;
     background-repeat: no-repeat;
+}
+
+.hover
+{
+    opacity: 70%;
 }
 
 .hover > .checkmark

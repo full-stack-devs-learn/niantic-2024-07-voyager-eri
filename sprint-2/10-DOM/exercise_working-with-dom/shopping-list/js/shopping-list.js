@@ -25,14 +25,18 @@ function displayGroceries()
     groceries.forEach(groceryItem => {
         createGroceryItemDiv(groceryItem, groceryListContainer);
     });
+
+    addGroceryItem(groceryListContainer);
 }
 
 function createGroceryItemDiv(groceryItem, parent)
 {
     const groceryItemDiv = document.createElement("label");
     groceryItemDiv.classList.add("list-item");
-    groceryItemDiv.setAttribute("onmouseover", "hoverCheckmark(this)");
-    groceryItemDiv.setAttribute("onmouseout", "hoverOutCheckmark(this)");
+
+    groceryItemDiv.setAttribute("onmouseover", "hover(this)");
+    groceryItemDiv.setAttribute("onmouseout", "hoverOut(this)");
+
     parent.appendChild(groceryItemDiv);
 
     const checkboxSpan = buildCheckbox(groceryItemDiv);
@@ -42,19 +46,10 @@ function createGroceryItemDiv(groceryItem, parent)
     clickToComplete(groceryItem, groceryItemDiv, checkboxSpan);
 }
 
-function hoverCheckmark(groceryItemDiv)
-{
-    groceryItemDiv.classList.add("hover");
-}
-
-function hoverOutCheckmark(groceryItemDiv)
-{
-    groceryItemDiv.classList.remove("hover");
-}
-
 function buildGroceryName(groceryItem, parent)
 {
     const groceryNameDiv = document.createElement("div");
+    groceryNameDiv.classList.add("grocery-name");
     groceryNameDiv.textContent = groceryItem.title;
 
     parent.appendChild(groceryNameDiv);
@@ -96,6 +91,16 @@ function buildCheckbox(parent)
     return checkboxSpan;
 }
 
+function hover(groceryItemDiv)
+{
+    groceryItemDiv.classList.add("hover");
+}
+
+function hoverOut(groceryItemDiv)
+{
+    groceryItemDiv.classList.remove("hover");
+}
+
 /**
  * This function will be called when the button is clicked. You will need to get a reference
  * to every list item and add the class completed to each one
@@ -106,24 +111,47 @@ function markAllCompleted()
     const checkmarks = document.querySelectorAll(".checkmark");
 
     groceryList.forEach(div => {
-        div.classList.toggle("complete-all");
+        div.classList.add("completed");
     });
 
     checkmarks.forEach(div => {
-        div.classList.toggle("completed");
+        div.classList.add("checkmark-completed");
     })
 }
 
 function clickToComplete(groceryItem, parent, checkboxSpan)
 {
     parent.addEventListener("change", function() {
-        parent.classList.toggle("complete-all");
-        checkboxSpan.classList.toggle("completed");
+        parent.classList.toggle("completed");
+        checkboxSpan.classList.toggle("checkmark-completed");
         groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
     }, false);
 }
 
-// TODO: STRIKETHROUGH IS ON QUANTITY TOO
+function addGroceryItem(groceryListContainer)
+{
+    const groceryNameInput = document.getElementById("grocery-name");
+    const groceryQuantityInput = document.getElementById("grocery-quantity");
+
+    const addButton = document.getElementById("add");
+
+    addButton.addEventListener("click", () => {
+        const groceryName = groceryNameInput.value.trim();
+        const groceryQuantity = groceryQuantityInput.value.trim();
+
+        if (groceryName !== "")
+        {
+            const groceryItem = {
+                title: groceryName,
+                quantity: groceryQuantity
+            };
+
+            createGroceryItemDiv(groceryItem, groceryListContainer);
+            groceryNameInput.value = "";
+            groceryQuantityInput.value = "";
+        }
+    });
+}
 
 displayListTitle();
 displayGroceries();
