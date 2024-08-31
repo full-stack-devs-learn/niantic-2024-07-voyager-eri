@@ -37,7 +37,8 @@ function createGroceryDiv(groceryItem, parent)
     parent.appendChild(groceryDiv);
 
     buildQuantity(groceryItem, groceryDiv);
-    // clickToComplete(groceryItem);
+    clickToComplete(groceryItem, groceryDiv);
+    buildCheckbox(groceryDiv);
 }
 
 function buildQuantity(groceryItem, parent)
@@ -61,6 +62,14 @@ function buildQuantityLabel(parent)
     parent.appendChild(quantityLabelDiv);
 }
 
+function buildCheckbox(parent)
+{
+    const checkboxDiv = document.createElement("img");
+    checkboxDiv.setAttribute("src", "/img/square-regular.svg");
+    checkboxDiv.setAttribute("width", "15px");
+    parent.appendChild(checkboxDiv);
+}
+
 /**
  * This function will be called when the button is clicked. You will need to get a reference
  * to every list item and add the class completed to each one
@@ -73,19 +82,14 @@ function markAllCompleted()
     });
 }
 
-function clickToComplete(groceryItem)
+function clickToComplete(groceryItem, parent)
 {
-    groceryItem.addEventListener('click', complete())
+    parent.addEventListener("click", function() {
+        parent.classList.toggle("complete");
 
-    function complete()
-    {
-        if(groceryItem.isComplete == false)
-        {
-            groceryItem.isComplete = true;
-        }
-    }
+        groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
+    }, false);
 }
-
 
 displayListTitle();
 displayGroceries();

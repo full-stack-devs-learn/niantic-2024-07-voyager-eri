@@ -17,31 +17,31 @@ class ShoppingService {
                 id: 2,
                 title: 'Frozen Pizza',
                 quantity: 4,
-                isComplete: true
+                isComplete: false
             },
             {
                 id: 3,
                 title: 'Natto',
                 quantity: 200,
-                isComplete: true
+                isComplete: false
             },
             {
                 id: 4,
                 title: 'Takuan',
                 quantity: 25,
-                isComplete: true
+                isComplete: false
             },
             {
                 id: 5,
                 title: 'Koya Tofu',
                 quantity: 5,
-                isComplete: true
+                isComplete: false
             },
             {
                 id: 6,
                 title: 'Tofu',
                 quantity: 5,
-                isComplete: true
+                isComplete: false
             },
             {
                 id: 7,

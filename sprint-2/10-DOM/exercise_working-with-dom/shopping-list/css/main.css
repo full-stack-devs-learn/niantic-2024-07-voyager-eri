@@ -59,12 +59,14 @@ body {
     width: 100%;
     border-radius: 2px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    margin-bottom: 10px;;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .complete {
     background-color: var(--bg-primary-light);
     color: var(--color-complete);
+    text-decoration: line-through;
 }
 
 
