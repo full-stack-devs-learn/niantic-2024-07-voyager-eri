@@ -25,8 +25,6 @@ function displayGroceries()
     groceries.forEach(groceryItem => {
         createGroceryItemDiv(groceryItem, groceryListContainer);
     });
-
-    addGroceryItem(groceryListContainer);
 }
 
 function createGroceryItemDiv(groceryItem, parent)
@@ -40,12 +38,15 @@ function createGroceryItemDiv(groceryItem, parent)
     parent.appendChild(groceryItemDiv);
 
     const checkboxSpan = buildCheckbox(groceryItemDiv);
-    buildGroceryName(groceryItem, groceryItemDiv);
 
+    const groceryNameDiv = buildGroceryName(groceryItem, groceryItemDiv);
     buildQuantity(groceryItem, groceryItemDiv);
     buildOptionsButton(groceryItemDiv);
     clickToComplete(groceryItem, groceryItemDiv, checkboxSpan);
+
+    addGroceryItem(parent)
     deleteGroceryItem(groceryItemDiv);
+    editGroceryItem(groceryItem, groceryItemDiv, groceryNameDiv);
 }
 
 function buildGroceryName(groceryItem, parent)
@@ -55,6 +56,7 @@ function buildGroceryName(groceryItem, parent)
     groceryNameDiv.textContent = groceryItem.title;
 
     parent.appendChild(groceryNameDiv);
+    return groceryNameDiv;
 }
 
 function buildQuantity(groceryItem, parent)
@@ -107,10 +109,13 @@ function buildOptionsButton(parent)
 {
     const deleteDiv = document.createElement("div");
     deleteDiv.classList.add("delete");
-    deleteDiv.textContent = "delete";
+    deleteDiv.textContent = "Delete";
     parent.appendChild(deleteDiv);
 
     const editDiv = document.createElement("div");
+    editDiv.classList.add("edit");
+    editDiv.textContent = "Edit";
+    parent.appendChild(editDiv);
 }
 
 /**
@@ -170,6 +175,33 @@ function deleteGroceryItem(groceryItemDiv)
     const deleteButton = groceryItemDiv.querySelector(".delete");
     deleteButton.addEventListener("click", () => {
         groceryItemDiv.remove();
+    })
+}
+
+function editGroceryItem(groceryItem, parent, groceryNameDiv)
+{
+    const editButton = parent.querySelector(".edit");
+    editButton.addEventListener("click", () => {
+        const span = parent.children[2];
+        const input = document.createElement("input");
+
+        if (editButton.textContent == "Edit")
+        {
+            input.type = "text";
+            input.value = groceryNameDiv.innerText;
+            
+            parent.appendChild(input);
+            parent.insertBefore(input, span);
+            groceryNameDiv.remove();
+            editButton.textContent = "Save";
+        }
+        else if (editButton.textContent == "Save")
+        {
+            groceryNameDiv.textContent = span.value;
+            parent.insertBefore(groceryNameDiv, span);
+            parent.removeChild(span);
+            editButton.textContent = "Edit";
+        }
     })
 }
 

@@ -114,6 +114,7 @@ hr
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 10%;
 }
 .super {
     display: inline-block;
@@ -152,6 +153,11 @@ html
 .completed > .grocery-name
 {
     text-decoration: line-through;
+}
+
+.grocery-name
+{
+    width: 40%;
 }
 
 input.hideDefaultCheckbox
