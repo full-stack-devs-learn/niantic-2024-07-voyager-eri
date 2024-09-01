@@ -43,7 +43,9 @@ function createGroceryItemDiv(groceryItem, parent)
     buildGroceryName(groceryItem, groceryItemDiv);
 
     buildQuantity(groceryItem, groceryItemDiv);
+    buildOptionsButton(groceryItemDiv);
     clickToComplete(groceryItem, groceryItemDiv, checkboxSpan);
+    deleteGroceryItem(groceryItemDiv);
 }
 
 function buildGroceryName(groceryItem, parent)
@@ -101,6 +103,16 @@ function hoverOut(groceryItemDiv)
     groceryItemDiv.classList.remove("hover");
 }
 
+function buildOptionsButton(parent)
+{
+    const deleteDiv = document.createElement("div");
+    deleteDiv.classList.add("delete");
+    deleteDiv.textContent = "delete";
+    parent.appendChild(deleteDiv);
+
+    const editDiv = document.createElement("div");
+}
+
 /**
  * This function will be called when the button is clicked. You will need to get a reference
  * to every list item and add the class completed to each one
@@ -151,6 +163,14 @@ function addGroceryItem(groceryListContainer)
             groceryQuantityInput.value = "";
         }
     });
+}
+
+function deleteGroceryItem(groceryItemDiv)
+{
+    const deleteButton = groceryItemDiv.querySelector(".delete");
+    deleteButton.addEventListener("click", () => {
+        groceryItemDiv.remove();
+    })
 }
 
 displayListTitle();
