@@ -32,8 +32,8 @@ function createGroceryItemDiv(groceryItem, parent)
     const groceryItemDiv = document.createElement("label");
     groceryItemDiv.classList.add("list-item");
 
-    // groceryItemDiv.setAttribute("onmouseover", "hover(this)");
-    // groceryItemDiv.setAttribute("onmouseout", "hoverOut(this)");
+    groceryItemDiv.setAttribute("onmouseover", "hover(this)");
+    groceryItemDiv.setAttribute("onmouseout", "hoverOut(this)");
 
     parent.appendChild(groceryItemDiv);
 
@@ -46,7 +46,7 @@ function createGroceryItemDiv(groceryItem, parent)
 
     addGroceryItem(parent)
     deleteGroceryItem(groceryItemDiv);
-    editGroceryItem(groceryItem, groceryItemDiv, groceryNameDiv);
+    editGroceryItem(groceryItemDiv, groceryNameDiv);
 }
 
 function buildGroceryName(groceryItem, parent)
@@ -106,6 +106,21 @@ function buildOptionsButton(parent)
     deleteDiv.classList.add("delete-button");
     deleteDiv.textContent = "Delete";
     parent.appendChild(deleteDiv);
+
+    // const deleteButtonDiv = document.createElement("img");
+    // deleteButtonDiv.setAttribute("src", "/img/trash-solid.svg");
+    // deleteButtonDiv.setAttribute("width", "10px");
+    // deleteDiv.appendChild(deleteButtonDiv);
+}
+
+function hover(groceryItemDiv)
+{
+    groceryItemDiv.classList.add("hover");
+}
+
+function hoverOut(groceryItemDiv)
+{
+    groceryItemDiv.classList.remove("hover");
 }
 
 /**
@@ -128,7 +143,7 @@ function markAllCompleted()
 
 function clickToComplete(groceryItem, parent, checkboxSpan)
 {
-    checkboxSpan.addEventListener("click", function() {
+    checkboxSpan.addEventListener("click", () => {
         parent.classList.toggle("completed");
         checkboxSpan.classList.toggle("checkmark-completed");
         groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
@@ -160,7 +175,7 @@ function addGroceryItem(groceryListContainer)
     });
 }
 
-function editGroceryItem(groceryItem, parent, groceryNameDiv)
+function editGroceryItem(parent, groceryNameDiv)
 {
     const editButton = parent.querySelector(".edit-button");
     editButton.addEventListener("click", () => {
@@ -198,14 +213,3 @@ function deleteGroceryItem(groceryItemDiv)
 
 displayListTitle();
 displayGroceries();
-
-
-// function hover(groceryItemDiv)
-// {
-//     groceryItemDiv.classList.add("hover");
-// }
-
-// function hoverOut(groceryItemDiv)
-// {
-//     groceryItemDiv.classList.remove("hover");
-// }
