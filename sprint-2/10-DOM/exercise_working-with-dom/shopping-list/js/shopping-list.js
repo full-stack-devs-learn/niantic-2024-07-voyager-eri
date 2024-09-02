@@ -44,9 +44,10 @@ function createGroceryItemDiv(groceryItem, parent)
     buildOptionsButton(groceryItemDiv);
     clickToComplete(groceryItem, groceryItemDiv, checkboxSpan);
 
-    addGroceryItem(parent)
+    addGroceryItem(parent);
     deleteGroceryItem(groceryItemDiv);
     editGroceryItem(groceryItemDiv, groceryNameDiv);
+
 }
 
 function buildGroceryName(groceryItem, parent)
@@ -210,6 +211,8 @@ function deleteGroceryItem(groceryItemDiv)
         groceryItemDiv.remove();
     })
 }
+
+
 
 displayListTitle();
 displayGroceries();

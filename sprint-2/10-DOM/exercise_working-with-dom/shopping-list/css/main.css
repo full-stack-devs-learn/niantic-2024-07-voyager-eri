@@ -30,15 +30,28 @@ body
     background-attachment: fixed;
     font-family: var(--font-family);
     font-size: 1em;
+    margin: 30px;
 }
 
 .container{
     display: grid;
     grid-template-columns: 1fr 2fr;
-    width: 800px;
-    margin: 50px auto;
+    max-width: 800px;
+    margin: auto;
     gap: 30px;
     align-items: flex-start;
+}
+
+@media screen and (max-width: 600px)
+{
+    body
+    {
+        margin: 10px;
+    }
+
+    .container{
+        grid-template-columns: 1fr;
+    }
 }
 
 #title {
