@@ -32,8 +32,8 @@ function createGroceryItemDiv(groceryItem, parent)
     const groceryItemDiv = document.createElement("label");
     groceryItemDiv.classList.add("list-item");
 
-    groceryItemDiv.setAttribute("onmouseover", "hover(this)");
-    groceryItemDiv.setAttribute("onmouseout", "hoverOut(this)");
+    // groceryItemDiv.setAttribute("onmouseover", "hover(this)");
+    // groceryItemDiv.setAttribute("onmouseout", "hoverOut(this)");
 
     parent.appendChild(groceryItemDiv);
 
@@ -95,27 +95,17 @@ function buildCheckbox(parent)
     return checkboxSpan;
 }
 
-function hover(groceryItemDiv)
-{
-    groceryItemDiv.classList.add("hover");
-}
-
-function hoverOut(groceryItemDiv)
-{
-    groceryItemDiv.classList.remove("hover");
-}
-
 function buildOptionsButton(parent)
 {
-    const deleteDiv = document.createElement("div");
-    deleteDiv.classList.add("delete");
-    deleteDiv.textContent = "Delete";
-    parent.appendChild(deleteDiv);
-
-    const editDiv = document.createElement("div");
-    editDiv.classList.add("edit");
+    const editDiv = document.createElement("button");
+    editDiv.classList.add("edit-button");
     editDiv.textContent = "Edit";
     parent.appendChild(editDiv);
+
+    const deleteDiv = document.createElement("button");
+    deleteDiv.classList.add("delete-button");
+    deleteDiv.textContent = "Delete";
+    parent.appendChild(deleteDiv);
 }
 
 /**
@@ -138,7 +128,7 @@ function markAllCompleted()
 
 function clickToComplete(groceryItem, parent, checkboxSpan)
 {
-    parent.addEventListener("change", function() {
+    checkboxSpan.addEventListener("click", function() {
         parent.classList.toggle("completed");
         checkboxSpan.classList.toggle("checkmark-completed");
         groceryItem.isComplete = (!groceryItem.isComplete) ? true : false;
@@ -170,20 +160,13 @@ function addGroceryItem(groceryListContainer)
     });
 }
 
-function deleteGroceryItem(groceryItemDiv)
-{
-    const deleteButton = groceryItemDiv.querySelector(".delete");
-    deleteButton.addEventListener("click", () => {
-        groceryItemDiv.remove();
-    })
-}
-
 function editGroceryItem(groceryItem, parent, groceryNameDiv)
 {
-    const editButton = parent.querySelector(".edit");
+    const editButton = parent.querySelector(".edit-button");
     editButton.addEventListener("click", () => {
         const span = parent.children[2];
         const input = document.createElement("input");
+        input.classList.add("edit-grocery-item");
 
         if (editButton.textContent == "Edit")
         {
@@ -205,6 +188,24 @@ function editGroceryItem(groceryItem, parent, groceryNameDiv)
     })
 }
 
+function deleteGroceryItem(groceryItemDiv)
+{
+    const deleteButton = groceryItemDiv.querySelector(".delete-button");
+    deleteButton.addEventListener("click", () => {
+        groceryItemDiv.remove();
+    })
+}
+
 displayListTitle();
 displayGroceries();
 
+
+// function hover(groceryItemDiv)
+// {
+//     groceryItemDiv.classList.add("hover");
+// }
+
+// function hoverOut(groceryItemDiv)
+// {
+//     groceryItemDiv.classList.remove("hover");
+// }
