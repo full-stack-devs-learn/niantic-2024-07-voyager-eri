@@ -9,17 +9,41 @@ const player2 = {
 }
 
 // current
-let currentPlayer;
+let currentPlayer = player1;
 
 
 function setNextPlayer()
 {
+    currentPlayer = (currentPlayer == player1) ? player2 : player1;
+    displayCurrentPlayer();
+}
+
+function displayCurrentPlayer()
+{
+    const playerNameDiv = document.getElementById("playerName");
+    playerNameDiv.innerHTML = currentPlayer.name + "'s Turn";
 }
 
 
 function init()
 {
-    
+    displayCurrentPlayer();
+    markTile();
+}
+
+function markTile()
+{
+    const buttons = document.querySelectorAll(".game-button");
+
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            if(button.innerHTML == "")
+            {
+                button.innerHTML = (currentPlayer == player1) ? player1.value : player2.value;
+                setNextPlayer();
+            }
+        });
+    });
 }
 
 // main
