@@ -1,4 +1,6 @@
-const service = new ShoppingService();
+let service;
+let list = []
+let allItemsIncomplete = true;
 
 // add pageTitle
 
@@ -19,10 +21,9 @@ function displayListTitle()
  */
 function displayGroceries() 
 {
-    const groceries = service.getShoppingList();
     const groceryListContainer = document.getElementById("shopping-list");
 
-    groceries.forEach(groceryItem => {
+    list.forEach(groceryItem => {
         createGroceryItemDiv(groceryItem, groceryListContainer);
     });
 }
@@ -47,7 +48,7 @@ function createGroceryItemDiv(groceryItem, parent)
     addGroceryItem(parent);
     deleteGroceryItem(groceryItemDiv);
     editGroceryItem(groceryItemDiv, groceryNameDiv);
-
+    drag();
 }
 
 function buildGroceryName(groceryItem, parent)
@@ -98,20 +99,24 @@ function buildCheckbox(parent)
 
 function buildOptionsButton(parent)
 {
-    const editDiv = document.createElement("button");
-    editDiv.classList.add("edit-button");
-    editDiv.textContent = "Edit";
-    parent.appendChild(editDiv);
+    const editButtonDiv = document.createElement("button");
+    editButtonDiv.classList.add("edit-button");
+    editButtonDiv.textContent = "Edit";
+    parent.appendChild(editButtonDiv);
 
-    const deleteDiv = document.createElement("button");
-    deleteDiv.classList.add("delete-button");
-    deleteDiv.textContent = "Delete";
-    parent.appendChild(deleteDiv);
+    const deleteButtonDiv = document.createElement("button");
+    deleteButtonDiv.classList.add("delete-button");
+    parent.appendChild(deleteButtonDiv);
 
-    // const deleteButtonDiv = document.createElement("img");
-    // deleteButtonDiv.setAttribute("src", "/img/trash-solid.svg");
-    // deleteButtonDiv.setAttribute("width", "10px");
-    // deleteDiv.appendChild(deleteButtonDiv);
+    const editIconDiv = document.createElement("img");
+    editIconDiv.setAttribute("src", "/img/pen-to-square-solid.svg");
+    editIconDiv.setAttribute("width", "10px");
+    editButtonDiv.appendChild(editIconDiv);
+
+    const deleteIconDiv = document.createElement("img");
+    deleteIconDiv.setAttribute("src", "/img/trash-solid.svg");
+    deleteIconDiv.setAttribute("width", "10px");
+    deleteButtonDiv.appendChild(deleteIconDiv);
 }
 
 function hover(groceryItemDiv)
@@ -124,10 +129,27 @@ function hoverOut(groceryItemDiv)
     groceryItemDiv.classList.remove("hover");
 }
 
-/**
- * This function will be called when the button is clicked. You will need to get a reference
- * to every list item and add the class completed to each one
- */
+
+function buildMarkAllButton()
+{
+    const buttonContainer = document.getElementById("mark-all");
+    buttonContainer.innerHTML = "Mark All Complete";
+    buttonContainer.addEventListener("click", () => {
+        if(allItemsIncomplete)
+        {
+            markAllCompleted();
+            buttonContainer.innerHTML = "Mark All Incomplete";
+            allItemsIncomplete = false;
+        }
+        else
+        {
+            markAllIncompleted();
+            buttonContainer.innerHTML = "Mark All Complete";
+            allItemsIncomplete = true;
+        }
+    });
+}
+
 function markAllCompleted() 
 {
     const groceryList = document.querySelectorAll(".list-item");
@@ -139,6 +161,20 @@ function markAllCompleted()
 
     checkmarks.forEach(div => {
         div.classList.add("checkmark-completed");
+    })
+}
+
+function markAllIncompleted()
+{
+    const groceryList = document.querySelectorAll(".list-item");
+    const checkmarks = document.querySelectorAll(".checkmark");
+
+    groceryList.forEach(div => {
+        div.classList.remove("completed");
+    });
+
+    checkmarks.forEach(div => {
+        div.classList.remove("checkmark-completed");
     })
 }
 
@@ -212,7 +248,49 @@ function deleteGroceryItem(groceryItemDiv)
     })
 }
 
+function drag()
+{
+    const groceryList = document.querySelectorAll(".list-item"), current = null;
+    
+    groceryList.forEach(i =>
+    {
+        i.draggable = true
+        i.addEventListener('dragenter', dragEnter)
+        i.addEventListener('dragover', dragOver)
+        i.addEventListener('dragleave', dragLeave)
+        i.addEventListener('drop', drop);
+    });
+}
 
+function dragEnter(e)
+{
+    e.preventDefault();
+    e.target.classList.add('drag-over');
+}
 
-displayListTitle();
-displayGroceries();
+function dragOver(e)
+{
+    e.preventDefault();
+    e.target.classList.add('drag-over');
+}
+
+function dragLeave(e, groceryItemDiv)
+{
+    e.target.classList.remove('drag-over');
+    
+    e.target.appendChild(groceryItemDiv);
+}
+
+function drop(e)
+{
+    e.target.classList.remove('drag-over');
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    service = new ShoppingService();
+    list = service.getShoppingList();
+
+    displayListTitle();
+    displayGroceries();
+    buildMarkAllButton();
+});
