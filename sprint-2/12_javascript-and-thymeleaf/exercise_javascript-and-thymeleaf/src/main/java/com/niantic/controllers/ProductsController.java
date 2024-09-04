@@ -30,6 +30,20 @@ public class ProductsController
         return "products/index";
     }
 
+    @GetMapping("/products/category/{catId}")
+    public String productsByCategory(Model model, @PathVariable int catId)
+    {
+        ArrayList<Product> products = productDao.getProductsByCategory(catId);
+        Category category = categoryDao.getCategoryById(catId);
+        ArrayList<Category> categories = categoryDao.getCategories();
+
+        model.addAttribute("products", products);
+        model.addAttribute("currentCategory", category);
+        model.addAttribute("categories", categories);
+
+        return "products/fragments/product-table-list";
+    }
+
     // details page
     @GetMapping("/products/{id}")
     public String getProduct(Model model, @PathVariable int id)
@@ -92,7 +106,7 @@ public class ProductsController
     }
 
 
-    // edit category
+    // delete category
     @GetMapping("/products/{id}/delete")
     public String deleteCategory(Model model, @PathVariable int id)
     {

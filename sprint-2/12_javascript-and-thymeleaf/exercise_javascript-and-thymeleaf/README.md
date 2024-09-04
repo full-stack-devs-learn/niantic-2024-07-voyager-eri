@@ -14,7 +14,7 @@ After completing this exercise, you'll understand:
 ## Getting started
 
 1. Run the application and navigate to the `/products` page
-2. Modify the `ProductsController` and the `products/index.html` page. 
+2. Modify the `ProductsController` and the `products/index.html` page.
    * The page should not load the products by default
    * Add a GetMapping handler that accepts a category id - and load all products for the selected category
 3. Create a ThymeLeaf fragment html page and use ThymeLeaf syntax to dynamically build the product rows
