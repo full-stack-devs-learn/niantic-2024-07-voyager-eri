@@ -1,4 +1,3 @@
-// players player 1,2
 const player1 = {
     name: 'Player One',
     value: 'X'
@@ -8,9 +7,9 @@ const player2 = {
     value: 'O'
 }
 
-// current
 let currentPlayer = player1;
 let buttons;
+let gameActive = true;
 
 let a1Div;
 let a2Div;
@@ -22,10 +21,10 @@ let c1Div;
 let c2Div;
 let c3Div;
 
-function setNextPlayer()
+function init()
 {
-    currentPlayer = (currentPlayer == player1) ? player2 : player1;
     displayCurrentPlayer();
+    markTile();
 }
 
 function displayCurrentPlayer()
@@ -34,14 +33,13 @@ function displayCurrentPlayer()
     playerNameDiv.innerHTML = currentPlayer.name + "'s Turn";
 }
 
-
-function init()
+function setNextPlayer()
 {
+    currentPlayer = (currentPlayer == player1) ? player2 : player1;
     displayCurrentPlayer();
-    markTile();
 }
 
-function allWinnableCombos()
+function isWin()
 {
     const a1 = a1Div.innerHTML;
     const a2 = a2Div.innerHTML;
@@ -53,7 +51,7 @@ function allWinnableCombos()
     const c2 = c2Div.innerHTML;
     const c3 = c3Div.innerHTML;
 
-    const win = [
+    const winnableCombos = [
         [a1, a2, a3],
         [b1, b2, b3],
         [c1, c2, c3],
@@ -64,9 +62,9 @@ function allWinnableCombos()
         [a3, b2, c1]
     ];
 
-    for (const winCondition of win) 
+    for (const combo of winnableCombos) 
     {
-        const set = new Set(winCondition);
+        const set = new Set(combo);
         if ((set.size == 1) && !(set.has("")))
         {
             return true;
@@ -75,36 +73,49 @@ function allWinnableCombos()
     return false;
 }
 
-function declareWinner()
+function displayWinner()
 {
-    if(allWinnableCombos() == true)
-    {
-        alert("Yay winner");
-    }
+    const playerNameDiv = document.getElementById("playerName");
+    playerNameDiv.innerHTML = "WINNER: " + currentPlayer.name;
+    gameActive = false;
 }
 
 function markTile()
 {
     buttons.forEach(button => {
         button.addEventListener("click", () => {
-            if(button.innerHTML == "")
+            if(button.innerHTML == "" && gameActive)
             {
                 button.innerHTML = (currentPlayer == player1) ? player1.value : player2.value;
-                setNextPlayer();
-                declareWinner();
+                nextAction();
             }
         });
     });
+}
+
+function nextAction()
+{
+    if(isWin())
+    {
+        displayWinner();
+    }
+    else
+    {
+        setNextPlayer();
+    }
 }
 
 function resetTiles()
 {
     buttons.forEach(button => {
         button.innerHTML = "";
-    })
+    });
+
+    gameActive = true;
+    currentPlayer = player1;
+    displayCurrentPlayer();
 }
 
-// main
 document.addEventListener('DOMContentLoaded', () =>
 {
     buttons = document.querySelectorAll(".game-button");
