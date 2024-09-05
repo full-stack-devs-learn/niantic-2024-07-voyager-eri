@@ -45,7 +45,7 @@ function displayProduct(product, table)
 
     const editLink = document.createElement("a");
     editLink.classList.add("btn");
-    editLink.classList.add("btn-warning");
+    editLink.classList.add("btn- warning");
     editLink.classList.add("me-1");
     editLink.textContent = "Edit";
     editLink.href = `/products/${product.productId}/edit`
