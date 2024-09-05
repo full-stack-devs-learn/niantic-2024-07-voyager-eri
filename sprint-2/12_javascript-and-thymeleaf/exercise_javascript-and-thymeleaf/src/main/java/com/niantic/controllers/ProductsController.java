@@ -7,6 +7,8 @@ import com.niantic.services.ProductDao;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 
@@ -62,9 +64,9 @@ public class ProductsController
         return "products/details";
     }
 
-    // add category
+    // add product
     @GetMapping("/products/new")
-    public String addCategory(Model model)
+    public String addProduct(Model model)
     {
         var categories = categoryDao.getCategories();
         model.addAttribute("categories", categories);
@@ -73,14 +75,18 @@ public class ProductsController
     }
 
     @PostMapping("/products/new")
-    public String saveProduct(@ModelAttribute("product") Product product)
+    public String saveProduct(Model model, @Valid @ModelAttribute("product") Product product, BindingResult result)
     {
-
+        if(result.hasErrors())
+        {
+            model.addAttribute("isInvalid", true);
+            return "products/add";
+        }
         productDao.addProduct(product);
         return "redirect:/products?catId=" + product.getCategoryId();
     }
 
-    // edit category
+    // edit product
     @GetMapping("/products/{id}/edit")
     public String editProduct(Model model, @PathVariable int id)
     {

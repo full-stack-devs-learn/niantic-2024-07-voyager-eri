@@ -1,14 +1,28 @@
 package com.niantic.models;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 public class Product
 {
     private int productId;
     private int categoryId;
+
+    @NotEmpty(message="Category name is required")
     private String productName;
+
+    @Min(value = 0, message="Quantity per unit is required")
     private String quantityPerUnit;
+
+    @Min(value = 0, message="Unit price is required")
     private double unitPrice;
+
+    @Min(value = 0, message="Units in stock is required")
     private int unitsInStock;
+
+    @Min(value = 0, message="Units on order is required")
     private int unitsOnOrder;
+
+    @Min(value = 0, message="Reorder level is required")
     private int reorderLevel;
 
     public Product(int productId, int categoryId, String productName, String quantityPerUnit, double unitPrice, int unitsInStock, int unitsOnOrder, int reorderLevel)
