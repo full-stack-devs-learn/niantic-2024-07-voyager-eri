@@ -11,7 +11,7 @@ public class Product
     @NotEmpty(message="Product name is required")
     private String productName;
 
-    @Min(value = 0, message="Quantity per unit is required")
+    @NotEmpty(message="Quantity per unit is required")
     private String quantityPerUnit;
 
     @Min(value = 0, message="Unit price is required")
