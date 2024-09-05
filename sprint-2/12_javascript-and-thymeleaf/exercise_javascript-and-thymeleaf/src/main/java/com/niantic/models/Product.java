@@ -5,9 +5,10 @@ import jakarta.validation.constraints.NotEmpty;
 public class Product
 {
     private int productId;
+
     private int categoryId;
 
-    @NotEmpty(message="Category name is required")
+    @NotEmpty(message="Product name is required")
     private String productName;
 
     @Min(value = 0, message="Quantity per unit is required")
