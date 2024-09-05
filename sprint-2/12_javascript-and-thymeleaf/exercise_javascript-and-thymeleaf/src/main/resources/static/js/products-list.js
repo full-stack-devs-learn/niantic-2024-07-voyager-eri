@@ -6,7 +6,6 @@ function loadPage()
 {
     const container = document.getElementById("product-container");
     const category = document.getElementById("category");
-    //const url = `/products/category/${selectedCatId}`;
     let selectedCatId;
     let url;
 
@@ -31,15 +30,3 @@ function loadPage()
         });
     }))
 }
-
-// function displayProduct(product, table)
-// {
-//     const row = document.createElement("tr");
-//     const idCell = document.createElement("td");
-//     const productNameCell = document.createElement("td");
-
-//     idCell.textContent = product.productId;
-//     row.appendChild(idCell);
-
-//     table.appendChild(row);
-// }

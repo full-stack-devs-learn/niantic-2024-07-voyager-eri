@@ -13,7 +13,7 @@ public class ProductsApiController
 {
     private ProductDao productDao = new ProductDao();
 
-    @GetMapping("/api/products/category/{catId")
+    @GetMapping("/api/products/category/{catId}")
     public ArrayList<Product> productsByCategory(@PathVariable int catId)
     {
         return productDao.getProductsByCategory(catId);
