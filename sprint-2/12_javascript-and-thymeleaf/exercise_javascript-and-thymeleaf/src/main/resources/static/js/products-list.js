@@ -21,10 +21,6 @@ function loadPage()
             throw new Error(response);
         }).then(data => {
             container.innerHTML = data;
-    
-            // data.forEach(product => {
-            //     displayProduct(product, container)
-            // })
         }).catch(error => {
             console.log(error)
         });

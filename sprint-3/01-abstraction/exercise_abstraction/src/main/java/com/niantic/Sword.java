@@ -1,5 +1,12 @@
 package com.niantic;
 
-public class Sword
+public class Sword extends Weapon
 {
+   @Override
+   public int attack()
+   {
+       return 0;
+   }
+
+
 }
