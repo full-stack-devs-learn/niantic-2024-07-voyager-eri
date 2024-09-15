@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class SwordTest
 {
     private Sword sword;
-    private String name;
+    private String name = "Slashy";
     private int damage = 10;
 
     @BeforeEach
@@ -53,7 +53,7 @@ class SwordTest
         int expectedCharge = 100;
 
         // act
-        sword.setPercentCharged(expectedCharge);
+        sword.setPercentCharged(100);
         sword.attack();
 
         int actualCharge = sword.getPercentCharged();
