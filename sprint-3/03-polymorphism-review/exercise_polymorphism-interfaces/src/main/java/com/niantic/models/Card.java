@@ -1,6 +1,8 @@
 package com.niantic.models;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Card implements Comparable<Card>
@@ -63,6 +65,30 @@ public class Card implements Comparable<Card>
     public int compareTo(Card o)
     {
         // todo: Exercise 1: implement Comparable<Card>
-        return 0;
+
+        List<String> suitOrder = new ArrayList<>();
+        suitOrder.add("Spades");
+        suitOrder.add("Hearts");
+        suitOrder.add("Diamonds");
+        suitOrder.add("Clubs");
+
+        List<String> rankOrder = new ArrayList<>();
+        rankOrder.add("K");
+        rankOrder.add("Q");
+        rankOrder.add("J");
+        rankOrder.add("10");
+
+        if(suitOrder.indexOf(o.getSuit()) > suitOrder.indexOf(this.getSuit()))
+        {
+            return -1;
+        }
+        else
+        {
+            if(this.getPointValue() == o.getPointValue() && this.getPointValue() == 10)
+            {
+                return (rankOrder.indexOf(o.getFaceValue()) < rankOrder.indexOf(this.getFaceValue())) ? -1 : 0;
+            }
+            return this.getPointValue() - o.getPointValue();
+        }
     }
 }
