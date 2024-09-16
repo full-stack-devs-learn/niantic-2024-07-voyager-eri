@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class GradingApplication implements Runnable
 {
-    private GradesService gradesService = new GradesFileService();
+    private static GradesService gradesService = new GradesFileService();
 
     public void run()
     {
@@ -46,59 +46,11 @@ public class GradingApplication implements Runnable
         }
     }
 
-    private String[] getAllFiles()
-    {
-        File file = new File("files");
-        return file.list();
-    }
-
-    private String getFileName()
-    {
-        displayAllFiles();
-
-        String[] fileNames = getAllFiles();
-        int choice = UserInput.fileSelection();
-        return fileNames[choice - 1];
-    }
-
-    private List<Assignment> getAllAssignmentsForStudent()
-    {
-        String fileName = getFileName();
-        File file = new File("files/" + fileName);
-
-        List<Assignment> assignments = new ArrayList<>();
-
-        try (Scanner reader = new Scanner(file))
-        {
-            reader.nextLine();
-
-            while (reader.hasNextLine())
-            {
-                var line = reader.nextLine();
-                var columns = line.split(",");
-
-                int number = Integer.parseInt(columns[0]);
-                String firstName = columns[1];
-                String lastName = columns[2];
-                String assignmentName = columns[3];
-                int score = Integer.parseInt(columns[4]);
-
-                var assignment = new Assignment(number, firstName, lastName, assignmentName, score);
-                assignments.add(assignment);
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-        }
-        return assignments;
-    }
-
     private void displayAllFiles()
     {
         // todo: 1 - get and display all student file names
 
-        String[] fileNames = getAllFiles();
+        String[] fileNames = gradesService.getFileNames();
 
         for (int i = 0; i < fileNames.length; i++)
         {
@@ -111,25 +63,17 @@ public class GradingApplication implements Runnable
         // todo: 2 - allow the user to select a file name
         // load all student assignment scores from the file - display all files
 
-        List<Assignment> assignments = getAllAssignmentsForStudent();
+        String fileName = selectFileName();
+        List<Assignment> assignments = gradesService.getAssignments(fileName);
         String studentName = getStudentName(assignments.getFirst());
 
         UserInput.displayMessage("All Assignments For " + studentName);
         System.out.println("-".repeat(60));
+
         for (Assignment assignment : assignments)
         {
             System.out.println(assignment);
         }
-    }
-
-    private String getStudentName(Assignment assignment)
-    {
-        String firstName = assignment.getFirstName();
-        String lastName = assignment.getLastName();
-        firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
-        lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
-
-        return firstName + " " + lastName;
     }
 
     private void displayStudentAverages()
@@ -137,24 +81,14 @@ public class GradingApplication implements Runnable
         // todo: 3 - allow the user to select a file name
         // load all student assignment scores from the file - display student statistics (low score, high score, average score)
 
-        int totalScore = 0;
-        int averageScore;
-        int lowestScore;
-        int highestScore;
-        String studentName;
+        displayAllFiles();
+        String fileName = gradesService.getFileName();
+        List<Assignment> assignments = gradesService.getAssignments(fileName);
 
-        List<Assignment> assignments = getAllAssignmentsForStudent();
-
-        for (Assignment assignment : assignments)
-        {
-            totalScore += assignment.getScore();
-        }
-
-        averageScore = totalScore / assignments.size();
-
-        lowestScore = Collections.min(assignments).getScore();
-        highestScore = Collections.max(assignments).getScore();
-        studentName = getStudentName(assignments.getFirst());
+        int averageScore = gradesService.getAverageScorePerStudent(assignments);
+        int lowestScore = Collections.min(assignments).getScore();
+        int highestScore = Collections.max(assignments).getScore();
+        String studentName = getStudentName(assignments.getFirst());
 
         UserInput.displayMessage("Assignment Stats For " + studentName);
         System.out.println("-".repeat(30));
@@ -167,6 +101,9 @@ public class GradingApplication implements Runnable
     {
         // todo: 4 - Optional / Challenge - load all scores from all student and all assignments
         // display the statistics for all scores (low score, high score, average score, number of students, number of assignments)
+
+        String[] fileNames = gradesService.getFileNames();
+        gradesService.getAllAssignments(fileNames);
     }
 
     private void displayAssignmentStatistics()
@@ -174,5 +111,21 @@ public class GradingApplication implements Runnable
         // todo: 5 - Optional / Challenge - load all scores from all student and all assignments
         // display the statistics for each assignment (assignment name, low score, high score, average score)
         // this one could take some time
+    }
+
+    private String getStudentName(Assignment assignment)
+    {
+        String firstName = assignment.getFirstName();
+        String lastName = assignment.getLastName();
+        firstName = firstName.substring(0,1).toUpperCase() + firstName.substring(1);
+        lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
+
+        return firstName + " " + lastName;
+    }
+
+    private String selectFileName()
+    {
+        displayAllFiles();
+        return gradesService.getFileName();
     }
 }
