@@ -30,6 +30,12 @@ public class UserInput
         return Integer.parseInt(in.nextLine());
     }
 
+    public static int fileSelection()
+    {
+        System.out.print("Enter the number of the file you would like to view: ");
+        return Integer.parseInt(in.nextLine());
+    }
+
     public static void displayMessage(String message)
     {
         System.out.println();
