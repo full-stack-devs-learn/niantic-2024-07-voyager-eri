@@ -20,19 +20,32 @@ class BowTest
     }
 
     @Test
-    public void attack()
+    public void attack_shouldReplenishArrow_after5Sec() throws InterruptedException
     {
-        bow.setPercentCharged(100);
+        // arrange
+        int expectedCountBeforeReplenishing = quiverSize - 1;
+        int expectedCountAfterReplenishing = quiverSize;
+
+        // act
+        bow.attack();
+
+        // assert
+        assertEquals(expectedCountBeforeReplenishing, bow.getArrowCount());
+        Thread.sleep(5000);
+        assertEquals(expectedCountAfterReplenishing, bow.getArrowCount());
+    }
+
+    @Test
+    public void powerAttack_shouldNotDepleteArrows_whenActive()
+    {
+        // arrange
+        int expectedCount = quiverSize;
+
+        // act
         bow.powerAttack();
         bow.attack();
-        bow.attack();
-        bow.attack();
-        bow.attack();
-        bow.attack();
-        bow.attack();
-        bow.attack();
-        bow.attack();
 
-
+        // assert
+        assertEquals(expectedCount, bow.getArrowCount());
     }
 }

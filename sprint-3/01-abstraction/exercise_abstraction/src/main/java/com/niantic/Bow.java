@@ -11,8 +11,6 @@ public class Bow extends Weapon
     private boolean isUnlimited = false;
     private int powerAttackMultiplier = 1;
 
-    Timer timer = new Timer();
-
     public Bow(String name, int damage, String arrowType, int quiverSize)
     {
         super(name, damage);
@@ -20,17 +18,7 @@ public class Bow extends Weapon
         this.quiverSize = quiverSize;
         arrowCount = quiverSize;
 
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run()
-            {
-                if(arrowCount < quiverSize )
-                {
-                    arrowCount++;
-                }
-            }
-        }, 5000);
-
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -55,6 +43,19 @@ public class Bow extends Weapon
                 arrowCount--;
                 powerAttackMultiplier = 2;
             }
+
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run()
+                {
+                    if(arrowCount < quiverSize )
+                    {
+                        arrowCount++;
+                    }
+                }
+            }, 5000);
+
             return switch (arrowType)
             {
                 case "standard" -> getDamage() * powerAttackMultiplier;
@@ -71,6 +72,7 @@ public class Bow extends Weapon
     {
         isUnlimited = true;
 
+        Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -84,5 +86,10 @@ public class Bow extends Weapon
     @Override
     public int getRange() {
         return 20;
+    }
+
+    public int getArrowCount()
+    {
+        return arrowCount;
     }
 }
