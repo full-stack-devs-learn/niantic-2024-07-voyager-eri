@@ -91,17 +91,6 @@ public class GradingApplication implements Runnable
         displayStats(assignments);
     }
 
-    private void displayStats(List<Assignment> assignments)
-    {
-        int averageScore = gradesService.getAverageScore(assignments);
-        int lowestScore = Collections.min(assignments).getScore();
-        int highestScore = Collections.max(assignments).getScore();
-
-        System.out.println("Lowest score: " + lowestScore);
-        System.out.println("Highest score: " + highestScore);
-        System.out.println("Average score: " + averageScore);
-    }
-
     private void displayAllStudentStatistics()
     {
         // todo: 4 - Optional / Challenge - load all scores from all student and all assignments
@@ -113,6 +102,8 @@ public class GradingApplication implements Runnable
         UserInput.displayMessage("Assignment Stats For All Students");
         System.out.println("-".repeat(60));
         displayStats(allAssignments);
+        System.out.println("Total number of students: " + fileNames.length);
+        System.out.println("Total number of assignments: " + allAssignments.size());
     }
 
     private void displayAssignmentStatistics()
@@ -120,6 +111,17 @@ public class GradingApplication implements Runnable
         // todo: 5 - Optional / Challenge - load all scores from all student and all assignments
         // display the statistics for each assignment (assignment name, low score, high score, average score)
         // this one could take some time
+    }
+
+    private void displayStats(List<Assignment> assignments)
+    {
+        int averageScore = gradesService.getAverageScore(assignments);
+        int lowestScore = Collections.min(assignments).getScore();
+        int highestScore = Collections.max(assignments).getScore();
+
+        System.out.println("Lowest score: " + lowestScore);
+        System.out.println("Highest score: " + highestScore);
+        System.out.println("Average score: " + averageScore);
     }
 
     private String getStudentName(Assignment assignment)
