@@ -4,9 +4,7 @@ import com.niantic.models.Assignment;
 import com.niantic.ui.UserInput;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GradesFileService implements GradesService
 {
@@ -69,6 +67,32 @@ public class GradesFileService implements GradesService
         }
 
         return allAssignments;
+    }
+
+    @Override
+    public HashMap<String, List<Integer>> sortAssignmentsByName(List<Assignment> allAssignments)
+    {
+        HashMap<String, List<Integer>> assignmentsByName = new HashMap();
+        String key;
+        int value;
+
+        for (Assignment assignment : allAssignments)
+        {
+            key = assignment.getAssignmentName();
+            value = assignment.getScore();
+
+            assignmentsByName.putIfAbsent(key, new ArrayList<>());
+            assignmentsByName.get(key).add(value);
+        }
+
+        return assignmentsByName;
+    }
+
+    @Override
+    public int getAverageScoreFromAllAssignments(List<Integer> scores)
+    {
+        int totalScore = scores.stream().reduce(0, Integer::sum);
+        return totalScore / scores.size();
     }
 
     @Override

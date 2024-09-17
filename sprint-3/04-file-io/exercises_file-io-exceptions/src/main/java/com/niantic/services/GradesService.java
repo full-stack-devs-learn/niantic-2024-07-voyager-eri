@@ -2,6 +2,7 @@ package com.niantic.services;
 
 import com.niantic.models.Assignment;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface GradesService
@@ -14,5 +15,9 @@ public interface GradesService
 
     List<Assignment> getAllAssignments(String[] fileNames);
 
+    HashMap<String, List<Integer>> sortAssignmentsByName(List<Assignment> allAssignments);
+
     int getAverageScore(List<Assignment> assignments);
+
+    int getAverageScoreFromAllAssignments(List<Integer> scores);
 }

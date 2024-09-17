@@ -6,10 +6,7 @@ import com.niantic.services.GradesService;
 import com.niantic.ui.UserInput;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class GradingApplication implements Runnable
 {
@@ -111,6 +108,28 @@ public class GradingApplication implements Runnable
         // todo: 5 - Optional / Challenge - load all scores from all student and all assignments
         // display the statistics for each assignment (assignment name, low score, high score, average score)
         // this one could take some time
+
+        String[] fileNames = gradesService.getFileNames();
+        List<Assignment> allAssignments = gradesService.getAllAssignments(fileNames);
+        HashMap<String, List<Integer>> assignmentsByName = gradesService.sortAssignmentsByName(allAssignments);
+
+        UserInput.displayMessage("Stats Per Assignment");
+        System.out.println("-".repeat(60));
+
+        for(String assignmentName : assignmentsByName.keySet())
+        {
+            List<Integer> scores = assignmentsByName.get(assignmentName);
+            int averageScore = gradesService.getAverageScoreFromAllAssignments(scores);
+            int lowestScore = Collections.min(scores);
+            int highestScore = Collections.max(scores);
+
+            System.out.println(assignmentName);
+            System.out.println("-".repeat(20));
+            System.out.println("Lowest score: " + lowestScore);
+            System.out.println("Highest score: " + highestScore);
+            System.out.println("Average score: " + averageScore);
+            System.out.println();
+        }
     }
 
     private void displayStats(List<Assignment> assignments)
