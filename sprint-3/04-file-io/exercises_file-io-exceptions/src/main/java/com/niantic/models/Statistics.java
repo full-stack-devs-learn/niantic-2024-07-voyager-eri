@@ -40,9 +40,19 @@ public class Statistics
         return Collections.min(assignments).getScore();
     }
 
+    public Assignment getLowestScoreAssignment()
+    {
+        return Collections.min(assignments);
+    }
+
     public int getHighestScore()
     {
         return Collections.max(assignments).getScore();
+    }
+
+    public Assignment getHighestScoreAssignment()
+    {
+        return Collections.max(assignments);
     }
 
     public int getAverageScore()
@@ -55,5 +65,15 @@ public class Statistics
         }
 
         return totalScore / assignments.size();
+    }
+
+    public List<Assignment> getAverageRangeAssignments()
+    {
+        int averageScore = getAverageScore();
+        return assignments.stream()
+                          .filter(assignment -> assignment.getScore() >= averageScore - 1 && assignment.getScore() <= averageScore + 1)
+                          .toList();
+
+
     }
 }

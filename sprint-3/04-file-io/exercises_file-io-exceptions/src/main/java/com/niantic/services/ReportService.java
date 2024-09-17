@@ -1,5 +1,6 @@
 package com.niantic.services;
 
+import com.niantic.models.Assignment;
 import com.niantic.models.Statistics;
 
 import java.io.File;
@@ -35,8 +36,19 @@ public class ReportService
             out.println(statistics.getStudentName());
             out.println("-".repeat(20));
             out.println("Low Score: " + statistics.getLowestScore());
+            out.println(statistics.getLowestScoreAssignment());
+            out.println();
             out.println("High Score: " + statistics.getHighestScore());
+            out.println(statistics.getHighestScoreAssignment());
+            out.println();
+
             out.println("Average Score: " + statistics.getAverageScore());
+            var averageRangeAssignments = statistics.getAverageRangeAssignments();
+
+            for (Assignment assignment : averageRangeAssignments)
+            {
+                out.println(assignment);
+            }
         }
         catch (FileNotFoundException e)
         {
