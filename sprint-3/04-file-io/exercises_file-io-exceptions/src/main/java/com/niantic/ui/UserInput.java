@@ -1,12 +1,17 @@
 package com.niantic.ui;
 
+import com.niantic.models.Assignment;
 import com.niantic.models.Statistics;
+import com.niantic.services.GradesFileService;
+import com.niantic.services.GradesService;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInput
 {
     protected static Scanner in = new Scanner(System.in);
+    private static GradesService gradesService = new GradesFileService();
 
     public static int homeScreenSelection()
     {
@@ -36,6 +41,25 @@ public class UserInput
         return Integer.parseInt(in.nextLine());
     }
 
+    public static void displayAllFiles(String[] fileNames)
+    {
+        for (int i = 0; i < fileNames.length; i++)
+        {
+            System.out.println((i + 1) + ") " + fileNames[i]);
+        }
+    }
+
+    public static void displayStudentScores(List<Assignment> assignments, String studentName)
+    {
+        UserInput.displayMessage("All Assignments For " + studentName);
+        System.out.println("-".repeat(60));
+
+        for (Assignment assignment : assignments)
+        {
+            System.out.println(assignment);
+        }
+    }
+
     public static void displayStudentStats(Statistics statistics)
     {
         displayMessage("Stats For " + statistics.getStudentName());
@@ -43,6 +67,12 @@ public class UserInput
         System.out.println("Low Score: " + statistics.getLowestScore());
         System.out.println("High Score: " + statistics.getHighestScore());
         System.out.println("Average Score: " + statistics.getAverageScore());
+    }
+
+    public static void displayTotalStats(Statistics statistics)
+    {
+        System.out.println("Total number of students: " + gradesService.getFileNames().length);
+        System.out.println("Total number of assignments: " + statistics.getTotalNumberOfAssignments());
     }
 
     public static int fileSelection()
