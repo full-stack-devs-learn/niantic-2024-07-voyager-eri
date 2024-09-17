@@ -12,13 +12,16 @@ import java.time.format.DateTimeFormatter;
 public class ReportService
 {
     private static GradesService gradesService = new GradesFileService();
+    private final LogService errorLogger = new LogService("error");
+    private final LogService appLogger = new LogService("application");
 
-    private static void ensureDirectoryExists(String path)
+    private void ensureDirectoryExists(String path)
     {
         File dir = new File(path);
         if(!dir.exists())
         {
             dir.mkdir();
+            appLogger.logMessage("Creating directory " + path);
         }
     }
     public void createStudentSummaryReport(Statistics statistics)
@@ -52,7 +55,7 @@ public class ReportService
         }
         catch (FileNotFoundException e)
         {
-
+            errorLogger.logMessage(e.getMessage());
         }
     }
 
@@ -77,7 +80,7 @@ public class ReportService
         }
         catch (FileNotFoundException e)
         {
-
+            errorLogger.logMessage(e.getMessage());
         }
     }
 }

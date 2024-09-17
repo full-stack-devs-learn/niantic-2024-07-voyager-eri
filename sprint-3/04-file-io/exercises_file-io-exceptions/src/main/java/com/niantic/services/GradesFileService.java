@@ -8,6 +8,8 @@ import java.util.*;
 
 public class GradesFileService implements GradesService
 {
+    private final LogService errorLogger = new LogService("error");
+
     @Override
     public String[] getFileNames()
     {
@@ -51,7 +53,7 @@ public class GradesFileService implements GradesService
         }
         catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            errorLogger.logMessage(e.getMessage());
         }
         return assignments;
     }
