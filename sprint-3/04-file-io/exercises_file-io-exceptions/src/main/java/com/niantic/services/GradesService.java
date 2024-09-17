@@ -14,5 +14,5 @@ public interface GradesService
 
     List<Assignment> getAllAssignments(String[] fileNames);
 
-    int getAverageScorePerStudent(List<Assignment> assignments);
+    int getAverageScore(List<Assignment> assignments);
 }

@@ -85,13 +85,18 @@ public class GradingApplication implements Runnable
         String fileName = gradesService.getFileName();
         List<Assignment> assignments = gradesService.getAssignments(fileName);
 
-        int averageScore = gradesService.getAverageScorePerStudent(assignments);
+        String studentName = getStudentName(assignments.getFirst());
+        UserInput.displayMessage("Assignment Stats For " + studentName);
+        System.out.println("-".repeat(60));
+        displayStats(assignments);
+    }
+
+    private void displayStats(List<Assignment> assignments)
+    {
+        int averageScore = gradesService.getAverageScore(assignments);
         int lowestScore = Collections.min(assignments).getScore();
         int highestScore = Collections.max(assignments).getScore();
-        String studentName = getStudentName(assignments.getFirst());
 
-        UserInput.displayMessage("Assignment Stats For " + studentName);
-        System.out.println("-".repeat(30));
         System.out.println("Lowest score: " + lowestScore);
         System.out.println("Highest score: " + highestScore);
         System.out.println("Average score: " + averageScore);
@@ -103,7 +108,11 @@ public class GradingApplication implements Runnable
         // display the statistics for all scores (low score, high score, average score, number of students, number of assignments)
 
         String[] fileNames = gradesService.getFileNames();
-        gradesService.getAllAssignments(fileNames);
+        List<Assignment> allAssignments = gradesService.getAllAssignments(fileNames);
+
+        UserInput.displayMessage("Assignment Stats For All Students");
+        System.out.println("-".repeat(60));
+        displayStats(allAssignments);
     }
 
     private void displayAssignmentStatistics()

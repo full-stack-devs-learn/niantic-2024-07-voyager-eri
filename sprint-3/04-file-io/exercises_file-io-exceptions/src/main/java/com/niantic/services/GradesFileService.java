@@ -72,7 +72,7 @@ public class GradesFileService implements GradesService
     }
 
     @Override
-    public int getAverageScorePerStudent(List<Assignment> assignments)
+    public int getAverageScore(List<Assignment> assignments)
     {
         int totalScore = 0;
 
