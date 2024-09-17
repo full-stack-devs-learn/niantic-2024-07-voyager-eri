@@ -1,0 +1,7 @@
+All Students
+--------------------
+Low Score: 80
+High Score: 100
+Average Score: 89
+Total number of students: 5
+Total number of assignments: 15

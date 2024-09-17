@@ -1,5 +1,7 @@
 package com.niantic.ui;
 
+import com.niantic.models.Statistics;
+
 import java.util.Scanner;
 
 public class UserInput
@@ -22,12 +24,25 @@ public class UserInput
         System.out.println("  4) All Students: display average score");
         System.out.println("  5) All Assignments: display average score");
         System.out.println();
+        System.out.println("  ---------- Create Report Files ----------");
+        System.out.println("  6) Create student summary report");
+        System.out.println("  7) Create all students summary report");
+        System.out.println();
         System.out.println("  0) Exit");
 
         System.out.println();
         System.out.print("Please make a selection: ");
 
         return Integer.parseInt(in.nextLine());
+    }
+
+    public static void displayStudentStats(Statistics statistics)
+    {
+        displayMessage("Stats For " + statistics.getStudentName());
+        System.out.println("-".repeat(30));
+        System.out.println("Low Score: " + statistics.getLowestScore());
+        System.out.println("High Score: " + statistics.getHighestScore());
+        System.out.println("Average Score: " + statistics.getAverageScore());
     }
 
     public static int fileSelection()

@@ -1,8 +1,10 @@
 package com.niantic.application;
 
 import com.niantic.models.Assignment;
+import com.niantic.models.Statistics;
 import com.niantic.services.GradesFileService;
 import com.niantic.services.GradesService;
+import com.niantic.services.ReportService;
 import com.niantic.ui.UserInput;
 
 import java.io.File;
@@ -17,28 +19,19 @@ public class GradingApplication implements Runnable
         while(true)
         {
             int choice = UserInput.homeScreenSelection();
-            switch(choice)
-            {
-                case 1:
-                    displayAllFiles();
-                    break;
-                case 2:
-                    displayFileScores();
-                    break;
-                case 3:
-                    displayStudentAverages();
-                    break;
-                case 4:
-                    displayAllStudentStatistics();
-                    break;
-                case 5:
-                    displayAssignmentStatistics();
-                    break;
-                case 0:
+            switch (choice) {
+                case 1 -> displayAllFiles();
+                case 2 -> displayFileScores();
+                case 3 -> displayStudentStats();
+                case 4 -> displayAllStudentStatistics();
+                case 5 -> displayAssignmentStatistics();
+                case 6 -> createStudentSummaryReport();
+                case 7 -> createAllStudentsSummaryReport();
+                case 0 -> {
                     UserInput.displayMessage("Goodbye");
                     System.exit(0);
-                default:
-                    UserInput.displayMessage("Please make a valid selection");
+                }
+                default -> UserInput.displayMessage("Please make a valid selection");
             }
         }
     }
@@ -73,19 +66,16 @@ public class GradingApplication implements Runnable
         }
     }
 
-    private void displayStudentAverages()
+    private void displayStudentStats()
     {
         // todo: 3 - allow the user to select a file name
         // load all student assignment scores from the file - display student statistics (low score, high score, average score)
 
-        displayAllFiles();
-        String fileName = gradesService.getFileName();
+        String fileName = selectFileName();
         List<Assignment> assignments = gradesService.getAssignments(fileName);
-
-        String studentName = getStudentName(assignments.getFirst());
-        UserInput.displayMessage("Assignment Stats For " + studentName);
-        System.out.println("-".repeat(60));
-        displayStats(assignments);
+        String studentName = getStudentNameFromFile(fileName);
+        Statistics statistics = new Statistics(studentName, assignments);
+        UserInput.displayStudentStats(statistics);
     }
 
     private void displayAllStudentStatistics()
@@ -132,6 +122,28 @@ public class GradingApplication implements Runnable
         }
     }
 
+    private void createStudentSummaryReport()
+    {
+        // todo: 1
+        String fileName = selectFileName();
+        String studentName = getStudentNameFromFile(fileName);
+        List<Assignment> assignments = gradesService.getAssignments(fileName);
+        Statistics statistics = new Statistics(studentName, assignments);
+
+        ReportService reportService = new ReportService();
+        reportService.createStudentSummaryReport(statistics);
+    }
+
+    private void createAllStudentsSummaryReport()
+    {
+        // todo: 2
+        ReportService reportService = new ReportService();
+        String[] fileNames = gradesService.getFileNames();
+        List<Assignment> assignments = gradesService.getAllAssignments(fileNames);
+        Statistics statistics = new Statistics("All Students", assignments);
+        reportService.createAllStudentsSummaryReport(statistics);
+    }
+
     private void displayStats(List<Assignment> assignments)
     {
         int averageScore = gradesService.getAverageScore(assignments);
@@ -151,6 +163,18 @@ public class GradingApplication implements Runnable
         lastName = lastName.substring(0,1).toUpperCase() + lastName.substring(1);
 
         return firstName + " " + lastName;
+    }
+
+    private String getStudentNameFromFile(String fileName)
+    {
+        String lowerCaseName =  fileName.replace(".csv", "")
+                                        .replace("_", " ")
+                                        .substring(10);
+        int space = lowerCaseName.indexOf(" ");
+
+        // this is a little cursed heh
+        // all it's doing is making the name Proper Name case
+        return lowerCaseName.substring(0,1).toUpperCase() + lowerCaseName.substring(1, space) + " " + lowerCaseName.substring(space + 1, space + 2).toUpperCase() + lowerCaseName.substring(space + 2);
     }
 
     private String selectFileName()
