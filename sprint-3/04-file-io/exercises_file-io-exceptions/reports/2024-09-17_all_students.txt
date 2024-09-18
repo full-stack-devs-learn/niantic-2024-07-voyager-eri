@@ -1,0 +1,25 @@
+All Students
+--------------------
+Total number of students: 5
+Total number of assignments: 15
+Low Score: 80
+2   Subtraction Practice           80   
+
+High Score: 100
+3   Multiplication Practice        100  
+
+Average Score: 89
+2   Subtraction Practice           90   
+3   Multiplication Practice        88   
+7   Word Problems                  89   
+11  Graphing                       88   
+12  Probability                    90   
+1   Addition Practice              88   
+5   Fractions                      88   
+6   Decimals                       88   
+8   Basic Algebra                  90   
+2   Subtraction Practice           88   
+2   Subtraction Practice           88   
+6   Decimals                       88   
+7   Word Problems                  88   
+10  Statistics Introduction        90   

@@ -125,7 +125,8 @@ public class GradingApplication implements Runnable
         Statistics statistics = new Statistics(studentName, assignments);
 
         ReportService reportService = new ReportService();
-        reportService.createStudentSummaryReport(statistics);
+        String fileNameSuffix = statistics.getStudentName().toLowerCase().replace(" ", "_");
+        reportService.createReport(fileNameSuffix, statistics);
         appLogger.logMessage("Created report file for " + studentName);
     }
 
@@ -136,7 +137,7 @@ public class GradingApplication implements Runnable
         String[] fileNames = gradesService.getFileNames();
         List<Assignment> assignments = gradesService.getAllAssignments(fileNames);
         Statistics statistics = new Statistics("All Students", assignments);
-        reportService.createAllStudentsSummaryReport(statistics);
+        reportService.createReport("all_students", statistics);
         appLogger.logMessage("Created report file for all students");
     }
 
@@ -147,8 +148,7 @@ public class GradingApplication implements Runnable
                                         .substring(10);
         int space = lowerCaseName.indexOf(" ");
 
-        // this is a little cursed heh
-        // all it's doing is making the name Proper Name case
+        // this is a little cursed heh. all it's doing is making the name Proper Name case
         return lowerCaseName.substring(0,1).toUpperCase() + lowerCaseName.substring(1, space) + " " + lowerCaseName.substring(space + 1, space + 2).toUpperCase() + lowerCaseName.substring(space + 2);
     }
 

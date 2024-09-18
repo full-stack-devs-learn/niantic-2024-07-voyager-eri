@@ -24,13 +24,14 @@ public class ReportService
             appLogger.logMessage("Creating directory " + path);
         }
     }
-    public void createStudentSummaryReport(Statistics statistics)
+
+    public void createReport(String fileNameSuffix, Statistics statistics)
     {
         ensureDirectoryExists("reports");
 
         LocalDate today = LocalDate.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fileName = "reports/" + today.format(formatter) + "_" + statistics.getStudentName().toLowerCase().replace(" ", "_") + ".txt";
+        String fileName = "reports/" + today.format(formatter) + "_" + fileNameSuffix + ".txt";
 
         File file = new File(fileName);
 
@@ -38,6 +39,13 @@ public class ReportService
         {
             out.println(statistics.getStudentName());
             out.println("-".repeat(20));
+
+            if(fileNameSuffix.equals("all_students"))
+            {
+                out.println("Total number of students: " + gradesService.getFileNames().length);
+                out.println("Total number of assignments: " + statistics.getTotalNumberOfAssignments());
+            }
+
             out.println("Low Score: " + statistics.getLowestScore());
             out.println(statistics.getLowestScoreAssignment());
             out.println();
@@ -52,31 +60,6 @@ public class ReportService
             {
                 out.println(assignment);
             }
-        }
-        catch (FileNotFoundException e)
-        {
-            errorLogger.logMessage(e.getMessage());
-        }
-    }
-
-    public void createAllStudentsSummaryReport(Statistics statistics)
-    {
-        ensureDirectoryExists("reports");
-        LocalDate today = LocalDate.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        String fileName = "reports/" + today.format(formatter) + "_" + "all_students" + ".txt";
-
-        File file = new File(fileName);
-
-        try (PrintWriter out = new PrintWriter(file))
-        {
-            out.println(statistics.getStudentName());
-            out.println("-".repeat(20));
-            out.println("Low Score: " + statistics.getLowestScore());
-            out.println("High Score: " + statistics.getHighestScore());
-            out.println("Average Score: " + statistics.getAverageScore());
-            out.println("Total number of students: " + gradesService.getFileNames().length);
-            out.println("Total number of assignments: " + statistics.getTotalNumberOfAssignments());
         }
         catch (FileNotFoundException e)
         {
