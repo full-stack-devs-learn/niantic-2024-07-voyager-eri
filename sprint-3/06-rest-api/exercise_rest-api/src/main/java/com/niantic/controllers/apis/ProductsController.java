@@ -79,16 +79,52 @@ public class ProductsController
     }
 
     @PutMapping("/api/products/{productId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateProduct(@PathVariable int productId, @RequestBody Product product)
+    public ResponseEntity<?> updateProduct(@PathVariable int productId, @RequestBody Product product)
     {
-        productDao.updateProduct(productId, product);
+        try
+        {
+            var currentProduct = productDao.getProductById(productId);
+
+            if(currentProduct == null)
+            {
+                logger.logMessage("Product with id " + productId + " not found");
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(), "Product " + productId + " is invalid");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            productDao.updateProduct(productId, product);
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e)
+        {
+            logger.logMessage(e.getMessage());
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Oops something went wrong");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @DeleteMapping("/api/products/{productId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable int productId)
+    public ResponseEntity<?> deleteProduct(@PathVariable int productId)
     {
-        productDao.deleteProduct(productId);
+        try
+        {
+            var currentProduct = productDao.getProductById(productId);
+
+            if(currentProduct == null)
+            {
+                logger.logMessage("Product with id " + productId + " not found");
+                var error = new HttpError(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(), "Product " + productId + " is invalid");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+            }
+
+            productDao.deleteProduct(productId);
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e)
+        {
+            logger.logMessage(e.getMessage());
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Oops something went wrong");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 }
