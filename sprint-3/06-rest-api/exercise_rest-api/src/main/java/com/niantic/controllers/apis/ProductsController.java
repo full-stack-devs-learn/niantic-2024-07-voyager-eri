@@ -63,10 +63,19 @@ public class ProductsController
     }
 
     @PostMapping("/api/products")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Product addProduct(@RequestBody Product product)
+    public ResponseEntity<?> addProduct(@RequestBody Product product)
     {
-        return productDao.addProduct(product);
+        try
+        {
+            var createdProduct = productDao.addProduct(product);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+        }
+        catch (Exception e)
+        {
+            logger.logMessage(e.getMessage());
+            var error = new HttpError(HttpStatus.INTERNAL_SERVER_ERROR.value(),HttpStatus.INTERNAL_SERVER_ERROR.toString(), "Oops something went wrong");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+        }
     }
 
     @PutMapping("/api/products/{productId}")
