@@ -3,18 +3,25 @@ package com.niantic.controllers.apis;
 import com.niantic.models.HttpError;
 import com.niantic.models.Product;
 import com.niantic.services.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 public class ProductsController
 {
-    private ProductDao productDao = new MySqlProductDao();
-    private CategoryDao categoryDao = new MySqlCategoryDao();
-    private LoggingService logger = new LoggingService();
+    private ProductDao productDao;
+    private CategoryDao categoryDao;
+    private LoggingService logger;
+
+    @Autowired
+    public ProductsController(ProductDao productDao, CategoryDao categoryDao, LoggingService logger)
+    {
+        this.productDao = productDao;
+        this.categoryDao = categoryDao;
+        this.logger = logger;
+    }
 
     @GetMapping("/api/products")
     public ResponseEntity<?> getProductsByCategory(Integer catId)

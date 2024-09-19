@@ -1,5 +1,7 @@
 package com.niantic.services;
 
+import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
@@ -7,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@Service
 public class LoggingService
 {
     private String logType = "errors";
