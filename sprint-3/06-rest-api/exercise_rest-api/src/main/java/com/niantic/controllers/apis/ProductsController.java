@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api/products")
 public class ProductsController
 {
     private ProductDao productDao;
@@ -23,7 +25,7 @@ public class ProductsController
         this.logger = logger;
     }
 
-    @GetMapping("/api/products")
+    @GetMapping("")
     public ResponseEntity<?> getProductsByCategory(Integer catId)
     {
         try
@@ -46,7 +48,7 @@ public class ProductsController
         }
     }
 
-    @GetMapping("/api/products/{productId}")
+    @GetMapping("{productId}")
     public ResponseEntity<?> getProductById(@PathVariable int productId)
     {
         try
@@ -69,7 +71,7 @@ public class ProductsController
         }
     }
 
-    @PostMapping("/api/products")
+    @PostMapping("")
     public ResponseEntity<?> addProduct(@RequestBody Product product)
     {
         try
@@ -85,7 +87,7 @@ public class ProductsController
         }
     }
 
-    @PutMapping("/api/products/{productId}")
+    @PutMapping("{productId}")
     public ResponseEntity<?> updateProduct(@PathVariable int productId, @RequestBody Product product)
     {
         try
@@ -110,7 +112,7 @@ public class ProductsController
         }
     }
 
-    @DeleteMapping("/api/products/{productId}")
+    @DeleteMapping("{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable int productId)
     {
         try
