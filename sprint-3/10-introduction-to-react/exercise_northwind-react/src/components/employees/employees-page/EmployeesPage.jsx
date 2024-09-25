@@ -1,8 +1,17 @@
 import EmployeeRow from "../employee-row/EmployeeRow"
 import { employees } from '../../../data'
+import { useState } from "react"
 
 export default function EmployeesPage()
 {
+    const [setSelectedEmployeeId] = useState(0);
+
+    const employeeSelected = (id) =>
+    {
+        setSelectedEmployeeId(id);
+        console.log(id);
+    }
+
     return (
         <>
             <header className="container mt-4">
@@ -17,6 +26,7 @@ export default function EmployeesPage()
                         lastName={employee.lastName}
                         id={employee.employeeId}
                         title={employee.title}
+                        onEmployeeSelected={employeeSelected}
                         ></EmployeeRow>
                     ))
                 }
