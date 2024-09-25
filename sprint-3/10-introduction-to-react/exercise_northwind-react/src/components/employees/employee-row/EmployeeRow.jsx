@@ -5,7 +5,7 @@ export default function EmployeeRow({firstName, lastName, id, title, onEmployeeS
     const imageUrl = `images/employees/${id}.webp`
 
     return(
-        <div className="employee-row" onClick={() => onEmployeeSelected(id)}>
+        <div className="employee-row" onClick={() => onEmployeeSelected(id)} style={{cursor: 'pointer'}}>
           <img id="employee-image" src={imageUrl} />
           <div className="employee-name">
             <h1>{firstName} {lastName}</h1>

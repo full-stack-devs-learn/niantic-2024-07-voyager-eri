@@ -1,15 +1,17 @@
 import EmployeeRow from "../employee-row/EmployeeRow"
+import EmployeeDetails from "../employee-details/EmployeeDetails";
 import { employees } from '../../../data'
 import { useState } from "react"
 
 export default function EmployeesPage()
 {
-    const [setSelectedEmployeeId] = useState(0);
+    const [selectedEmployeeId, setSelectedEmployeeId] = useState(0);
 
-    const employeeSelected = (id) =>
-    {
+    const employeeSelected = (id) => {
         setSelectedEmployeeId(id);
+        const selectedEmployee = employees.find(employee => employee.employeeId == id);
         console.log(id);
+        console.log(selectedEmployee);
     }
 
     return (

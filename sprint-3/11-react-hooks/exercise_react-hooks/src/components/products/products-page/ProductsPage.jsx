@@ -1,4 +1,5 @@
 import './ProductsPage.css'
+import ProductCardContainer from '../product-card-container/ProductCardContainer'
 
 export default function ProductsPage()
 {
@@ -6,6 +7,8 @@ export default function ProductsPage()
         <>
         <header className="container mt-4">
             <h1>Products</h1>
-        </header></>
+        </header>
+        <ProductCardContainer></ProductCardContainer>
+        </>
     )
 }
