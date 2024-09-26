@@ -7,8 +7,6 @@ export default function CategoryCard({id, category, onCategorySelected, onCatego
     const imageUrl = `images/categories/${id}.webp`
     
     const categoryClicked = () => {
-        // console.log(id)
-        // console.log(category); 
         onCategorySelected(category)       
     }
 

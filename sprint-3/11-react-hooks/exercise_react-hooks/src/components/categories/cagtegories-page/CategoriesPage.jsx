@@ -18,7 +18,6 @@ export default function CategoriesPage()
             {action === "add" && <CategoryAdd onCancel={()=>setAction("list")}
                                               onCategoryAdded={()=>setAction("list")}
                 ></CategoryAdd>}
-            
         </div>
     )
 }

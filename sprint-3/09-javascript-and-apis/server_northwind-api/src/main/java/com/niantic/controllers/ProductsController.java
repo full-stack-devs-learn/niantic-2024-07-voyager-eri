@@ -28,16 +28,24 @@ public class ProductsController
     }
 
     @GetMapping
-    public ResponseEntity<?> searchByCategory(@RequestParam(defaultValue = "1", name = "catId") Integer  categoryId)
+    public ResponseEntity<?> searchByCategory(@RequestParam(defaultValue = "0", name = "catId") Integer  categoryId)
     {
         try
         {
-            var category = categoryDao.getCategory(categoryId);
-            if(category == null)
+            if(categoryId == 0)
             {
-                logger.logMessage("Category id " + categoryId + " not found");
-                var error = new HttpError(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(), "Category " + categoryId + " is invalid");
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+                var products = productDao.getAllProducts();
+                return ResponseEntity.ok(products);
+            }
+            else
+            {
+                var category = categoryDao.getCategory(categoryId);
+                if(category == null)
+                {
+                    logger.logMessage("Category id " + categoryId + " not found");
+                    var error = new HttpError(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.toString(), "Category " + categoryId + " is invalid");
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+                }
             }
 
             var products = productDao.getByCategoryId(categoryId);
