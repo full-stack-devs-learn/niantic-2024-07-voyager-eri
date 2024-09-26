@@ -3,6 +3,7 @@
     align-items: center;
     gap: 10px;
     border: solid 1px #ddd;
+    cursor: pointer;
   }
 
   .employee-row img {

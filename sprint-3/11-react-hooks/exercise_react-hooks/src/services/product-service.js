@@ -10,6 +10,12 @@ class ProductService
         return response.data;
     }
 
+    async getProductsByCategoryId(categoryId)
+    {
+        const response = await axios.get(this.baseUrl + `?catId=${categoryId}`);
+        return response.data;
+    }
+
     async add(product)
     {
         const response = await axios.post(this.baseUrl, product);
