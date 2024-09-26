@@ -12,7 +12,12 @@ export default function ProductCardContainer()
             .then(data => {
                 setProducts(data);
             })
-    })
+    }, [])
+
+    const productDeleted = (productId) => {
+        const newList = products.filter(product => product.id !== productId);
+        setProducts(newList);
+    }
 
     return(
         <>
@@ -22,6 +27,7 @@ export default function ProductCardContainer()
                     <ProductCard key={product.id}
                         productName={product.name}
                         id={product.id}
+                        onProductDeleted={productDeleted}
                         ></ProductCard>
                 ))
             }
