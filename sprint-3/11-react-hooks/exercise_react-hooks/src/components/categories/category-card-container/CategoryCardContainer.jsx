@@ -43,8 +43,8 @@ export default function CategoryCardContainer()
 
     return(
         <>
-        <h5 className="container">Selected Category: {selectedCategory}</h5>
-        <main className="container mt-4 categories-container" id="categories-container">
+        <h5>Selected Category: {selectedCategory}</h5>
+        <main className="container mt-4 categories-container g-0" id="categories-container">
         {
             categories.map((category) => (
                 <CategoryCard key={category.categoryId} 

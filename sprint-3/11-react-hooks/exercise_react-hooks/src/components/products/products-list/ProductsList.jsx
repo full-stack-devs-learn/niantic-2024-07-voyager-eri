@@ -14,17 +14,23 @@ export default function ProductsList({categoryId})
         })
     }, [categoryId])
 
+    const productDeleted = (productId) => {
+        const newList = products.filter(product => product.id !== productId);
+        setProducts(newList);
+    }
+
     return (
         <>
         {categoryId !== 0 &&
             <>
             <h3>Products for category: {categoryId}</h3>
-            <main className="container my-4 categories-container" id="products-container">
+            <main className="container my-4 categories-container g-0" id="products-container">
             {
                 products.map((product) => (
                     <ProductCard key={product.id}
                         productName={product.name}
                         id={product.id}
+                        onProductDeleted={productDeleted}
                         ></ProductCard>
                 ))
             }
