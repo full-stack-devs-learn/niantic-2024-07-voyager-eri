@@ -11,11 +11,7 @@ export default function CategoryCardContainer({categoryToUpdate})
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
-
         categoryService.getAllCategories().then(data => {
-
-            console.log("data being returned:");            
-            console.log(data);
             setCategories(data);   
         })
 

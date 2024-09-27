@@ -10,6 +10,12 @@ class CategoryService
         return response.data;
     }
 
+    async getById(categoryId)
+    {
+        const response = await axios.get(`${this.baseUrl}/${categoryId}`);
+        return response.data;
+    }
+
     async add(category)
     {
         const response = await axios.post(this.baseUrl, category);

@@ -6,9 +6,11 @@ import './CategoriesPage.css'
 export default function CategoriesPage()
 {
     const [action, setAction] = useState("list");
+    const [categoryId, setCategoryId] = useState(0);
 
     const updateCategory = (categoryId) => {
         setAction("edit");
+        setCategoryId(categoryId);
     }
 
     return (
@@ -16,9 +18,11 @@ export default function CategoriesPage()
             <header className="mt-4">
                 <h1>Categories</h1>
             </header>
-            <button className="btn btn-danger" onClick={()=> setAction("add")}>Add</button>
 
-            {action === "list" && <CategoryCardContainer categoryToUpdate={updateCategory}></CategoryCardContainer>}
+            {action === "list" && <>
+            <button className="btn btn-danger" onClick={()=> setAction("add")}>Add</button>
+            <CategoryCardContainer categoryToUpdate={updateCategory}></CategoryCardContainer>
+            </>}
             {action === "add" && <CategoryAdd onCancel={()=>setAction("list")}
                                               onCategoryAdded={()=>setAction("list")}
                                               action="add"
@@ -26,6 +30,7 @@ export default function CategoriesPage()
             {action === "edit" && <CategoryAdd onCancel={()=>setAction("list")}
                                               onCategoryAdded={()=>setAction("list")}
                                               action="edit"
+                                              categoryId={categoryId}
                 ></CategoryAdd>}
         </div>
     )
