@@ -16,6 +16,11 @@ class CategoryService
         return response.data;
     }
 
+    async update(categoryId, category)
+    {
+        await axios.put(`${this.baseUrl}/${categoryId}`, category)
+    }
+
     async delete(categoryId)
     {
         await axios.delete(`${this.baseUrl}/${categoryId}`)

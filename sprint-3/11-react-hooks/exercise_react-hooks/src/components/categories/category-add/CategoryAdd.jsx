@@ -1,7 +1,7 @@
 import { useState } from "react";
 import categoryService from "../../../services/category-service"
 
-export default function CategoryAdd({onCancel, onCategoryAdded})
+export default function CategoryAdd({onCancel, onCategoryAdded, action})
 {
     const [categoryName, setCategoryName] = useState('');
     const [description, setDescription] = useState('');
@@ -15,17 +15,22 @@ export default function CategoryAdd({onCancel, onCategoryAdded})
             description: description
         }
 
-
-        // call my api
         await categoryService.add(newCategory)
-    
         onCategoryAdded()
     }
 
+    async function editCategoryHandler(event)
+    {
+        event.preventDefault()
+        console.log(event)
+    }
+
     return (
+        <>
+        {action === "edit" && <h1>Allegedly this works</h1>}
         <div className="container">
         <h2>Add New Category</h2>
-        <form onSubmit={addCategoryHandler}>
+        <form onSubmit={action === "add" ? addCategoryHandler : editCategoryHandler}>
             <div className="row">
                 <label htmlFor="category-name">Category Name:</label>
                 <input type="text" className="form-control" name="category-name" id="category-name"
@@ -42,5 +47,6 @@ export default function CategoryAdd({onCancel, onCategoryAdded})
             <button className="btn btn-dark" type="cancel" onClick={onCancel}>Cancel</button>
         </form>
         </div>
+        </>
     )
 }

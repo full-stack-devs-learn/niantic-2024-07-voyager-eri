@@ -3,9 +3,8 @@ import CategoryCard from '../category-card/CategoryCard'
 import './CategoryCardContainer.css'
 import categoryService from '../../../services/category-service';
 import ProductsList from '../../products/products-list/ProductsList';
-// import { categories } from '../../../data'
 
-export default function CategoryCardContainer()
+export default function CategoryCardContainer({categoryToUpdate})
 {
     const [selectedCategory, setSelectedCategory] = useState("None Selected");
     const [selectedCategoryId, setSelectedCategoryId] = useState(0);
@@ -41,6 +40,10 @@ export default function CategoryCardContainer()
         setCategories(newList)
     }
 
+    const categoryUpdated = (categoryId) => {
+        categoryToUpdate(categoryId);
+    }
+
     return(
         <>
         <h5>Selected Category: {selectedCategory}</h5>
@@ -52,6 +55,7 @@ export default function CategoryCardContainer()
                     id={category.categoryId}
                     onCategorySelected={categorySelected}
                     onCategoryDeleted={categoryDeleted}
+                    onCategoryUpdated={categoryUpdated}
                     ></CategoryCard>
             ))
         }

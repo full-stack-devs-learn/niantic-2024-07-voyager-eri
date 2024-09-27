@@ -3,7 +3,7 @@ import Header from "./components/header/Header"
 import CategoriesPage from "./components/categories/cagtegories-page/CategoriesPage"
 import ProductsPage from "./components/products/products-page/ProductsPage"
 
-function App() {
+export default function App() {
   const [pageName, setPageName] = useState("categories")
 
   const pageChangeHanlder = (newPage) =>
@@ -24,5 +24,3 @@ function App() {
     </>
   )
 }
-
-export default App

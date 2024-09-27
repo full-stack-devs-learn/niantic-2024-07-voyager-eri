@@ -7,7 +7,6 @@ export default function ProductsList({categoryId})
 {
     const [products, setProducts] = useState([]);
 
-    // call the products api - getProductsByCategoryId
     useEffect(() => {
         productService.getProductsByCategoryId(categoryId).then(data => {
             setProducts(data);

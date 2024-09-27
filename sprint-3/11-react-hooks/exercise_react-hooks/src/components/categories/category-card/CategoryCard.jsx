@@ -1,10 +1,12 @@
 import categoryService from '../../../services/category-service'
 import './CategoryCard.css'
-import { XCircle, XCircleFill } from 'react-bootstrap-icons'
+import { PencilFill, XCircleFill } from 'react-bootstrap-icons'
+import { useState } from 'react'
 
-export default function CategoryCard({id, category, onCategorySelected, onCategoryDeleted})
+export default function CategoryCard({id, category, onCategorySelected, onCategoryDeleted, onCategoryUpdated})
 {
     const imageUrl = `images/categories/${id}.webp`
+    const [categoryToUpdate, setCategoryToUpdate] = useState(0);
     
     const categoryClicked = () => {
         onCategorySelected(category)       
@@ -19,6 +21,11 @@ export default function CategoryCard({id, category, onCategorySelected, onCatego
         onCategoryDeleted(id);
     }
 
+    async function updateCategory()
+    {
+        onCategoryUpdated(id);
+    }
+
 
     return(
         <div className="card category-card" onClick={categoryClicked}>
@@ -28,6 +35,7 @@ export default function CategoryCard({id, category, onCategorySelected, onCatego
             </div>
             <div className="card-footer">
                 <XCircleFill onClick={deleteCategory} color="red" />
+                <PencilFill onClick={updateCategory}/>
             </div>
         </div>
     )
