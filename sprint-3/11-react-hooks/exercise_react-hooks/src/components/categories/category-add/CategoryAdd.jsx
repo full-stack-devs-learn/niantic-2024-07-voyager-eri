@@ -36,6 +36,8 @@ export default function CategoryAdd({onCancel, onCategoryAdded, action, category
     useEffect(() => {
         categoryService.getById(categoryId).then(data => {
             setCategory(data);
+            setCategoryName(data.categoryName);
+            setDescription(data.description);
         })
     }, [categoryId])
 
