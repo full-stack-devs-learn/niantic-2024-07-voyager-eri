@@ -6,7 +6,8 @@ import productService from "../../services/product-service";
 export default function CategoryDetails()
 {
     const [products, setProducts] = useState<Product[]>([]);
-    const { categoryId } = useParams();
+    const params = useParams();
+    const categoryId = params.categoryId ?? 0;
 
     useEffect(() => { loadProducts() }, []);
 
@@ -19,7 +20,7 @@ export default function CategoryDetails()
     return (
         <>
         <h2>Category Details for Category Id: {categoryId}</h2>
-        <table className="table table-hover mt-5">
+        <table className="table mt-5">
             <thead>
                 <th>Product Id</th>
                 <th>Name</th>

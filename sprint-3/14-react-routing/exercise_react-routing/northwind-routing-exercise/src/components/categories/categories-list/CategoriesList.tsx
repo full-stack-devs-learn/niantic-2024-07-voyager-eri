@@ -19,7 +19,7 @@ export default function CategoriesList()
         <>
         <h2>List of Categories</h2>
         
-        <table className="table table-hover mt-5">
+        <table className="table mt-5">
             <thead>
                 <th>Category Id</th>
                 <th>Name</th>
