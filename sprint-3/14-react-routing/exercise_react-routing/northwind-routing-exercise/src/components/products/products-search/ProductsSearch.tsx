@@ -17,7 +17,7 @@ export default function ProductsSearch()
     const minPrice = params.get("minPrice") ?? 0;
     const maxPrice = params.get("maxPrice") ?? 0;
     const name = params.get("name") ?? "";
-    const catId = params.get("catId") ?? 1;
+    const catId = params.get("catId") ?? 0;
 
     // useEffect(() => { loadProductsByCategory() }, [catId]);
     // useEffect(() => { loadCategories() }, []);
@@ -31,8 +31,18 @@ export default function ProductsSearch()
 
     async function loadAllProducts()
     {
-        const response = await productService.getAllProducts();
-        const results = response.filter((product: Product) => (+product.categoryId == +catId) && (+product.unitPrice >= +minPrice) && (+product.unitPrice <= +maxPrice) && (product.name.toLowerCase().includes(name)));
+        let response = await productService.getAllProducts();
+
+        if(+catId !== 0)
+        {
+            response = response.filter((product:Product) => +product.categoryId == +catId);
+        }
+
+        if(+maxPrice !== 0)
+        {
+            response = response.filter((product: Product) => +product.unitPrice <= +maxPrice);
+        }
+        const results = response.filter((product: Product) => (+product.unitPrice >= +minPrice) && (product.name.toLowerCase().includes(name)));
         setFilteredProducts(results);
     }
 
