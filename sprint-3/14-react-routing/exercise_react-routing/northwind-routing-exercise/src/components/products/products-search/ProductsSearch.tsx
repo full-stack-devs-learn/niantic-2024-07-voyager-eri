@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import productService from "../../services/product-service";
-import { Product } from "../../../models/product";
 import categoryService from "../../services/category-service";
+import { Product } from "../../../models/product";
 import { Category } from "../../../models/category";
 
 export default function ProductsSearch()
 {
+    const [categories, setCategories] = useState<Category[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
-    // const [categories, setCategories] = useState<Category[]>([]);
-    // const [priceFilterMin, setPriceFilterMin] = useState<number>(0);
-    // const [categoryFilter, setCategoryFilter] = useState<number>(0);
+    const [searchName, setSearchName] = useState("");
+    const [searchCategory, setSearchCategory] = useState("");
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const location = useLocation();
     const params = new URLSearchParams(location.search);
@@ -19,15 +20,8 @@ export default function ProductsSearch()
     const name = params.get("name") ?? "";
     const catId = params.get("catId") ?? 0;
 
-    // useEffect(() => { loadProductsByCategory() }, [catId]);
-    // useEffect(() => { loadCategories() }, []);
-    useEffect(() => { loadAllProducts() }, []);
-
-    // async function loadProductsByCategory()
-    // {
-    //     const response = await productService.getByCategoryId(+catId);
-    //     setProducts(response);
-    // }
+    useEffect(() => { loadAllProducts() }, [searchParams]);
+    useEffect(() => { loadCategories() }, []);
 
     async function loadAllProducts()
     {
@@ -46,39 +40,52 @@ export default function ProductsSearch()
         setFilteredProducts(results);
     }
 
-    // async function loadCategories()
-    // {
-    //     const response = await categoryService.getAllCategories();
-    //     setCategories(response);
-    // }
-
-    async function searchHandler(event: any)
+    async function loadCategories()
     {
-        event.preventDefault();
-        
+        const response = await categoryService.getAllCategories();
+        setCategories(response);
     }
 
+    function searchHandler(event: any)
+    {
+        event.preventDefault();
+
+        if(params.has("name"))
+        {
+            params.delete("name");
+        }
+        if(searchName.length != 0)
+        {
+            params.append("name", searchName);
+        }
+
+        if(params.has("catId"))
+        {
+            params.delete("catId");
+        }
+        if(searchCategory.length != 0)
+        {
+            params.append("catId", searchCategory);
+        }
+
+        setSearchParams(params.toString());
+    }
 
     return (
         <>
         <h2>Search for Products</h2>
-        {/* <form onSubmit={searchHandler} method="get" action="">
-            <select className="form-select" onChange={(e) => {setCategoryFilter(+e.target.value)}}>
-                <option value="0">No category selected</option>
+        <form onSubmit={searchHandler}>
+            <input className="form-control" type="search" placeholder="Search for product name" onChange={(e) => {setSearchName(e.target.value)}}></input>
+            <select className="form-select" onChange={(e) => {setSearchCategory(e.target.value)}}>
+                <option value="0">Select a category</option>
                 {
                     categories.map((category: Category) => (
                         <option value={category.categoryId}>{category.categoryName}</option>
                     ))
                 }
             </select>
-            <div>
-                <label htmlFor="minPriceFilter">$</label>
-                <input type="text" placeholder="Min" className="form-control" name="minPriceFilter" onChange={(e) => {setPriceFilterMin(+e.target.value)}}/>
-                <span>to</span>
-                <input type="text" placeholder="Max" className="form-control" />
-                <button type="submit" className="btn btn-primary">Search</button>
-            </div>
-        </form> */}
+            <button className="btn btn-primary" type="submit">Search</button>
+        </form>
         <table className="table mt-5">
             <thead>
                 <tr>
